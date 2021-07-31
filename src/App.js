@@ -1,9 +1,10 @@
 import React from 'react'
 import './Stylesheets/App.css'
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { getBook } from "./Actions/Book";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Navbar from "./Components/Navbar";
 
 class App extends React.Component {
 
@@ -17,14 +18,17 @@ class App extends React.Component {
 
   render() {
     return (
-        <div>Table Host V2 Baby! </div>
+        <div className="app-wrapper">
+            <Navbar />
+        </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
   //state.resyRestaurants calls the reducer and .resyRestaurants calls the action
-  currentBook: state.book.book,
+  currentBook: state.book.currentBook,
+  currentNavbar: state.navbar.currentNavbar
 })
 
 export default connect(mapStateToProps, { getBook })(App);

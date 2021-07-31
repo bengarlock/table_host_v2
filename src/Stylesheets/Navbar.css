@@ -1,0 +1,14 @@
+#nav-bar-wrapper {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 5em;
+    bottom: 0;
+    background-color: #050539;
+    justify-content: space-around;
+}
+
+#nav-bar-wrapper span {
+
+}
