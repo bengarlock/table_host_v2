@@ -1,7 +1,7 @@
 import { CHANGE_NAVBAR } from "../Actions/Types";
 
 const initialState = {
-    currentNavbar: 'home',
+    currentNavbar: 'book',
 }
 
 export default function (state = initialState, action) {
