@@ -1,5 +1,5 @@
 import { GET_BOOK } from "./Types";
-
+import { SET_DATE} from "./Types";
 
 //GET BOOK
 export const getBook = (date) => {
@@ -26,4 +26,12 @@ export const getBook = (date) => {
             payload: book
         })
     };
+}
+
+export const setDate = (date) => {
+    return (dispatch) => dispatch({
+        type: SET_DATE,
+        payload: date
+    })
+
 }
