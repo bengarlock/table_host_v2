@@ -11,7 +11,6 @@
     color: white;
 }
 
-
 .menu-icon {
     padding: 1em;
     flex: 2;
@@ -35,7 +34,8 @@
 
 @media only screen and (min-width: 600px)  {
     #nav-bar-wrapper {
-        position: absolute;
+        top: 50px;
+
         flex-direction: column;
         height: 100%;
         width: 60px;

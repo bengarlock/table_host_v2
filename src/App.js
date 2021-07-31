@@ -1,10 +1,11 @@
 import React from 'react'
 import './Stylesheets/App.css'
-import { Route, Redirect } from "react-router-dom";
+// import { Route, Redirect } from "react-router-dom";
 import { getBook } from "./Actions/Book";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Navbar from "./Components/Navbar";
+import Datepicker from "./Components/Datepicker";
 
 class App extends React.Component {
 
@@ -19,7 +20,8 @@ class App extends React.Component {
   render() {
     return (
         <div className="app-wrapper">
-            <Navbar />
+          <Datepicker />
+          <Navbar />
         </div>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 import "../Stylesheets/Navbar.css"
 import {connect} from "react-redux";
-import {changeNavbar} from "../Actions/Navbar";
+import { changeNavbar } from "../Actions/Navbar";
 import PropTypes from 'prop-types';
 
 
