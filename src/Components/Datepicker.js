@@ -74,7 +74,6 @@ class Datepicker extends React.Component {
     }
 
     render() {
-        console.log(this.props.currentDate)
         return (
             <div className='datepicker-wrapper'>
                 <span className="calendar-button" onClick={this.onClickHandler} id="left"> {"<"} </span>
