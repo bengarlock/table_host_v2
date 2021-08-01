@@ -1,7 +1,7 @@
 
 
 .datepicker-wrapper {
-    position: fixed;
+    position: absolute;
     height: 50px;
     background-color: #2b2b2f;
     width: 100%;
@@ -35,7 +35,6 @@
     top: 50px;
     left: 50%;
     transform: translate(-50%);
-    z-index: 2000;
 }
 
 #cal {

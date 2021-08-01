@@ -11,17 +11,32 @@ class ReservationForm extends React.Component {
         currentSlot: PropTypes.array.isRequired
     }
 
+    onClickHandler = (e) => {
+        if (e.target.id === "overlay") {
+            this.props.changeSlot([])
+        }
+    }
 
 
     render() {
-        console.log("form rendered")
-
         return(
             <div>
                 {this.props.currentSlot ?
-                    <div className="form-wrapper">
-                        RESERVATION EXISTING FORM
+                    <div>
+                        <div className="overlay" id="overlay" onClick={this.onClickHandler} />
+                        <div className="form-wrapper">
+                            <h3>Reservation</h3>
+                            <form className="user-form">
+                                <input name="first-name" type="text" placeholder="First Name"/>
+                                <input name="last-name" type="text" placeholder="Last Name" />
+
+
+                                <input name="phone-number" type="text" placeholder="Phone Number" />
+                                <input type="submit" />
+                            </form>
+                        </div>
                     </div>
+
                 :
                     null
                 }
