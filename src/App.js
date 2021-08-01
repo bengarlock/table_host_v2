@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Navbar from "./Components/Navbar";
 import Datepicker from "./Components/Datepicker";
+import {Route} from "react-router-dom";
+import Book from "./Components/Book"
 
 class App extends React.Component {
 
@@ -20,8 +22,12 @@ class App extends React.Component {
   render() {
     return (
         <div className="app-wrapper">
-          <Datepicker />
-          <Navbar />
+            <Datepicker />
+            <Navbar />
+            <Route exact path="/" render={ () => <Book /> } />
+            {/*<Route exact path="/floor" render={ () => <Floor /> } />*/}
+            {/*<Route exact path="/guests" render={ () => <Guest /> } />*/}
+            {/*<Route exact path="/reports" render={ () => <Report /> } />*/}
         </div>
     )
   }

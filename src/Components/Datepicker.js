@@ -39,15 +39,19 @@ class Datepicker extends React.Component {
             date.setDate(date.getDate() - 1)
             date = date.toJSON().slice(0,10).replace(/-/g,'-')
             this.props.setDate(date)
+            this.props.getBook(date)
+
         } else if (e.target.id === "cal") {
             this.setState({
                 calendarClicked: !this.state.calendarClicked
             })
+
         } else if (e.target.id === "right") {
             let date = new Date(this.props.currentDate)
             date.setDate(date.getDate() + 1)
             date = date.toJSON().slice(0,10).replace(/-/g,'-')
             this.props.setDate(date)
+            this.props.getBook(date)
 
         } else if (e.target.id === "th-calendar-wrapper") {
             this.setState({
@@ -55,6 +59,7 @@ class Datepicker extends React.Component {
             })
         } else if (e.target.id === "now-button") {
             this.props.setDate(new Date().toJSON().slice(0,10).replace(/-/g,'-'))
+            this.props.getBook(new Date().toJSON().slice(0,10).replace(/-/g,'-'))
         }
     }
 
