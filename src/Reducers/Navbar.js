@@ -4,7 +4,7 @@ const initialState = {
     currentNavbar: 'book',
 }
 
-export default function (state = initialState, action) {
+export default function navbar(state = initialState, action) {
     switch(action.type) {
         case CHANGE_NAVBAR:
             return {

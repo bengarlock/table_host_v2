@@ -17,7 +17,6 @@ class ReservationForm extends React.Component {
         }
     }
 
-
     render() {
         return(
             <div>
@@ -29,7 +28,6 @@ class ReservationForm extends React.Component {
                             <form className="user-form">
                                 <input name="first-name" type="text" placeholder="First Name"/>
                                 <input name="last-name" type="text" placeholder="Last Name" />
-
 
                                 <input name="phone-number" type="text" placeholder="Phone Number" />
                                 <input type="submit" />
