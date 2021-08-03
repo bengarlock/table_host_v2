@@ -19,6 +19,10 @@ class ReservationForm extends React.Component {
 
     }
 
+    onClickHandler = () => {
+
+    }
+
 
 
 
@@ -29,7 +33,7 @@ class ReservationForm extends React.Component {
             <div>
                 {this.props.currentSlot[0].booked ? <ModifyReservation /> : <NewReservation />}
                     <div>
-                        <div className="overlay" id="overlay" onClick={this.onClickHandler} />
+
                         <div className="form-wrapper">
                             <h3>Reservation</h3>
                             <form className="user-form">
