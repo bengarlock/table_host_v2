@@ -18,7 +18,7 @@ class Slot extends React.Component {
 
     render() {
         return(
-            <div className="slot-container" onClick={this.clickHandler}>
+            <div className="slot-container" onDoubleClick={this.clickHandler}>
                 <span>{this.props.slot.time}</span>
                 <span>{this.props.slot.party_size}</span>
                 {

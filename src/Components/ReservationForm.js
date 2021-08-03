@@ -28,6 +28,23 @@ class ReservationForm extends React.Component {
         return(
             <div>
                 {this.props.currentSlot[0].booked ? <ModifyReservation /> : <NewReservation />}
+                    <div>
+                        <div className="overlay" id="overlay" onClick={this.onClickHandler} />
+                        <div className="form-wrapper">
+                            <h3>Reservation</h3>
+                            <form className="user-form">
+                                <input name="first-name" type="text" placeholder="First Name"/>
+                                <input name="last-name" type="text" placeholder="Last Name" />
+
+                                <input name="phone-number" type="text" placeholder="Phone Number" />
+                                <input type="submit" />
+                            </form>
+                        </div>
+                    </div>
+
+                :
+                    null
+                }
             </div>
         )
     }
