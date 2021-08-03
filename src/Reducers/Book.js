@@ -7,7 +7,7 @@ const initialState = {
     currentDate: new Date().toJSON().slice(0,10).replace(/-/g,'-')
 }
 
-export default function (state = initialState, action) {
+export default function book(state = initialState, action) {
     switch(action.type) {
         case GET_BOOK:
             return {
