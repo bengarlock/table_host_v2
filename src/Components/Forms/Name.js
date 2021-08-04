@@ -17,7 +17,7 @@ class Name extends React.Component {
 
         return(
             <div className="slot-container" onClick={this.onClickHandler}>
-                {this.props.name.first_name} {this.props.name.last_name} - {this.props.name.phone_number}
+                {this.props.name.first_name} {this.props.name.last_name} {this.props.name.phone_number}
             </div>
         )
     }

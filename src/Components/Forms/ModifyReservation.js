@@ -65,6 +65,11 @@ class ModifyReservation extends React.Component {
         }
     }
 
+    onSubmitHandler = (e) => {
+        e.preventDefault()
+
+    }
+
     render() {
         return(
             <>
@@ -72,7 +77,7 @@ class ModifyReservation extends React.Component {
                 <div className="form-wrapper">
                     <h3>Reservation</h3>
 
-                    <form className="user-form">
+                    <form className="user-form" onSubmit={this.onSubmitHandler}>
                         <input name="first-name"
                                value={this.state.first_name}
                                onChange={this.onChangeHandler}
