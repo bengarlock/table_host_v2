@@ -18,7 +18,7 @@ export const getBook = (date) => {
             return [year, month, day].join('-');
         }
 
-        const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + String(formatDate(date)))
+        const response = await fetch("http://127.0.0.1:8000/api/v1/tablehost/books/?date=" + String(formatDate(date)))
         let book = await response.json()
 
         dispatch({
