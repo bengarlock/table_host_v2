@@ -21,13 +21,13 @@ class Navbar extends React.Component {
         return(
             <div id="nav-bar-wrapper">
                 <NavLink className={this.props.currentNavbar === "book" ? "menu-icon-selected" : "menu-icon"} id='book'
-                         to="/" onClick={this.onClickHandler}>B</NavLink>
+                         to="/tablehost" onClick={this.onClickHandler}>B</NavLink>
                 <NavLink className={this.props.currentNavbar === "floor" ? "menu-icon-selected" : "menu-icon"} id='floor'
-                         to="/floor" onClick={this.onClickHandler}>F</NavLink >
+                         to="/tablehost/floor" onClick={this.onClickHandler}>F</NavLink >
                 <NavLink className={this.props.currentNavbar === "guests" ? "menu-icon-selected" : "menu-icon"} id='guests'
-                         to="/guests" onClick={this.onClickHandler}>G</NavLink>
+                         to="/tablehost/guests" onClick={this.onClickHandler}>G</NavLink>
                 <NavLink className={this.props.currentNavbar === "reports" ? "menu-icon-selected" : "menu-icon"} id='reports'
-                         to="/reports" onClick={this.onClickHandler}>R</NavLink>
+                         to="/tablehost/reports" onClick={this.onClickHandler}>R</NavLink>
             </div>
         )
     }

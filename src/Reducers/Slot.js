@@ -4,7 +4,7 @@ const initialState = {
     currentSlot: [],
 }
 
-export default function (state = initialState, action) {
+export default function slot(state = initialState, action) {
     switch(action.type) {
         case CHANGE_SLOT:
             return {

@@ -8,6 +8,7 @@ import Navbar from "./Components/Navbar";
 import Datepicker from "./Components/Datepicker";
 import {Route} from "react-router-dom";
 import Book from "./Components/Book"
+import Floor from "./Components/Floor";
 
 class App extends React.Component {
 
@@ -24,10 +25,10 @@ class App extends React.Component {
         <div className="app-wrapper">
             <Datepicker />
             <Navbar />
-            <Route exact path="/" render={ () => <Book /> } />
-            {/*<Route exact path="/floor" render={ () => <Floor /> } />*/}
-            {/*<Route exact path="/guests" render={ () => <Guest /> } />*/}
-            {/*<Route exact path="/reports" render={ () => <Report /> } />*/}
+            <Route exact path="/tablehost" render={ () => <Book /> } />
+            <Route exact path="/tablehost/floor" render={ () => <Floor /> } />
+            {/*<Route exact path="/tablehost/guests" render={ () => <Guest /> } />*/}
+            {/*<Route exact path="/tablehost/reports" render={ () => <Report /> } />*/}
         </div>
     )
   }
