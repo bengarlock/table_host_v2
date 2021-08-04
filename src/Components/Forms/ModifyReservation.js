@@ -16,18 +16,36 @@ class ModifyReservation extends React.Component {
         party_size: '',
         status: '',
         reservation_notes: '',
+        guest_notes: '',
         tables: '',
+        showMenu: false,
     }
 
     static propTypes = {
         currentSlot: PropTypes.array.isRequired,
         currentGuest: PropTypes.array.isRequired,
+
+    }
+
+    componentDidMount() {
+        this.setState({
+            first_name: this.props.currentGuest[0].first_name,
+            last_name: this.props.currentGuest[0].last_name,
+            phone_number: this.props.currentGuest[0].phone_number,
+            reservation_notes: this.props.currentSlot[0].reservation_notes,
+            guest_notes: this.props.currentSlot[0].guest_notes,
+
+        })
     }
 
     onClickHandler = (e) => {
         if (e.target.id === "overlay") {
             this.props.changeSlot([])
             this.props.changeGuest([])
+        } else if (e.target.id === "status-menu-button") {
+            this.setState({
+                showMenu: !this.state.showMenu
+            })
         }
     }
 
@@ -70,6 +88,33 @@ class ModifyReservation extends React.Component {
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="Phone Number" />
+                        <input name="reservation-notes"
+                               value={this.state.reservation_notes}
+                               onChange={this.onChangeHandler}
+                               type="text"
+                               placeholder="Reservation Notes" />
+                        <input name="guest-notes"
+                               value={this.state.guest_notes}
+                               onChange={this.onChangeHandler}
+                               type="text"
+                               placeholder="Guest Notes" />
+
+                        <div>
+                            <div id="status-menu-button" onClick={this.onClickHandler}>
+                                Status
+                            </div>
+
+                            {this.state.showMenu ? (
+                                        <div className="menu">
+                                            <div id="booked">Booked</div>
+                                            <div id="confirmed">Confirmed</div>
+                                            <div id="cancel">Cancel</div>
+                                            <div id="noshow">No-show</div>
+                                        </div>)
+                                    : null
+                            }
+                        </div>
+
                         <input type="submit" />
                     </form>
                 </div>
