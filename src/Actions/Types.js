@@ -1,7 +1,7 @@
 export const GET_BOOK = "GET_BOOK"
 export const SET_DATE = "SET_DATE"
-
 export const CHANGE_NAVBAR = "CHANGE_NAVBAR"
-
 export const CHANGE_SLOT = "CHANGE_SLOT"
 export const PATCH_SLOT = "PATCH_SLOT"
+export const CHANGE_GUEST = "CHANGE_GUEST"
+export const PATCH_GUEST = "PATCH_GUEST"

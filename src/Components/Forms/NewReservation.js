@@ -46,16 +46,20 @@ class NewReservation extends React.Component {
                 <div className="overlay" id="overlay" onClick={this.onClickHandler} />
                 <div className="form-wrapper">
                     <h3>NEW RESERVATION</h3>
-                    <form>
-                        <input name="search"
-                               type="text"
-                               value={this.state.search}
-                               onChange={this.onChangeHandler}
-                               autoComplete="off"
-                               placeholder="Guest Search" />
-                    </form>
-                    <div className="search-results">
-                        {this.searchGuest()}
+
+                    <div className="search-results-wrapper">
+                        <form>
+                            <input name="search"
+                                   type="text"
+                                   value={this.state.search}
+                                   onChange={this.onChangeHandler}
+                                   autoComplete="off"
+                                   placeholder="Guest Search" />
+                        </form>
+                        <div className="search-results">
+                            {this.state.search.length > 0 ? this.searchGuest() : null }
+                        </div>
+
                     </div>
                 </div>
             </>

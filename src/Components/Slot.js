@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 class Slot extends React.Component {
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.array.isRequired,
     }
 
     clickHandler = () => {

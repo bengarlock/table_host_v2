@@ -1,11 +1,11 @@
 import {CHANGE_SLOT, GET_BOOK} from "./Types";
 
 //CHANGE_SLOT
-export const changeSlot = (selection) => {
+export const changeSlot = (slot) => {
     return (dispatch) => {
         dispatch({
             type: CHANGE_SLOT,
-            payload: selection
+            payload: slot
         })
     }
 }
