@@ -1,7 +1,8 @@
 import React from 'react'
 import "../../Stylesheets/ReservationForm.css"
 import {connect} from "react-redux";
-import {changeSlot} from "../../Actions/Slot";
+import { changeSlot } from "../../Actions/Slot";
+import { changeGuest} from "../../Actions/Guest";
 import PropTypes from "prop-types";
 
 class ModifyReservation extends React.Component {
@@ -19,12 +20,14 @@ class ModifyReservation extends React.Component {
     }
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.array.isRequired,
+        currentGuest: PropTypes.array.isRequired,
     }
 
     onClickHandler = (e) => {
         if (e.target.id === "overlay") {
             this.props.changeSlot([])
+            this.props.changeGuest([])
         }
     }
 
@@ -77,7 +80,8 @@ class ModifyReservation extends React.Component {
 
 const mapStateToProps = (state) => ({
     currentSlot: state.book.currentBook,
+    currentGuest: state.guest.currentGuest,
 })
 
 
-export default connect(mapStateToProps, { changeSlot })(ModifyReservation);
+export default connect(mapStateToProps, { changeSlot, changeGuest })(ModifyReservation);

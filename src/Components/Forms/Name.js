@@ -10,7 +10,7 @@ class Name extends React.Component {
     }
 
     onClickHandler = () => {
-        this.props.changeGuest(this.props.name)
+        this.props.changeGuest([this.props.name])
     }
 
     render() {
