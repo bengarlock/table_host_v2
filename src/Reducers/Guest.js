@@ -1,7 +1,7 @@
 import { CHANGE_GUEST } from "../Actions/Types";
 
 const initialState = {
-    currentGuest: '',
+    currentGuest: [],
 }
 
 export default function guest(state = initialState, action) {

@@ -6,7 +6,7 @@ import { changeGuest } from "../../Actions/Guest";
 class Name extends React.Component {
 
     static propTypes = {
-        currentGuest: PropTypes.string.isRequired
+        currentGuest: PropTypes.array.isRequired
     }
 
     onClickHandler = () => {

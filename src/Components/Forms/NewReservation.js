@@ -3,6 +3,7 @@ import "../../Stylesheets/ReservationForm.css"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {changeSlot} from "../../Actions/Slot";
+import {changeGuest} from "../../Actions/Guest";
 import Name from "./Name";
 
 class NewReservation extends React.Component {
@@ -19,6 +20,14 @@ class NewReservation extends React.Component {
     onClickHandler = (e) => {
         if (e.target.id === "overlay") {
             this.props.changeSlot([])
+            this.props.changeGuest([])
+        } else if (e.target.id === "new-guest") {
+            console.log("new guest")
+
+        } else if (e.target.id === "clear") {
+            this.setState({
+                search: ''
+            })
         }
     }
 
@@ -56,7 +65,10 @@ class NewReservation extends React.Component {
                                    autoComplete="off"
                                    placeholder="Guest Search" />
                         </form>
-                        <button>New Guest</button>
+                        <div className="new-reso-form-button-wrappers">
+                            <button id="new-guest" onClick={this.onClickHandler}>New Guest</button>
+                            <button id="clear" onClick={this.onClickHandler}>Clear</button>
+                        </div>
                         <div className="search-results">
                             {this.state.search.length > 0 ? this.searchGuest() : null }
                         </div>
@@ -74,4 +86,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { changeSlot })(NewReservation);
+export default connect(mapStateToProps, { changeSlot, changeGuest })(NewReservation);
