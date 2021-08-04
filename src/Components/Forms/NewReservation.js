@@ -56,6 +56,7 @@ class NewReservation extends React.Component {
                                    autoComplete="off"
                                    placeholder="Guest Search" />
                         </form>
+                        <button>New Guest</button>
                         <div className="search-results">
                             {this.state.search.length > 0 ? this.searchGuest() : null }
                         </div>
