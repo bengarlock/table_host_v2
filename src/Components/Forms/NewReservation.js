@@ -3,7 +3,7 @@ import "../../Stylesheets/ReservationForm.css"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {changeSlot} from "../../Actions/Slot";
-import {changeGuest} from "../../Actions/Guest";
+import {changeGuest, createGuest} from "../../Actions/Guest";
 import Name from "./Name";
 
 class NewReservation extends React.Component {
@@ -22,8 +22,7 @@ class NewReservation extends React.Component {
             this.props.changeSlot([])
             this.props.changeGuest([])
         } else if (e.target.id === "new-guest") {
-            console.log("new guest")
-
+            this.props.createGuest(this.state.search)
         } else if (e.target.id === "clear") {
             this.setState({
                 search: ''
@@ -86,4 +85,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { changeSlot, changeGuest })(NewReservation);
+export default connect(mapStateToProps, { changeSlot, changeGuest, createGuest})(NewReservation);
