@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import { changeSlot } from "../../Actions/Slot";
 import { changeGuest } from "../../Actions/Guest";
 import PropTypes from "prop-types";
+import Time from "../Time";
 
 class ModifyReservation extends React.Component {
 
@@ -24,14 +25,12 @@ class ModifyReservation extends React.Component {
     }
 
     static propTypes = {
+        currentBook: PropTypes.array.isRequired,
         currentSlot: PropTypes.array.isRequired,
         currentGuest: PropTypes.array.isRequired,
     }
 
     componentDidMount() {
-
-        console.log(this.props.currentSlot[0].status ? this.props.currentSlot[0].status : "Booked")
-
         this.setState({
             first_name: this.props.currentGuest[0].first_name,
             last_name: this.props.currentGuest[0].last_name,
@@ -44,7 +43,6 @@ class ModifyReservation extends React.Component {
     }
 
     onClickHandler = (e) => {
-        console.log(e.target.id)
         if (e.target.id === "overlay") {
             this.props.changeSlot([])
             this.props.changeGuest([])
@@ -89,13 +87,11 @@ class ModifyReservation extends React.Component {
             phone_number: this.state.phone_number,
             guest_notes: this.state.guest_notes
         }
-
-        let reservation = {
-
-        }
-
     }
 
+    renderTimes = () => {
+        return this.props.currentBook[0].slots.map(slot => <Time key={slot.id} slot={slot}/>)
+    }
 
     render() {
         return(
@@ -109,16 +105,12 @@ class ModifyReservation extends React.Component {
                             <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
                                 Time
                             </div>
-
                                 {this.state.timeMenu ? (
                                     <>
                                         <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
                                         <div className="menu-items-wrapper">
                                             <div className="menu">
-                                                <div className="menu-item" id="booked">Booked</div>
-                                                <div className="menu-item" id="confirmed">Confirmed</div>
-                                                <div className="menu-item" id="cancel">Cancel</div>
-                                                <div className="menu-item" id="noshow">No-show</div>
+                                                {this.renderTimes()}
                                             </div>
                                         </div>
                                     </>
@@ -127,11 +119,6 @@ class ModifyReservation extends React.Component {
                                 }
 
                         </div>
-
-
-
-
-
                         <input name="first-name"
                                value={this.state.first_name}
                                onChange={this.onChangeHandler}
@@ -175,9 +162,7 @@ class ModifyReservation extends React.Component {
                                             </div>
                                         </div>
                                     </>
-
                                     )
-
                                     : null
                                 }
                             </div>
@@ -192,7 +177,8 @@ class ModifyReservation extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    currentSlot: state.book.currentBook,
+    currentBook: state.book.currentBook,
+    currentSlot: state.slot.currentSlot,
     currentGuest: state.guest.currentGuest,
 })
 
