@@ -16,14 +16,15 @@
     justify-content: center;
     align-content: flex-start;
     padding: 1em;
-    top: 50%;
-    left: calc(50% + 30px);
-    transform: translate(-50%, -70%);
-    width: 60%;
-    height: 400px;
+    top: 10%;
+    height: 100%;
+    left: calc(50%);
+    transform: translate(-50%);
+    width: 70%;
+
     background-color: #183065;
-    z-index: 4000;
-    overflow: scroll;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .form-wrapper h3 {

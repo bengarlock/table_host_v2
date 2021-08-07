@@ -10,7 +10,8 @@ class NewReservation extends React.Component {
 
     state = {
         search: '',
-        searchResults: []
+        searchResults: [],
+        message: '',
     }
 
     static propTypes = {
@@ -22,10 +23,19 @@ class NewReservation extends React.Component {
             this.props.changeSlot([])
             this.props.changeGuest([])
         } else if (e.target.id === "new-guest") {
-            this.props.createGuest(this.state.search)
+            if (this.state.search.length !== 0) {
+                this.props.createGuest(this.state.search)
+
+            } else {
+                this.setState({
+                    message: "Please Enter a Name or Phone Number"
+                })
+            }
+
         } else if (e.target.id === "clear") {
             this.setState({
-                search: ''
+                search: '',
+                message: '',
             })
         }
     }
@@ -64,6 +74,7 @@ class NewReservation extends React.Component {
                                    autoComplete="off"
                                    placeholder="Guest Search" />
                         </form>
+                        <div>{this.state.message ? this.state.message : <br />}</div>
                         <div className="new-reso-form-button-wrappers">
                             <button id="new-guest" onClick={this.onClickHandler}>New Guest</button>
                             <button id="clear" onClick={this.onClickHandler}>Clear</button>
