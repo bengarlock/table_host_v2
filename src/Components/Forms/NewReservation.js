@@ -19,9 +19,15 @@ class NewReservation extends React.Component {
     }
 
     onClickHandler = (e) => {
-        if (e.target.id === "overlay") {
-            this.props.changeSlot([])
-            this.props.changeGuest([])
+        if (e.target.id === "overlay" || e.target.id === 'close-button') {
+            if (this.state.search === '') {
+                this.props.changeSlot([])
+                this.props.changeGuest([])
+            } else {
+                this.setState({
+                    message: 'Please clear search before exiting.'
+                })
+            }
         } else if (e.target.id === "new-guest") {
             if (this.state.search.length !== 0) {
                 this.props.createGuest(this.state.search)
@@ -31,7 +37,6 @@ class NewReservation extends React.Component {
                     message: "Please Enter a Name or Phone Number"
                 })
             }
-
         } else if (e.target.id === "clear") {
             this.setState({
                 search: '',
@@ -52,6 +57,7 @@ class NewReservation extends React.Component {
 
             let response = await fetch("https://bengarlock.com/api/v1/tablehost/guests/?search=" + this.state.search)
             let searchResults = await response.json()
+            searchResults = searchResults.filter(guest => guest.active === true)
             this.setState({
                 searchResults: searchResults
             })
@@ -63,6 +69,7 @@ class NewReservation extends React.Component {
             <>
                 <div className="overlay" id="overlay" onClick={this.onClickHandler} />
                 <div className="form-wrapper">
+                    <div id="close-button" onClick={this.onClickHandler}>X</div>
                     <h3>NEW RESERVATION</h3>
 
                     <div className="search-results-wrapper">
@@ -82,11 +89,9 @@ class NewReservation extends React.Component {
                         <div className="search-results">
                             {this.state.search.length > 0 ? this.searchGuest() : null }
                         </div>
-
                     </div>
                 </div>
             </>
-
         )
     }
 }
