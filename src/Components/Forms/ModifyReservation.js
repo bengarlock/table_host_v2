@@ -140,7 +140,6 @@ class ModifyReservation extends React.Component {
                 <div className="overlay" id="overlay" onClick={this.onClickHandler} />
                 <div className="form-wrapper">
                     <h3>Reservation Details</h3>
-
                     <form className="user-form" onSubmit={this.onSubmitHandler}>
                         <div>
                             <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
@@ -218,8 +217,6 @@ class ModifyReservation extends React.Component {
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="Guest Notes" />
-
-
                         <input type="submit" />
                     </form>
                 </div>
@@ -234,6 +231,5 @@ const mapStateToProps = (state) => ({
     currentGuest: state.guest.currentGuest,
     statuses: state.status.statuses
 })
-
 
 export default connect(mapStateToProps, { changeSlot, changeGuest, patchBook })(ModifyReservation);
