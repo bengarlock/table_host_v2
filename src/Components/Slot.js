@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 class Slot extends React.Component {
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired,
+        currentBook: PropTypes.array.isRequired,
     }
 
     clickHandler = () => {
@@ -42,8 +42,7 @@ class Slot extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    //state.resyRestaurants calls the reducer and .resyRestaurants calls the action
-    currentSlot: state.book.currentBook,
+    currentBook: state.book.currentBook,
 })
 
 export default connect(mapStateToProps, { changeSlot })(Slot);

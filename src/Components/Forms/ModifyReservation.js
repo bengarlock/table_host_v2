@@ -89,8 +89,21 @@ class ModifyReservation extends React.Component {
         }
     }
 
+    toggleMenu = (menu) => {
+        if (menu === 'time') {
+            this.setState({
+                timeMenu: !this.state.timeMenu
+            })
+        }
+    }
+
     renderTimes = () => {
-        return this.props.currentBook[0].slots.map(slot => <Time key={slot.id} slot={slot}/>)
+        function uniq(a) {
+            return Array.from(new Set(a));
+        }
+
+        let times = uniq(this.props.currentBook[0].slots.map(slot => slot.time)).sort()
+        return times.map(time => <Time key={times.indexOf(time)} time={time} toggleMenu={this.toggleMenu}/>)
     }
 
     render() {
@@ -103,7 +116,7 @@ class ModifyReservation extends React.Component {
                     <form className="user-form" onSubmit={this.onSubmitHandler}>
                         <div>
                             <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
-                                Time
+                                {this.props.currentSlot[0].time}
                             </div>
                                 {this.state.timeMenu ? (
                                     <>
