@@ -1,11 +1,10 @@
 import React from 'react'
 import "../../Stylesheets/ReservationForm.css"
 import {connect} from "react-redux";
-import { changeSlot } from "../../Actions/Slot";
-import { changeGuest } from "../../Actions/Guest";
+import { changeSlot, patchSlot } from "../../Actions/Slot";
+import { changeGuest, patchGuest } from "../../Actions/Guest";
 import { patchBook } from "../../Actions/Book";
 import PropTypes from "prop-types";
-import Time from "../MenuItem";
 import MenuItem from "../MenuItem";
 
 class ModifyReservation extends React.Component {
@@ -96,6 +95,8 @@ class ModifyReservation extends React.Component {
         slotToUpdate.booked = this.props.currentSlot[0].booked
         slotToUpdate.guest = this.props.currentGuest[0]
         this.props.patchBook([newBook])
+        this.props.patchSlot([this.props.currentSlot[0]])
+        this.props.patchGuest([this.props.currentGuest[0]])
         this.props.changeSlot([])
         this.props.changeGuest([])
     }
@@ -232,4 +233,4 @@ const mapStateToProps = (state) => ({
     statuses: state.status.statuses
 })
 
-export default connect(mapStateToProps, { changeSlot, changeGuest, patchBook })(ModifyReservation);
+export default connect(mapStateToProps, { changeSlot, changeGuest, patchBook, patchSlot, patchGuest })(ModifyReservation);
