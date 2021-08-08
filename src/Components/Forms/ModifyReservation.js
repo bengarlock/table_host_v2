@@ -22,6 +22,7 @@ class ModifyReservation extends React.Component {
         tables: '',
         statusMenu: false,
         timeMenu: false,
+        partySizeMenu: false,
     }
 
     static propTypes = {
@@ -55,10 +56,15 @@ class ModifyReservation extends React.Component {
             this.setState({
                 timeMenu: !this.state.timeMenu
             })
+        } else if (e.target.id === 'party-size-menu') {
+            this.setState({
+                partySizeMenu: !this.state.partySizeMenu
+            })
         } else if (e.target.id === 'menu-overlay') {
             this.setState({
                 statusMenu: false,
                 timeMenu: false,
+                partySizeMenu: false,
             })
         }
     }
@@ -81,12 +87,15 @@ class ModifyReservation extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-
         let guest = {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             phone_number: this.state.phone_number,
             guest_notes: this.state.guest_notes
+        }
+
+        let slot = {
+
         }
     }
 
@@ -99,6 +108,10 @@ class ModifyReservation extends React.Component {
             this.setState({
                 statusMenu: !this.state.statusMenu
             })
+        } else if (menu === 'partySize') {
+            this.setState({
+                partySizeMenu: !this.state.partySizeMenu
+            })
         }
     }
 
@@ -106,7 +119,6 @@ class ModifyReservation extends React.Component {
         function uniq(a) {
             return Array.from(new Set(a));
         }
-
         let times = uniq(this.props.currentBook[0].slots.map(slot => slot.time)).sort()
         return times.map(time => <MenuItem key={times.indexOf(time)} menuItem={time} toggleMenu={this.toggleMenu} type={"time"}/>)
     }
@@ -114,6 +126,12 @@ class ModifyReservation extends React.Component {
     renderStatuses = () => {
         let statuses = this.props.statuses.map(status => status.label)
         return statuses.map(status => <MenuItem key={status.id} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
+    }
+
+    renderPartySizes = () => {
+        let partySizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+        return partySizes.map(partySize => <MenuItem key={partySize.id} menuItem={partySize} toggleMenu={this.toggleMenu}  type={"partySize"}/>)
+
     }
 
     render() {
@@ -140,8 +158,27 @@ class ModifyReservation extends React.Component {
                                     )
                                     : null
                                 }
-
                         </div>
+                        <div>
+                            <div className="menu-dropdown-wrapper" id="party-size-menu" onClick={this.onClickHandler}>
+                                {this.props.currentSlot[0].party_size}
+                            </div>
+                            {this.state.partySizeMenu ? (
+                                    <>
+                                        <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
+                                        <div className="menu-items-wrapper">
+                                            <div className="menu">
+                                                {this.renderPartySizes()}
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                                : null
+                            }
+                        </div>
+
+
+
                         <input name="first-name"
                                value={this.state.first_name}
                                onChange={this.onChangeHandler}

@@ -21,6 +21,11 @@ class MenuItem extends React.Component {
             slot[0].status = this.props.menuItem
             this.props.changeSlot(slot)
             this.props.toggleMenu('status')
+        } else if (this.props.type === "partySize") {
+            let slot = [...this.props.currentSlot]
+            slot[0].party_size = this.props.menuItem
+            this.props.changeSlot(slot)
+            this.props.toggleMenu('partySize')
         }
 
     }
