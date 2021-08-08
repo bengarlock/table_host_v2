@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 import { changeSlot } from "../../Actions/Slot";
 import { changeGuest } from "../../Actions/Guest";
 import PropTypes from "prop-types";
-import Time from "../Time";
+import Time from "../MenuItem";
+import MenuItem from "../MenuItem";
 
 class ModifyReservation extends React.Component {
 
@@ -21,13 +22,13 @@ class ModifyReservation extends React.Component {
         tables: '',
         statusMenu: false,
         timeMenu: false,
-
     }
 
     static propTypes = {
         currentBook: PropTypes.array.isRequired,
         currentSlot: PropTypes.array.isRequired,
         currentGuest: PropTypes.array.isRequired,
+        statuses: PropTypes.array.isRequired,
     }
 
     componentDidMount() {
@@ -94,6 +95,10 @@ class ModifyReservation extends React.Component {
             this.setState({
                 timeMenu: !this.state.timeMenu
             })
+        } else if (menu === 'status') {
+            this.setState({
+                statusMenu: !this.state.statusMenu
+            })
         }
     }
 
@@ -103,7 +108,12 @@ class ModifyReservation extends React.Component {
         }
 
         let times = uniq(this.props.currentBook[0].slots.map(slot => slot.time)).sort()
-        return times.map(time => <Time key={times.indexOf(time)} time={time} toggleMenu={this.toggleMenu}/>)
+        return times.map(time => <MenuItem key={times.indexOf(time)} menuItem={time} toggleMenu={this.toggleMenu} type={"time"}/>)
+    }
+
+    renderStatuses = () => {
+        let statuses = this.props.statuses.map(status => status.label)
+        return statuses.map(status => <MenuItem key={status.id} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
     }
 
     render() {
@@ -160,19 +170,14 @@ class ModifyReservation extends React.Component {
 
                         <div>
                             <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
-                                {this.state.status}
+                                {this.props.currentSlot[0].status}
                             </div>
                             <div className="menu-items-wrapper">
                                 {this.state.statusMenu ? (
                                     <>
                                         <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
                                         <div className="menu-items-wrapper">
-                                            <div className="menu">
-                                                <div className="menu-item" id="booked">Booked</div>
-                                                <div className="menu-item" id="confirmed">Confirmed</div>
-                                                <div className="menu-item" id="cancel">Cancel</div>
-                                                <div className="menu-item" id="noshow">No-show</div>
-                                            </div>
+                                            {this.renderStatuses()}
                                         </div>
                                     </>
                                     )
@@ -180,7 +185,6 @@ class ModifyReservation extends React.Component {
                                 }
                             </div>
                         </div>
-
                         <input type="submit" />
                     </form>
                 </div>
@@ -193,6 +197,7 @@ const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     currentSlot: state.slot.currentSlot,
     currentGuest: state.guest.currentGuest,
+    statuses: state.status.statuses
 })
 
 

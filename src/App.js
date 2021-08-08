@@ -2,6 +2,7 @@ import React from 'react'
 import './Stylesheets/App.css'
 // import { Route, Redirect } from "react-router-dom";
 import { getBook } from "./Actions/Book";
+import { getStatuses } from "./Actions/Status";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Navbar from "./Components/Navbar";
@@ -17,7 +18,8 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    this.props.getBook(Date.now())
+      this.props.getBook(Date.now())
+      this.props.getStatuses()
   }
 
   render() {
@@ -40,4 +42,4 @@ const mapStateToProps = (state) => ({
   currentNavbar: state.navbar.currentNavbar
 })
 
-export default connect(mapStateToProps, { getBook })(App);
+export default connect(mapStateToProps, { getBook, getStatuses })(App);
