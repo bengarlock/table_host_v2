@@ -1,4 +1,4 @@
-import { GET_BOOK } from "./Types";
+import {GET_BOOK, PATCH_BOOK} from "./Types";
 import { SET_DATE} from "./Types";
 
 //GET BOOK
@@ -10,7 +10,6 @@ export const getBook = (date) => {
                 month = '' + (d.getMonth() + 1),
                 day = '' + d.getDate(),
                 year = d.getFullYear();
-
             if (month.length < 2)
                 month = '0' + month;
             if (day.length < 2)
@@ -33,5 +32,12 @@ export const setDate = (date) => {
         type: SET_DATE,
         payload: date
     })
+}
 
+//PATCH_BOOK
+export const patchBook = (book) => {
+    return (dispatch) => dispatch({
+        type: PATCH_BOOK,
+        payload: book
+    })
 }

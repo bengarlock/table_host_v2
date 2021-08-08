@@ -27,7 +27,6 @@ class MenuItem extends React.Component {
             this.props.changeSlot(slot)
             this.props.toggleMenu('partySize')
         }
-
     }
 
 

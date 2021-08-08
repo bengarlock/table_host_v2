@@ -13,7 +13,14 @@ class Slot extends React.Component {
     }
 
     clickHandler = () => {
-        this.props.changeSlot([this.props.slot])
+        if (this.props.slot.status === "") {
+            let newSlot = {...this.props.slot}
+            newSlot.status = "Booked"
+            newSlot.booked = true
+            this.props.changeSlot([newSlot])
+        } else {
+            this.props.changeSlot([this.props.slot])
+        }
         //check if slot is booked and if so populate guest object in redux
     }
 

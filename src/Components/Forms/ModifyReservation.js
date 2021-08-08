@@ -3,6 +3,7 @@ import "../../Stylesheets/ReservationForm.css"
 import {connect} from "react-redux";
 import { changeSlot } from "../../Actions/Slot";
 import { changeGuest } from "../../Actions/Guest";
+import { patchBook } from "../../Actions/Book";
 import PropTypes from "prop-types";
 import Time from "../MenuItem";
 import MenuItem from "../MenuItem";
@@ -40,7 +41,7 @@ class ModifyReservation extends React.Component {
             reservation_notes: this.props.currentSlot[0].reservation_notes,
             guest_notes: this.props.currentSlot[0].guest_notes,
             time: this.props.currentSlot[0].time,
-            status: this.props.currentSlot[0].status ? this.props.currentSlot[0].status : "Booked"
+            status: this.props.currentSlot[0].status === "" ? "Booked" : this.props.currentSlot[0].status
         })
     }
 
@@ -95,8 +96,26 @@ class ModifyReservation extends React.Component {
         }
 
         let slot = {
-
+            time: this.state.time,
+            party_size: this.state.party_size,
+            status: this.state.status,
+            reservation_notes: this.state.reservation_notes,
+            booked: this.state.booked,
+            guest: guest,
         }
+
+        console.log(this.props.currentSlot[0])
+
+        console.log(this.props.currentBook[0].slots)
+
+        // build the new slot object
+        //copy book object
+        //grab index of slot we want to change
+        //swap out slot using patchbook
+
+
+
+
     }
 
     toggleMenu = (menu) => {
@@ -125,13 +144,12 @@ class ModifyReservation extends React.Component {
 
     renderStatuses = () => {
         let statuses = this.props.statuses.map(status => status.label)
-        return statuses.map(status => <MenuItem key={status.id} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
+        return statuses.map(status => <MenuItem key={statuses.indexOf(status)} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
     }
 
     renderPartySizes = () => {
         let partySizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-        return partySizes.map(partySize => <MenuItem key={partySize.id} menuItem={partySize} toggleMenu={this.toggleMenu}  type={"partySize"}/>)
-
+        return partySizes.map(partySize => <MenuItem key={partySizes.indexOf(partySize)} menuItem={partySize} toggleMenu={this.toggleMenu}  type={"partySize"}/>)
     }
 
     render() {
@@ -176,9 +194,23 @@ class ModifyReservation extends React.Component {
                                 : null
                             }
                         </div>
-
-
-
+                        <div>
+                            <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
+                                {this.props.currentSlot[0].status}
+                            </div>
+                            <div className="menu-items-wrapper">
+                                {this.state.statusMenu ? (
+                                        <>
+                                            <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
+                                            <div className="menu-items-wrapper">
+                                                {this.renderStatuses()}
+                                            </div>
+                                        </>
+                                    )
+                                    : null
+                                }
+                            </div>
+                        </div>
                         <input name="first-name"
                                value={this.state.first_name}
                                onChange={this.onChangeHandler}
@@ -205,23 +237,7 @@ class ModifyReservation extends React.Component {
                                type="text"
                                placeholder="Guest Notes" />
 
-                        <div>
-                            <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
-                                {this.props.currentSlot[0].status}
-                            </div>
-                            <div className="menu-items-wrapper">
-                                {this.state.statusMenu ? (
-                                    <>
-                                        <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
-                                        <div className="menu-items-wrapper">
-                                            {this.renderStatuses()}
-                                        </div>
-                                    </>
-                                    )
-                                    : null
-                                }
-                            </div>
-                        </div>
+
                         <input type="submit" />
                     </form>
                 </div>
@@ -238,4 +254,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { changeSlot, changeGuest })(ModifyReservation);
+export default connect(mapStateToProps, { changeSlot, changeGuest, patchBook })(ModifyReservation);
