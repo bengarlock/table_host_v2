@@ -11,16 +11,6 @@ import MenuItem from "../MenuItem";
 class ModifyReservation extends React.Component {
 
     state = {
-        booked: '',
-        first_name: '',
-        last_name: '',
-        phone_number: '',
-        time: '',
-        party_size: '',
-        status: '',
-        reservation_notes: '',
-        guest_notes: '',
-        tables: '',
         statusMenu: false,
         timeMenu: false,
         partySizeMenu: false,
@@ -38,6 +28,7 @@ class ModifyReservation extends React.Component {
             first_name: this.props.currentGuest[0].first_name,
             last_name: this.props.currentGuest[0].last_name,
             phone_number: this.props.currentGuest[0].phone_number,
+            party_size: this.props.currentSlot[0].party_size,
             reservation_notes: this.props.currentSlot[0].reservation_notes,
             guest_notes: this.props.currentSlot[0].guest_notes,
             time: this.props.currentSlot[0].time,
@@ -72,50 +63,41 @@ class ModifyReservation extends React.Component {
 
     onChangeHandler = (e) => {
         if (e.target.name === "first-name") {
-            this.setState({
-                first_name: e.target.value
-            })
+            let guest = {...this.props.currentGuest[0]}
+            guest.first_name = e.target.value
+            this.props.changeGuest([guest])
         } else if (e.target.name === "last-name") {
-            this.setState({
-                last_name: e.target.value
-            })
+            let guest = {...this.props.currentGuest[0]}
+            guest.last_name = e.target.value
+            this.props.changeGuest([guest])
         } else if (e.target.name === "phone-number") {
-            this.setState({
-                phone_number: e.target.value
-            })
+            let guest = {...this.props.currentGuest[0]}
+            guest.phone_number = e.target.value
+            this.props.changeGuest([guest])
+        } else if (e.target.name === "guest-notes") {
+            let guest = {...this.props.currentGuest[0]}
+            guest.guest_notes = e.target.value
+            this.props.changeGuest([guest])
+        } else if (e.target.name === "reservation-notes") {
+            let slot = {...this.props.currentSlot[0]}
+            slot.reservation_notes = e.target.value
+            this.props.changeSlot([slot])
         }
     }
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-        let guest = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            phone_number: this.state.phone_number,
-            guest_notes: this.state.guest_notes
-        }
-
-        let slot = {
-            time: this.state.time,
-            party_size: this.state.party_size,
-            status: this.state.status,
-            reservation_notes: this.state.reservation_notes,
-            booked: this.state.booked,
-            guest: guest,
-        }
-
-        console.log(this.props.currentSlot[0])
-
-        console.log(this.props.currentBook[0].slots)
-
-        // build the new slot object
-        //copy book object
-        //grab index of slot we want to change
-        //swap out slot using patchbook
-
-
-
-
+        let newBook = {...this.props.currentBook[0]}
+        let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot[0].id)
+        slotToUpdate.time = this.props.currentSlot[0].time
+        slotToUpdate.party_size = this.props.currentSlot[0].party_size
+        slotToUpdate.status = this.props.currentSlot[0].status
+        slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
+        slotToUpdate.booked = this.props.currentSlot[0].booked
+        slotToUpdate.guest = this.props.currentGuest[0]
+        this.props.patchBook([newBook])
+        this.props.changeSlot([])
+        this.props.changeGuest([])
     }
 
     toggleMenu = (menu) => {
@@ -212,27 +194,27 @@ class ModifyReservation extends React.Component {
                             </div>
                         </div>
                         <input name="first-name"
-                               value={this.state.first_name}
+                               value={this.props.currentGuest[0].first_name}
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="First Name"/>
                         <input name="last-name"
-                               value={this.state.last_name}
+                               value={this.props.currentGuest[0].last_name}
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="Last Name" />
                         <input name="phone-number"
-                               value={this.state.phone_number}
+                               value={this.props.currentGuest[0].phone_number}
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="Phone Number" />
                         <input name="reservation-notes"
-                               value={this.state.reservation_notes}
+                               value={this.props.currentSlot[0].reservation_notes}
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="Reservation Notes" />
                         <input name="guest-notes"
-                               value={this.state.guest_notes}
+                               value={this.props.currentGuest[0].guest_notes}
                                onChange={this.onChangeHandler}
                                type="text"
                                placeholder="Guest Notes" />
