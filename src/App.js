@@ -18,7 +18,8 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-      this.props.getBook(Date.now())
+      const today = new Date();
+      this.props.getBook(today)
       this.props.getStatuses()
   }
 

@@ -1,4 +1,4 @@
-import {CHANGE_SLOT, GET_BOOK} from "./Types";
+import {CHANGE_SLOT, PATCH_SLOT} from "./Types";
 
 //CHANGE_SLOT
 export const changeSlot = (slot) => {
@@ -11,14 +11,28 @@ export const changeSlot = (slot) => {
 }
 
 //PATCH_SLOT
-export const patchSlot = (slot) => {
+export const patchSlot = (slot, guest) => {
     return async (dispatch) => {
 
-        const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + String(slot.id))
+        console.log(guest.id)
+
+        const packet = {
+            method: "put",
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify({
+                book: slot.book,
+                guest: guest.id
+            })
+        }
+
+        const response = await fetch("https://bengarlock.com/api/v1/tablehost/slots/" + String(slot.id) + "/", packet)
         let updatedSlot = await response.json()
 
         dispatch({
-            type: GET_BOOK,
+            type: PATCH_SLOT,
             payload: updatedSlot
         })
     };
