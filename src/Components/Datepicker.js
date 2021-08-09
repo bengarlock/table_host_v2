@@ -29,27 +29,24 @@ class Datepicker extends React.Component {
         if (String(this.props.currentDate) === String(today)) {
             return (
                 <>
-                    <div>Today</div>
-                    <div>{newDate}</div>
+                    <div id="cal">Today</div>
+                    <div id="cal">{newDate}</div>
                 </>
             )
 
-        } else if(String(this.props.currentDate) === String(tomorrow)) {
+        } else if (String(this.props.currentDate) === String(tomorrow)) {
             return (
                 <>
-                    <div>Tomorrow</div>
-                    <div>{newDate}</div>
+                    <div id="cal">Tomorrow</div>
+                    <div id="cal">{newDate}</div>
                 </>
             )
         } else {
             return newDate
         }
-
     }
 
     onClickHandler = (e) => {
-        // let today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
-
         if (e.target.id === "left") {
             let date = new Date(this.props.currentDate)
             date.setDate(date.getDate() - 1)
@@ -83,7 +80,6 @@ class Datepicker extends React.Component {
         let formatDate = new Date(date).toJSON().slice(0,10)
         this.props.setDate(formatDate)
 
-
         this.setState({
             calendarClicked: false
         })
@@ -96,7 +92,6 @@ class Datepicker extends React.Component {
                 <span className="center-calendar-selector" onClick={this.onClickHandler} id="cal">
                     {this.renderDay()}
                 </span>
-
                         {this.state.calendarClicked ?
 
                             <div id="th-calendar-wrapper" onClick={this.onClickHandler}>
