@@ -16,22 +16,26 @@ export const getBook = (date) => {
                 day = '0' + day;
             return [year, month, day].join('-');
         }
-
         const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + String(formatDate(date)))
         let book = await response.json()
+
         book[0].slots.sort((a, b) => (a.id > b.id) ? 1 : -1)
 
         dispatch({
             type: GET_BOOK,
-            payload: book.sort()
+            payload: book
         })
     };
 }
 
 export const setDate = (date) => {
+
+    let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+
     return (dispatch) => dispatch({
         type: SET_DATE,
-        payload: date
+        payload: String(newDate)
     })
 }
 
@@ -40,6 +44,6 @@ export const patchBook = (book) => {
 
     return (dispatch) => dispatch({
         type: PATCH_BOOK,
-        payload: book.sort()
+        payload: book
     })
 }
