@@ -29,8 +29,6 @@ export const getBook = (date) => {
 }
 
 export const setDate = (date) => {
-    console.log(date)
-
     let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     return (dispatch) => dispatch({
         type: SET_DATE,

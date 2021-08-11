@@ -161,28 +161,35 @@ class ModifyReservation extends React.Component {
                 <div className="form-wrapper">
                     <h3>Reservation Details</h3>
                     <form className="user-form" onSubmit={this.onSubmitHandler}>
-                        <div>
-                            <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
-                                {this.props.currentSlot[0].time}
-                            </div>
+
+
+
+                        <div className="menu-collection-wrapper">
+
+
+                            <div>
+                                <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
+                                    {this.props.currentSlot[0].time}
+                                </div>
                                 {this.state.timeMenu ? (
-                                    <>
-                                        <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
-                                        <div className="menu-items-wrapper">
-                                            <div className="menu">
-                                                {this.renderTimes()}
+                                        <>
+                                            <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
+                                            <div className="menu-items-wrapper">
+                                                <div className="menu">
+                                                    {this.renderTimes()}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </>
+                                        </>
                                     )
                                     : null
                                 }
-                        </div>
-                        <div>
+                            </div>
+
+                            <div>
                             <div className="menu-dropdown-wrapper" id="party-size-menu" onClick={this.onClickHandler}>
                                 {this.props.currentSlot[0].party_size}
                             </div>
-                            {this.state.partySizeMenu ? (
+                                    {this.state.partySizeMenu ? (
                                     <>
                                         <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
                                         <div className="menu-items-wrapper">
@@ -194,23 +201,28 @@ class ModifyReservation extends React.Component {
                                 )
                                 : null
                             }
-                        </div>
-                        <div>
-                            <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
-                                {this.props.currentSlot[0].status}
                             </div>
-                            <div className="menu-items-wrapper">
+
+                            <div>
+                                <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
+                                    {this.props.currentSlot[0].status}
+                                </div>
                                 {this.state.statusMenu ? (
                                         <>
                                             <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
                                             <div className="menu-items-wrapper">
-                                                {this.renderStatuses()}
+                                                <div className="menu">
+                                                    {this.renderStatuses()}
+                                                </div>
                                             </div>
                                         </>
                                     )
                                     : null
                                 }
                             </div>
+
+
+
                         </div>
                         <input name="first-name"
                                value={this.props.currentGuest[0].first_name}

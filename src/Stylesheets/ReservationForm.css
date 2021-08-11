@@ -79,10 +79,22 @@ input{
     z-index: 4;
 }
 
+.menu-collection-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .menu-dropdown-wrapper {
-    background-color: #2b2b2f;
+    background-color: #42729c;
     padding: 1em;
+    min-width: 100px;
+    text-align: center;
     user-select: none;
+}
+.menu-dropdown-wrapper:hover {
+    background-color: #b66500;
+    transition: .5s;
 }
 
 .menu {
@@ -92,7 +104,7 @@ input{
 }
 
 .menu-items-wrapper {
-    position: fixed;
+    position: absolute;
     user-select: none;
     overflow: hidden;
     width: 15em;
