@@ -2,6 +2,7 @@ import React from 'react'
 import "../Stylesheets/Slot.css"
 import PropTypes from 'prop-types';
 import { changeSlot } from "../Actions/Slot";
+import { changeGuest} from "../Actions/Guest";
 import { connect } from "react-redux";
 
 
@@ -13,13 +14,16 @@ class Slot extends React.Component {
     }
 
     clickHandler = () => {
-        if (this.props.slot.status === "") {
+        if (this.props.slot.booked) {
+            this.props.changeSlot([this.props.slot])
+            this.props.changeGuest([this.props.slot.guest])
+        } else {
             let newSlot = {...this.props.slot}
             newSlot.status = "Booked"
             newSlot.booked = true
             this.props.changeSlot([newSlot])
-        } else {
-            this.props.changeSlot([this.props.slot])
+
+
         }
         //check if slot is booked and if so populate guest object in redux
     }
@@ -52,4 +56,4 @@ const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
 })
 
-export default connect(mapStateToProps, { changeSlot })(Slot);
+export default connect(mapStateToProps, { changeSlot, changeGuest })(Slot);

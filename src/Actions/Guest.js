@@ -13,17 +13,22 @@ export const changeGuest = (guest) => {
 //PATCH_GUEST
 export const patchGuest = (guest) => {
     return async (dispatch) => {
-
         const packet = {
             method: "put",
             headers: {
                 "content-type": 'application/json',
                 "accept": "application/json",
             },
-            body: JSON.stringify(guest)
+            body: JSON.stringify({
+                first_name: guest.first_name,
+                last_name: guest.last_name,
+                phone_number: guest.phone_number,
+                guest_notes: guest.guest_notes,
+                active: guest.active,
+            })
         }
 
-        const response = await fetch("https://bengarlock.com/api/v1/tablehost/guest/" + String(guest.id), packet)
+        const response = await fetch("https://bengarlock.com/api/v1/tablehost/guests/" + String(guest.id) + '/', packet)
         let updatedGuest = await response.json()
 
         dispatch({

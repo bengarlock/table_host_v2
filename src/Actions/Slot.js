@@ -13,9 +13,6 @@ export const changeSlot = (slot) => {
 //PATCH_SLOT
 export const patchSlot = (slot, guest) => {
     return async (dispatch) => {
-
-        console.log(guest.id)
-
         const packet = {
             method: "put",
             headers: {
@@ -23,8 +20,14 @@ export const patchSlot = (slot, guest) => {
                 'accept': 'application/json'
             },
             body: JSON.stringify({
+                booked: slot.booked,
+                time: slot.time,
+                party_size: slot.party_size,
+                status: slot.status,
+                reservation_notes: slot.reservation_notes,
+                tables: slot.tables,
                 book: slot.book,
-                guest: guest.id
+                guest: guest.id,
             })
         }
 
