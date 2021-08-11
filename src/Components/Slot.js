@@ -22,10 +22,7 @@ class Slot extends React.Component {
             newSlot.status = "Booked"
             newSlot.booked = true
             this.props.changeSlot([newSlot])
-
-
         }
-        //check if slot is booked and if so populate guest object in redux
     }
 
     render() {

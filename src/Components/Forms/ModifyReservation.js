@@ -86,19 +86,38 @@ class ModifyReservation extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
+
         let newBook = {...this.props.currentBook[0]}
         let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot[0].id)
-        slotToUpdate.time = this.props.currentSlot[0].time
-        slotToUpdate.party_size = this.props.currentSlot[0].party_size
-        slotToUpdate.status = this.props.currentSlot[0].status
-        slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
-        slotToUpdate.booked = this.props.currentSlot[0].booked
-        slotToUpdate.guest = this.props.currentGuest[0]
-        this.props.patchBook([newBook])
-        this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0])
-        this.props.patchGuest(this.props.currentGuest[0])
-        this.props.changeSlot([])
-        this.props.changeGuest([])
+
+        if (this.props.currentSlot[0].status === "Cancelled") {
+            slotToUpdate.time = this.props.currentSlot[0].time
+            slotToUpdate.party_size = this.props.currentSlot[0].party_size
+            slotToUpdate.status = ""
+            slotToUpdate.reservation_notes = ""
+            slotToUpdate.booked = false
+            slotToUpdate.guest = null
+
+            this.props.patchBook([newBook])
+            this.props.patchSlot(this.props.currentSlot[0], null)
+            this.props.patchGuest(this.props.currentGuest[0])
+            this.props.changeSlot([])
+            this.props.changeGuest([])
+
+        } else {
+            slotToUpdate.time = this.props.currentSlot[0].time
+            slotToUpdate.party_size = this.props.currentSlot[0].party_size
+            slotToUpdate.status = this.props.currentSlot[0].status
+            slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
+            slotToUpdate.booked = this.props.currentSlot[0].booked
+            slotToUpdate.guest = this.props.currentGuest[0]
+
+            this.props.patchBook([newBook])
+            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id)
+            this.props.patchGuest(this.props.currentGuest[0])
+            this.props.changeSlot([])
+            this.props.changeGuest([])
+        }
     }
 
     toggleMenu = (menu) => {
