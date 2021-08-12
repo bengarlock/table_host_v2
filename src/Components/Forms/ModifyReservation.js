@@ -162,12 +162,10 @@ class ModifyReservation extends React.Component {
                     <h3>Reservation Details</h3>
                     <form className="user-form" onSubmit={this.onSubmitHandler}>
 
-
-
                         <div className="menu-collection-wrapper">
 
-
                             <div>
+                                <div className="label">Time</div>
                                 <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
                                     {this.props.currentSlot[0].time}
                                 </div>
@@ -186,6 +184,7 @@ class ModifyReservation extends React.Component {
                             </div>
 
                             <div>
+                                <div className="label">Party Size</div>
                             <div className="menu-dropdown-wrapper" id="party-size-menu" onClick={this.onClickHandler}>
                                 {this.props.currentSlot[0].party_size}
                             </div>
@@ -204,6 +203,7 @@ class ModifyReservation extends React.Component {
                             </div>
 
                             <div>
+                                <div className="label">Status</div>
                                 <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
                                     {this.props.currentSlot[0].status}
                                 </div>
@@ -221,35 +221,52 @@ class ModifyReservation extends React.Component {
                                 }
                             </div>
 
+                        </div>
 
+                        <div className="form-collection-wrapper">
+                            <div className="input-wrapper">
+                                <div className="label">First Name</div>
+                                <input name="first-name"
+                                       value={this.props.currentGuest[0].first_name}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="First Name"/>
+                            </div>
+                            <div className="input-wrapper">
+                                <div className="label">Last Name</div>
+                                <input name="last-name"
+                                       value={this.props.currentGuest[0].last_name}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="Last Name" />
+                            </div>
+                            <div className="input-wrapper">
+                                <div className="label">Phone</div>
+                                <input name="phone-number"
+                                       value={this.props.currentGuest[0].phone_number}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="Phone Number" />
+                            </div>
 
                         </div>
-                        <input name="first-name"
-                               value={this.props.currentGuest[0].first_name}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="First Name"/>
-                        <input name="last-name"
-                               value={this.props.currentGuest[0].last_name}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Last Name" />
-                        <input name="phone-number"
-                               value={this.props.currentGuest[0].phone_number}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Phone Number" />
-                        <input name="reservation-notes"
-                               value={this.props.currentSlot[0].reservation_notes}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Reservation Notes" />
-                        <input name="guest-notes"
-                               value={this.props.currentGuest[0].guest_notes}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Guest Notes" />
-                        <input type="submit" />
+                        <div className="notes-wrapper">
+                            <input name="reservation-notes"
+                                   value={this.props.currentSlot[0].reservation_notes}
+                                   onChange={this.onChangeHandler}
+                                   type="text"
+                                   placeholder="Reservation Notes" />
+                            <input name="guest-notes"
+                                   value={this.props.currentGuest[0].guest_notes}
+                                   onChange={this.onChangeHandler}
+                                   type="text"
+                                   placeholder="Guest Notes" />
+
+                        </div>
+                        <div className='submit'>
+                            <input type="submit" />
+                        </div>
+
                     </form>
                 </div>
             </>
