@@ -86,6 +86,8 @@ class ModifyReservation extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
+
+        //update local book state
         let newBook = {...this.props.currentBook[0]}
         let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot[0].id)
         slotToUpdate.time = this.props.currentSlot[0].time
@@ -93,10 +95,17 @@ class ModifyReservation extends React.Component {
         slotToUpdate.status = this.props.currentSlot[0].status
         slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
         slotToUpdate.booked = this.props.currentSlot[0].booked
-        slotToUpdate.guest = this.props.currentGuest[0]
+        slotToUpdate.guest = this.props.currentGuest[0].id
         this.props.patchBook([newBook])
-        this.props.patchSlot([this.props.currentSlot[0]])
-        this.props.patchGuest([this.props.currentGuest[0]])
+
+        //prep and patch slot in db
+        let newSlot = {...this.props.currentSlot[0]}
+        newSlot.guest = this.props.currentGuest[0].id
+        this.props.patchSlot(newSlot)
+
+
+
+        // this.props.patchGuest([this.props.currentGuest[0]])
         this.props.changeSlot([])
         this.props.changeGuest([])
     }

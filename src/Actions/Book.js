@@ -36,6 +36,9 @@ export const setDate = (date) => {
 
 //PATCH_BOOK
 export const patchBook = (book) => {
+
+    //write to db
+
     return (dispatch) => dispatch({
         type: PATCH_BOOK,
         payload: book
