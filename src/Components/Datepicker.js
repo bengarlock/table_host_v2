@@ -5,6 +5,7 @@ import { getBook, setDate } from "../Actions/Book";
 import PropTypes from "prop-types";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import 'dateformat'
 
 class Datepicker extends React.Component {
 
