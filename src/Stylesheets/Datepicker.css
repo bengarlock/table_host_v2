@@ -10,8 +10,12 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 15px;
     user-select: none;
+}
+
+.center-calendar-selector {
+    width: 300px;
 }
 
 .calendar-button {

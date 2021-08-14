@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-
 class Datepicker extends React.Component {
 
     state = {
@@ -19,25 +18,38 @@ class Datepicker extends React.Component {
     }
 
     renderDay = () => {
-        if (this.props.currentBook[0]) {
-            let today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
-            if (this.props.currentDate === today) {
-                return "TODAY"
-            } else {
-                return this.props.currentDate
-            }
+
+        let dateFormat = require("dateformat");
+        let newDate = dateFormat(this.props.currentDate, "dddd mmmm dS, yyyy")
+
+        let today = new Date()
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        let tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+
+        if (String(this.props.currentDate) === String(today)) {
+            return (
+                <>
+                    <div id="cal">Today</div>
+                    <div id="cal">{newDate}</div>
+                </>
+            )
+
+        } else if (String(this.props.currentDate) === String(tomorrow)) {
+            return (
+                <>
+                    <div id="cal">Tomorrow</div>
+                    <div id="cal">{newDate}</div>
+                </>
+            )
         } else {
-            return "CLOSED"
+            return newDate
         }
     }
 
     onClickHandler = (e) => {
-        // let today = new Date().toJSON().slice(0,10).replace(/-/g,'-');
-
         if (e.target.id === "left") {
             let date = new Date(this.props.currentDate)
             date.setDate(date.getDate() - 1)
-            date = date.toJSON().slice(0,10).replace(/-/g,'-')
             this.props.setDate(date)
             this.props.getBook(date)
 
@@ -49,7 +61,6 @@ class Datepicker extends React.Component {
         } else if (e.target.id === "right") {
             let date = new Date(this.props.currentDate)
             date.setDate(date.getDate() + 1)
-            date = date.toJSON().slice(0,10).replace(/-/g,'-')
             this.props.setDate(date)
             this.props.getBook(date)
 
@@ -58,15 +69,16 @@ class Datepicker extends React.Component {
                 calendarClicked: false
             })
         } else if (e.target.id === "now-button") {
-            this.props.setDate(new Date().toJSON().slice(0,10).replace(/-/g,'-'))
-            this.props.getBook(new Date().toJSON().slice(0,10).replace(/-/g,'-'))
+            let today = new Date()
+            today = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+            this.props.setDate(today)
+            this.props.getBook(today)
         }
     }
 
     onChangeHandler = (date) => {
         let formatDate = new Date(date).toJSON().slice(0,10)
         this.props.setDate(formatDate)
-
 
         this.setState({
             calendarClicked: false
@@ -77,8 +89,9 @@ class Datepicker extends React.Component {
         return (
             <div className='datepicker-wrapper'>
                 <span className="calendar-button" onClick={this.onClickHandler} id="left"> {"<"} </span>
-                <span className="center-calendar-selector" onClick={this.onClickHandler} id="cal">{this.renderDay()}</span>
-
+                <span className="center-calendar-selector" onClick={this.onClickHandler} id="cal">
+                    {this.renderDay()}
+                </span>
                         {this.state.calendarClicked ?
 
                             <div id="th-calendar-wrapper" onClick={this.onClickHandler}>

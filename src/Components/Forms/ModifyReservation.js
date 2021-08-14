@@ -86,28 +86,37 @@ class ModifyReservation extends React.Component {
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-
-        //update local book state
         let newBook = {...this.props.currentBook[0]}
         let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot[0].id)
-        slotToUpdate.time = this.props.currentSlot[0].time
-        slotToUpdate.party_size = this.props.currentSlot[0].party_size
-        slotToUpdate.status = this.props.currentSlot[0].status
-        slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
-        slotToUpdate.booked = this.props.currentSlot[0].booked
-        slotToUpdate.guest = this.props.currentGuest[0].id
-        this.props.patchBook([newBook])
 
-        //prep and patch slot in db
-        let newSlot = {...this.props.currentSlot[0]}
-        newSlot.guest = this.props.currentGuest[0].id
-        this.props.patchSlot(newSlot)
+        if (this.props.currentSlot[0].status === "Cancelled") {
+            slotToUpdate.time = this.props.currentSlot[0].time
+            slotToUpdate.party_size = this.props.currentSlot[0].party_size
+            slotToUpdate.status = ""
+            slotToUpdate.reservation_notes = ""
+            slotToUpdate.booked = false
+            slotToUpdate.guest = null
 
+            this.props.patchBook([newBook])
+            this.props.patchSlot(this.props.currentSlot[0], null)
+            this.props.patchGuest(this.props.currentGuest[0])
+            this.props.changeSlot([])
+            this.props.changeGuest([])
 
+        } else {
+            slotToUpdate.time = this.props.currentSlot[0].time
+            slotToUpdate.party_size = this.props.currentSlot[0].party_size
+            slotToUpdate.status = this.props.currentSlot[0].status
+            slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
+            slotToUpdate.booked = this.props.currentSlot[0].booked
+            slotToUpdate.guest = this.props.currentGuest[0]
 
-        // this.props.patchGuest([this.props.currentGuest[0]])
-        this.props.changeSlot([])
-        this.props.changeGuest([])
+            this.props.patchBook([newBook])
+            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id)
+            this.props.patchGuest(this.props.currentGuest[0])
+            this.props.changeSlot([])
+            this.props.changeGuest([])
+        }
     }
 
     toggleMenu = (menu) => {
@@ -151,28 +160,34 @@ class ModifyReservation extends React.Component {
                 <div className="form-wrapper">
                     <h3>Reservation Details</h3>
                     <form className="user-form" onSubmit={this.onSubmitHandler}>
-                        <div>
-                            <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
-                                {this.props.currentSlot[0].time}
-                            </div>
+
+                        <div className="menu-collection-wrapper">
+
+                            <div>
+                                <div className="label">Time</div>
+                                <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
+                                    {this.props.currentSlot[0].time}
+                                </div>
                                 {this.state.timeMenu ? (
-                                    <>
-                                        <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
-                                        <div className="menu-items-wrapper">
-                                            <div className="menu">
-                                                {this.renderTimes()}
+                                        <>
+                                            <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
+                                            <div className="menu-items-wrapper">
+                                                <div className="menu">
+                                                    {this.renderTimes()}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </>
+                                        </>
                                     )
                                     : null
                                 }
-                        </div>
-                        <div>
+                            </div>
+
+                            <div>
+                                <div className="label">Party Size</div>
                             <div className="menu-dropdown-wrapper" id="party-size-menu" onClick={this.onClickHandler}>
                                 {this.props.currentSlot[0].party_size}
                             </div>
-                            {this.state.partySizeMenu ? (
+                                    {this.state.partySizeMenu ? (
                                     <>
                                         <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
                                         <div className="menu-items-wrapper">
@@ -184,50 +199,73 @@ class ModifyReservation extends React.Component {
                                 )
                                 : null
                             }
-                        </div>
-                        <div>
-                            <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
-                                {this.props.currentSlot[0].status}
                             </div>
-                            <div className="menu-items-wrapper">
+
+                            <div>
+                                <div className="label">Status</div>
+                                <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
+                                    {this.props.currentSlot[0].status}
+                                </div>
                                 {this.state.statusMenu ? (
                                         <>
                                             <div className="menu-overlay" id='menu-overlay' onClick={this.onClickHandler} />
                                             <div className="menu-items-wrapper">
-                                                {this.renderStatuses()}
+                                                <div className="menu">
+                                                    {this.renderStatuses()}
+                                                </div>
                                             </div>
                                         </>
                                     )
                                     : null
                                 }
                             </div>
+
                         </div>
-                        <input name="first-name"
-                               value={this.props.currentGuest[0].first_name}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="First Name"/>
-                        <input name="last-name"
-                               value={this.props.currentGuest[0].last_name}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Last Name" />
-                        <input name="phone-number"
-                               value={this.props.currentGuest[0].phone_number}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Phone Number" />
-                        <input name="reservation-notes"
-                               value={this.props.currentSlot[0].reservation_notes}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Reservation Notes" />
-                        <input name="guest-notes"
-                               value={this.props.currentGuest[0].guest_notes}
-                               onChange={this.onChangeHandler}
-                               type="text"
-                               placeholder="Guest Notes" />
-                        <input type="submit" />
+
+                        <div className="form-collection-wrapper">
+                            <div className="input-wrapper">
+                                <div className="label">First Name</div>
+                                <input name="first-name"
+                                       value={this.props.currentGuest[0].first_name}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="First Name"/>
+                            </div>
+                            <div className="input-wrapper">
+                                <div className="label">Last Name</div>
+                                <input name="last-name"
+                                       value={this.props.currentGuest[0].last_name}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="Last Name" />
+                            </div>
+                            <div className="input-wrapper">
+                                <div className="label">Phone</div>
+                                <input name="phone-number"
+                                       value={this.props.currentGuest[0].phone_number}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="Phone Number" />
+                            </div>
+
+                        </div>
+                        <div className="notes-wrapper">
+                            <input name="reservation-notes"
+                                   value={this.props.currentSlot[0].reservation_notes}
+                                   onChange={this.onChangeHandler}
+                                   type="text"
+                                   placeholder="Reservation Notes" />
+                            <input name="guest-notes"
+                                   value={this.props.currentGuest[0].guest_notes}
+                                   onChange={this.onChangeHandler}
+                                   type="text"
+                                   placeholder="Guest Notes" />
+
+                        </div>
+                        <div className='submit'>
+                            <input type="submit" />
+                        </div>
+
                     </form>
                 </div>
             </>

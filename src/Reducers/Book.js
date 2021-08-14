@@ -4,7 +4,7 @@ import { SET_DATE} from "../Actions/Types";
 
 const initialState = {
     currentBook: [],
-    currentDate: new Date().toJSON().slice(0,10).replace(/-/g,'-')
+    currentDate: ''
 }
 
 export default function book(state = initialState, action) {
