@@ -250,12 +250,12 @@ class ModifyReservation extends React.Component {
 
                         </div>
                         <div className="notes-wrapper">
-                            <input name="reservation-notes"
+                            <input id='reservation-notes' name="reservation-notes"
                                    value={this.props.currentSlot[0].reservation_notes}
                                    onChange={this.onChangeHandler}
                                    type="text"
                                    placeholder="Reservation Notes" />
-                            <input name="guest-notes"
+                            <input id='guest-notes' name="guest-notes"
                                    value={this.props.currentGuest[0].guest_notes}
                                    onChange={this.onChangeHandler}
                                    type="text"
