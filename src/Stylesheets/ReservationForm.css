@@ -140,6 +140,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
 }
 .menu-dropdown-wrapper:hover {
     background-color: #283b70;
@@ -150,7 +151,7 @@
     overflow-y: hidden;
     /*overflow-x: hidden;*/
     position: relative;
-    width: 15em;
+    min-width: 14em;
 }
 
 .menu-items-wrapper {
