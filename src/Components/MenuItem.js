@@ -6,7 +6,8 @@ import { changeSlot } from "../Actions/Slot";
 class MenuItem extends React.Component {
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.array.isRequired,
+        statuses: PropTypes.array.isRequired
     }
 
     onClickHandler = () => {
@@ -29,17 +30,32 @@ class MenuItem extends React.Component {
         }
     }
 
+    renderStyle = (e) => {
+        if (this.props.statuses.map(status => status.label).includes(this.props.menuItem)) {
+            const status = this.props.statuses.filter(status => status.label === this.props.menuItem)
+            return {backgroundColor: status[0].color}
+        }
+    }
+
+
 
     render() {
         return(
-            <div className="menu-item" id={this.props.menuItem} onClick={this.onClickHandler}>{this.props.menuItem}</div>
+            <div className="menu-item"
+                 id={this.props.menuItem}
+                 onClick={this.onClickHandler}
+                 style={this.renderStyle()}
+            >
+                {this.props.menuItem}
+            </div>
         )
     }
 
 }
 
 const mapStateToProps = (state) => ({
-    currentSlot: state.slot.currentSlot
+    currentSlot: state.slot.currentSlot,
+    statuses: state.status.statuses,
 })
 
 export default connect(mapStateToProps, { changeSlot })(MenuItem);

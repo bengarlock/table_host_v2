@@ -153,6 +153,17 @@ class ModifyReservation extends React.Component {
         return partySizes.map(partySize => <MenuItem key={partySizes.indexOf(partySize)} menuItem={partySize} toggleMenu={this.toggleMenu}  type={"partySize"}/>)
     }
 
+    renderStatusButtonColor = () => {
+        if (document.getElementById("status-menu")) {
+            let color = this.props.statuses.filter(
+                status => status.label === document.getElementById("status-menu").innerHTML)
+            return {backgroundColor: color[0].color}
+        } else {
+            return null
+        }
+
+    }
+
     render() {
         return(
             <>
@@ -204,7 +215,11 @@ class ModifyReservation extends React.Component {
 
                             <div className="user-select-option">
                                 <div className="label">Status</div>
-                                <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
+                                <div className="menu-dropdown-wrapper"
+                                     id="status-menu"
+                                     onClick={this.onClickHandler}
+                                     style={this.renderStatusButtonColor()}
+                                >
                                     {this.props.currentSlot[0].status}
                                 </div>
                                 {this.state.statusMenu ? (
