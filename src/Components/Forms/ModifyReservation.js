@@ -163,7 +163,7 @@ class ModifyReservation extends React.Component {
 
                         <div className="menu-collection-wrapper">
 
-                            <div>
+                            <div className="user-select-option">
                                 <div className="label">Time</div>
                                 <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
                                     {this.props.currentSlot[0].time}
@@ -182,7 +182,7 @@ class ModifyReservation extends React.Component {
                                 }
                             </div>
 
-                            <div>
+                            <div className="user-select-option">
                                 <div className="label">Party Size</div>
                             <div className="menu-dropdown-wrapper" id="party-size-menu" onClick={this.onClickHandler}>
                                 {this.props.currentSlot[0].party_size}
@@ -201,7 +201,7 @@ class ModifyReservation extends React.Component {
                             }
                             </div>
 
-                            <div>
+                            <div className="user-select-option">
                                 <div className="label">Status</div>
                                 <div className="menu-dropdown-wrapper" id="status-menu" onClick={this.onClickHandler}>
                                     {this.props.currentSlot[0].status}

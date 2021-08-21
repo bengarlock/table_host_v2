@@ -35,7 +35,6 @@ export const patchSlot = (slot, guest) => {
 
         const response = await fetch("https://bengarlock.com/api/v1/tablehost/slots/" + String(slot.id) + "/", packet)
         let updatedSlot = await response.json()
-        console.log(updatedSlot)
 
         dispatch({
             type: PATCH_SLOT,
