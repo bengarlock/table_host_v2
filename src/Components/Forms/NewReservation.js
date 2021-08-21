@@ -81,10 +81,10 @@ class NewReservation extends React.Component {
                                    autoComplete="off"
                                    placeholder="Guest Search" />
                         </form>
-                        <div>{this.state.message ? this.state.message : <br />}</div>
+                        <div>{this.state.message ? this.state.message : null}</div>
                         <div className="new-reso-form-button-wrappers">
-                            <button id="new-guest" onClick={this.onClickHandler}>New Guest</button>
-                            <button id="clear" onClick={this.onClickHandler}>Clear</button>
+                            <button className="form-button" id="new-guest" onClick={this.onClickHandler}>New Guest</button>
+                            <button className="form-button" id="clear" onClick={this.onClickHandler}>Clear</button>
                         </div>
                         <div className="search-results">
                             {this.state.search.length > 0 ? this.searchGuest() : null }

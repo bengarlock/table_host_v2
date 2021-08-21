@@ -30,6 +30,7 @@ export const getBook = (date) => {
 
 export const setDate = (date) => {
     let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    console.log(newDate)
     return (dispatch) => dispatch({
         type: SET_DATE,
         payload: String(newDate)

@@ -78,9 +78,7 @@ class Datepicker extends React.Component {
     }
 
     onChangeHandler = (date) => {
-        let formatDate = new Date(date).toJSON().slice(0,10)
-        this.props.setDate(formatDate)
-
+        this.props.setDate(date)
         this.setState({
             calendarClicked: false
         })
