@@ -158,8 +158,9 @@ class ModifyReservation extends React.Component {
             <>
                 <div className="overlay" id="overlay" onClick={this.onClickHandler} />
                 <div className="form-wrapper">
-                    <h3>Reservation Details</h3>
+
                     <form className="user-form" onSubmit={this.onSubmitHandler}>
+                        <h3>Reservation Details</h3>
 
                         <div className="menu-collection-wrapper">
 
@@ -250,16 +251,29 @@ class ModifyReservation extends React.Component {
 
                         </div>
                         <div className="notes-wrapper">
-                            <input id='reservation-notes' name="reservation-notes"
-                                   value={this.props.currentSlot[0].reservation_notes}
-                                   onChange={this.onChangeHandler}
-                                   type="text"
-                                   placeholder="Reservation Notes" />
-                            <input id='guest-notes' name="guest-notes"
-                                   value={this.props.currentGuest[0].guest_notes}
-                                   onChange={this.onChangeHandler}
-                                   type="text"
-                                   placeholder="Guest Notes" />
+
+                            <div className="note">
+                                <label>Reservation Notes</label>
+                                <input id='reservation-notes' name="reservation-notes"
+                                       autoComplete="off"
+                                       value={this.props.currentSlot[0].reservation_notes}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="Reservation Notes" />
+
+
+                            </div>
+                            <div className="note">
+                                <label>Guest Notes</label>
+                                <input id='guest-notes' name="guest-notes"
+                                       autoComplete="off"
+                                       value={this.props.currentGuest[0].guest_notes}
+                                       onChange={this.onChangeHandler}
+                                       type="text"
+                                       placeholder="Guest Notes" />
+                            </div>
+
+
 
                         </div>
                         <div className='submit'>
