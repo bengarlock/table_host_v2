@@ -11,6 +11,7 @@ class Slot extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.array.isRequired,
+        statuses: PropTypes.array.isRequired
     }
 
     clickHandler = () => {
@@ -25,9 +26,18 @@ class Slot extends React.Component {
         }
     }
 
+    renderStyle = () => {
+        // console.log(this.props.statuses.map(status => status.label))
+        if (this.props.statuses.map(status => status.label).includes(this.props.slot.status)) {
+            const status = this.props.statuses.filter(status => status.label === this.props.slot.status)
+            return {backgroundColor: status[0].color}
+        }
+        return {backgroundColor: '#2b2b2f'}
+    }
+
     render() {
         return(
-            <div className="slot-container" onDoubleClick={this.clickHandler}>
+            <div className="slot-container" onDoubleClick={this.clickHandler} style={this.renderStyle()}>
                 <span>{this.props.slot.time}</span>
                 <span>{this.props.slot.party_size}</span>
                 {
@@ -51,6 +61,7 @@ class Slot extends React.Component {
 
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
+    statuses: state.status.statuses,
 })
 
 export default connect(mapStateToProps, { changeSlot, changeGuest })(Slot);
