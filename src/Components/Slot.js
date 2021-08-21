@@ -31,7 +31,6 @@ class Slot extends React.Component {
             const status = this.props.statuses.filter(status => status.label === this.props.slot.status)
             return {backgroundColor: status[0].color}
         }
-        // return {backgroundColor: '#2b2b2f'}
     }
 
     render() {
