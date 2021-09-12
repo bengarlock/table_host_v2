@@ -1,0 +1,24 @@
+.floor-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 50px;
+    left: 60px;
+    color: white;
+    height: calc(100% - 50px);
+    overflow: hidden;
+}
+
+.floor-reservations-wrapper {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #162a4b;
+    user-select: none;
+}
+
+.floor-reservations-header {
+    background-color: #171616;
+    height: 40px;
+}
