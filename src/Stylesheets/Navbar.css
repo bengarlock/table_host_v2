@@ -9,6 +9,7 @@
     align-items: center;
     flex-wrap: nowrap;
     color: white;
+    z-index: 1;
 }
 
 .menu-icon {
