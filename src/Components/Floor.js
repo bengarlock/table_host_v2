@@ -18,14 +18,20 @@ class Floor extends React.Component {
 
     }
 
+    resizeHandler = (e) => {
+        console.log(e.target)
+    }
+
     render() {
         return(
             <div className="floor-wrapper">
-                <div className="floor-reservations-wrapper" style={{width: "25vw"}}>
+                <div className="floor-reservations-wrapper">
                     <div className="floor-reservations-header">Reservations</div>
                     <div>
                         {this.renderReservations()}
                     </div>
+                </div>
+                <div className="slider" onMouseOver={this.resizeHandler}>
                 </div>
                 <div className="floor-tables-wrapper">
 
