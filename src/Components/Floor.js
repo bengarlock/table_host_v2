@@ -12,10 +12,11 @@ class Floor extends React.Component {
 
     renderReservations = () => {
         if (this.props.currentBook[0]) {
-            const reservations = this.props.currentBook[0].slots.filter(reservation => reservation.booked)
+            const reservations = this.props.currentBook[0].slots.filter(reservation =>
+                reservation.booked && reservation.display_floor
+            )
             return reservations.map(slot => <Slot key={slot.id} slot={slot}/>)
         }
-
     }
 
     resizeHandler = (e) => {

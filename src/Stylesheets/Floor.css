@@ -17,6 +17,7 @@
     flex-direction: column;
     background-color: #162a4b;
     user-select: none;
+    min-width: 25vw;
     box-shadow: 2px 0 4px rgb(0 0 0);
 }
 
@@ -31,6 +32,5 @@
     height: 100%;
     width: 2px;
     cursor: ew-resize;
-    z-index: 1;
     content: "";
 }
