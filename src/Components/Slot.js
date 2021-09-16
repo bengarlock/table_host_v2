@@ -25,6 +25,7 @@ class Slot extends React.Component {
             this.props.changeGuest([this.props.slot.guest])
 
         } else {
+
             let newSlot = {...this.props.slot}
             newSlot.status = this.props.statuses.filter(status => status.name === "Booked")[0]
             newSlot.booked = true
@@ -32,11 +33,6 @@ class Slot extends React.Component {
         }
     }
 
-    // renderStyle = () => {
-    //     if (this.props.slot.status) {
-    //         return { backgroundColor: this.props.slot.status.color }
-    //     }
-    // }
     renderStyle = () => {
         if (this.props.slot.status) {
             if (!this.state.hover) {

@@ -3,11 +3,13 @@ import "../Stylesheets/Floor.css"
 import { connect } from "react-redux";
 import PropTypes from "prop-types"
 import Slot from "./Slot";
+import ReservationForm from "./ReservationForm";
 
 class Floor extends React.Component {
 
     static propTypes = {
-        currentBook: PropTypes.array.isRequired
+        currentBook: PropTypes.array.isRequired,
+        currentSlot: PropTypes.array.isRequired
     }
 
     renderReservations = () => {
@@ -30,20 +32,26 @@ class Floor extends React.Component {
                     <div className="floor-reservations-header">Reservations</div>
                     <div>
                         {this.renderReservations()}
+
+                            {this.props.currentSlot[0] ?
+                                <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
+
                     </div>
                 </div>
                 <div className="slider" onMouseOver={this.resizeHandler}>
                 </div>
                 <div className="floor-tables-wrapper">
-
                 </div>
+
+
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    currentBook: state.book.currentBook
+    currentBook: state.book.currentBook,
+    currentSlot: state.slot.currentSlot
 })
 
 export default connect(mapStateToProps)(Floor)
