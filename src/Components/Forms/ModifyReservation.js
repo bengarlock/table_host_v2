@@ -31,7 +31,7 @@ class ModifyReservation extends React.Component {
             reservation_notes: this.props.currentSlot[0].reservation_notes,
             guest_notes: this.props.currentSlot[0].guest_notes,
             time: this.props.currentSlot[0].time,
-            status: this.props.currentSlot[0].status.name === "" ? "Booked" : this.props.currentSlot[0].status.name
+            status: this.props.currentSlot[0].status === "" ? "Booked" : this.props.currentSlot[0].status
         })
     }
 
@@ -163,15 +163,18 @@ class ModifyReservation extends React.Component {
 
     renderStatusButtonColor = () => {
         if (document.getElementById("status-menu")) {
+
             let color = this.props.statuses.filter(
                 status => status.name === document.getElementById("status-menu").innerHTML)
-            return {backgroundColor: color[0].color}
+
+            // return {backgroundColor: color[0].color}
         } else {
             return null
         }
     }
 
     render() {
+
         return(
             <>
                 <div className="overlay" id="overlay" onClick={this.onClickHandler} />
