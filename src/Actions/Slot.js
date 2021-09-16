@@ -25,7 +25,7 @@ export const patchSlot = (slot, guest) => {
                 time: slot.time,
                 party_size: slot.party_size,
                 reservation_notes: slot.reservation_notes,
-                status: slot.status.id,
+                status: slot.status ? slot.status.id : null,
                 tables: slot.tables,
                 book: slot.book,
                 guest: guest

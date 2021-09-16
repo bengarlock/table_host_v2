@@ -94,7 +94,7 @@ class ModifyReservation extends React.Component {
         if (this.props.currentSlot[0].status.name === "Cancelled") {
             slotToUpdate.time = this.props.currentSlot[0].time
             slotToUpdate.party_size = this.props.currentSlot[0].party_size
-            slotToUpdate.status = ""
+            slotToUpdate.status = null
             slotToUpdate.reservation_notes = ""
             slotToUpdate.booked = false
             slotToUpdate.guest = null
