@@ -27,8 +27,8 @@ class Slot extends React.Component {
     }
 
     renderStyle = () => {
-        if (this.props.statuses.map(status => status.label).includes(this.props.slot.status)) {
-            const status = this.props.statuses.filter(status => status.label === this.props.slot.status)
+        if (this.props.statuses.map(status => status.name).includes(this.props.slot.status)) {
+            const status = this.props.statuses.filter(status => status.name === this.props.slot.status)
             return {backgroundColor: status[0].color}
         }
     }

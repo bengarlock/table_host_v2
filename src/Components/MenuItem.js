@@ -7,7 +7,11 @@ class MenuItem extends React.Component {
 
     static propTypes = {
         currentSlot: PropTypes.array.isRequired,
-        statuses: PropTypes.array.isRequired
+        statuses: PropTypes.array.isRequired,
+    }
+
+    state = {
+        hover: false
     }
 
     onClickHandler = () => {
@@ -31,10 +35,20 @@ class MenuItem extends React.Component {
     }
 
     renderStyle = (e) => {
-        if (this.props.statuses.map(status => status.label).includes(this.props.menuItem)) {
-            const status = this.props.statuses.filter(status => status.label === this.props.menuItem)
-            return {backgroundColor: status[0].color}
+        if (this.props.statuses.map(status => status.name).includes(this.props.menuItem)) {
+            if (!this.state.hover) {
+                const status = this.props.statuses.filter(status => status.name === this.props.menuItem)
+                return {backgroundColor: status[0].color, transition: '.5s'}
+            } else {
+                return {backgroundColor: "#103974", transition: '.5s'}
+            }
         }
+    }
+
+    toggleHover = () => {
+        this.setState({
+            hover: !this.state.hover
+        })
     }
 
 
@@ -42,6 +56,8 @@ class MenuItem extends React.Component {
     render() {
         return(
             <div className="menu-item"
+                 onMouseEnter={this.toggleHover}
+                 onMouseLeave={this.toggleHover}
                  id={this.props.menuItem}
                  onClick={this.onClickHandler}
                  style={this.renderStyle()}

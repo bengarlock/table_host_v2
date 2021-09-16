@@ -140,17 +140,25 @@ class ModifyReservation extends React.Component {
             return Array.from(new Set(a));
         }
         let times = uniq(this.props.currentBook[0].slots.map(slot => slot.time)).sort()
-        return times.map(time => <MenuItem key={times.indexOf(time)} menuItem={time} toggleMenu={this.toggleMenu} type={"time"}/>)
+        return times.map(time =>
+            <MenuItem key={times.indexOf(time)} menuItem={time} toggleMenu={this.toggleMenu} type={"time"}/>)
     }
 
     renderStatuses = () => {
-        let statuses = this.props.statuses.map(status => status.name)
-        return statuses.map(status => <MenuItem key={statuses.indexOf(status)} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
+        let statuses = this.props.statuses.filter(status =>
+            status.status_type === 'reservation').map(status => status.name)
+        return statuses.map(status =>
+            <MenuItem key={statuses.indexOf(status)} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
     }
 
     renderPartySizes = () => {
         let partySizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-        return partySizes.map(partySize => <MenuItem key={partySizes.indexOf(partySize)} menuItem={partySize} toggleMenu={this.toggleMenu}  type={"partySize"}/>)
+        return partySizes.map(partySize =>
+            <MenuItem
+                key={partySizes.indexOf(partySize)}
+                menuItem={partySize}
+                toggleMenu={this.toggleMenu}
+                type={"partySize"}/>)
     }
 
     renderStatusButtonColor = () => {
