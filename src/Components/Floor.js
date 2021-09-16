@@ -9,7 +9,8 @@ class Floor extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.array.isRequired,
-        currentSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.array.isRequired,
+        hoverSlot: PropTypes.array.isRequired
     }
 
     renderReservations = () => {
@@ -25,6 +26,17 @@ class Floor extends React.Component {
         console.log(e.target)
     }
 
+    onDragEnter = (e) => {
+        let table = e.target
+        table.style.backgroundColor = "#162a4b"
+    }
+
+    onDragExit = (e) => {
+        let table = e.target
+        table.style.backgroundColor = null
+    }
+
+
     render() {
         return(
             <div className="floor-wrapper">
@@ -32,18 +44,17 @@ class Floor extends React.Component {
                     <div className="floor-reservations-header">Reservations</div>
                     <div>
                         {this.renderReservations()}
-
-                            {this.props.currentSlot[0] ?
-                                <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
-
                     </div>
                 </div>
                 <div className="slider" onMouseOver={this.resizeHandler}>
                 </div>
                 <div className="floor-tables-wrapper">
+                    <div className="table"
+                         onDragEnter={this.onDragEnter}
+                         onDragLeave={this.onDragExit}
+                    >1</div>
                 </div>
-
-
+                {this.props.currentSlot[0] ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
             </div>
         )
     }
@@ -51,7 +62,8 @@ class Floor extends React.Component {
 
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
-    currentSlot: state.slot.currentSlot
+    currentSlot: state.slot.currentSlot,
+    hoverSlot: state.slot.hoverSlot
 })
 
 export default connect(mapStateToProps)(Floor)

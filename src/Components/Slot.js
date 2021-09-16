@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Stylesheets/Slot.css"
 import PropTypes from 'prop-types';
-import { changeSlot } from "../Actions/Slot";
+import { changeSlot, changeSeatedSlot } from "../Actions/Slot";
 import { changeGuest} from "../Actions/Guest";
 import { connect } from "react-redux";
 
@@ -11,7 +11,8 @@ class Slot extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.array.isRequired,
-        statuses: PropTypes.array.isRequired
+        statuses: PropTypes.array.isRequired,
+        seatedSlot: PropTypes.array.isRequired
     }
 
     state = {
@@ -42,10 +43,12 @@ class Slot extends React.Component {
     }
 
     toggleHover = () => {
+        this.props.changeSeatedSlot(this.props.slot)
         this.setState({
             hover: !this.state.hover
         })
     }
+
 
     render() {
         return(
@@ -53,7 +56,9 @@ class Slot extends React.Component {
                  onDoubleClick={this.clickHandler}
                  style={this.renderStyle()}
                  onMouseEnter={this.toggleHover}
-                 onMouseLeave={this.toggleHover}>
+                 onMouseLeave={this.toggleHover}
+                 draggable="true"
+            >
                 <span>{this.props.slot.time}</span>
                 <span>{this.props.slot.party_size}</span>
                 {
@@ -78,6 +83,7 @@ class Slot extends React.Component {
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     statuses: state.status.statuses,
+    seatedSlot: state.slot.seatedSlot
 })
 
-export default connect(mapStateToProps, { changeSlot, changeGuest })(Slot);
+export default connect(mapStateToProps, { changeSlot, changeGuest, changeSeatedSlot })(Slot);

@@ -1,10 +1,20 @@
-import {CHANGE_SLOT, PATCH_SLOT} from "./Types";
+import {CHANGE_SLOT, SEATED_SLOT, PATCH_SLOT} from "./Types";
 
 //CHANGE_SLOT
 export const changeSlot = (slot) => {
     return (dispatch) => {
         dispatch({
             type: CHANGE_SLOT,
+            payload: slot
+        })
+    }
+}
+
+//SEATED_SLOT
+export const changeSeatedSlot = (slot) => {
+    return (dispatch) => {
+        dispatch({
+            type: SEATED_SLOT,
             payload: slot
         })
     }
