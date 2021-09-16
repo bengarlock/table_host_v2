@@ -23,7 +23,6 @@ class ModifyReservation extends React.Component {
     }
 
     componentDidMount() {
-        let currentStatus = this.props.statuses.filter(status => status.name === this.props.currentSlot[0].status.name)
 
         this.setState({
             first_name: this.props.currentGuest[0].first_name,
@@ -106,6 +105,7 @@ class ModifyReservation extends React.Component {
             this.props.changeGuest([])
 
         } else {
+
             slotToUpdate.time = this.props.currentSlot[0].time
             slotToUpdate.party_size = this.props.currentSlot[0].party_size
             slotToUpdate.status = this.props.currentSlot[0].status
@@ -153,7 +153,10 @@ class ModifyReservation extends React.Component {
     }
 
     renderPartySizes = () => {
-        let partySizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+        let partySizes = []
+        for (let i=1; i < 21; i++) {
+            partySizes.push(i)
+        }
         return partySizes.map(partySize =>
             <MenuItem
                 key={partySizes.indexOf(partySize)}

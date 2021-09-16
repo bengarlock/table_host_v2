@@ -14,6 +14,10 @@ class Slot extends React.Component {
         statuses: PropTypes.array.isRequired
     }
 
+    state = {
+        hover: false
+    }
+
     clickHandler = () => {
         if (this.props.slot.booked) {
 
@@ -28,15 +32,32 @@ class Slot extends React.Component {
         }
     }
 
+    // renderStyle = () => {
+    //     if (this.props.slot.status) {
+    //         return { backgroundColor: this.props.slot.status.color }
+    //     }
+    // }
     renderStyle = () => {
         if (this.props.slot.status) {
-            return { backgroundColor: this.props.slot.status.color }
+            if (!this.state.hover) {
+                return { backgroundColor: this.props.slot.status.color, transition: '.5s'}
+            }
         }
+    }
+
+    toggleHover = () => {
+        this.setState({
+            hover: !this.state.hover
+        })
     }
 
     render() {
         return(
-            <div className="slot-container" onDoubleClick={this.clickHandler} style={this.renderStyle()}>
+            <div className="slot-container"
+                 onDoubleClick={this.clickHandler}
+                 style={this.renderStyle()}
+                 onMouseEnter={this.toggleHover}
+                 onMouseLeave={this.toggleHover}>
                 <span>{this.props.slot.time}</span>
                 <span>{this.props.slot.party_size}</span>
                 {

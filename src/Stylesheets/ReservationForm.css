@@ -148,16 +148,17 @@
 }
 
 .menu {
-    overflow-y: hidden;
+    overflow-y: scroll;
     /*overflow-x: hidden;*/
     position: relative;
     min-width: 14em;
 }
 
 .menu-items-wrapper {
-    position: fixed;
+    position: absolute;
     user-select: none;
-    overflow: hidden;
+    overflow-y:scroll;
+    overflow-x:hidden;
     z-index: 10;
 }
 
