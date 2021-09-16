@@ -22,7 +22,7 @@ class Slot extends React.Component {
 
         } else {
             let newSlot = {...this.props.slot}
-            newSlot.status = "Booked"
+            newSlot.status = this.props.statuses.filter(status => status.name === "Booked")[0]
             newSlot.booked = true
             this.props.changeSlot([newSlot])
         }

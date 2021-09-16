@@ -15,7 +15,6 @@ class MenuItem extends React.Component {
     }
 
     onClickHandler = () => {
-
         if (this.props.type === 'time') {
             let slot = [...this.props.currentSlot]
             slot[0].time = this.props.menuItem
@@ -58,11 +57,11 @@ class MenuItem extends React.Component {
             <div className="menu-item"
                  onMouseEnter={this.toggleHover}
                  onMouseLeave={this.toggleHover}
-                 id={this.props.menuItem}
+                 id={this.props.menuItem.name}
                  onClick={this.onClickHandler}
                  style={this.renderStyle()}
             >
-                {this.props.menuItem}
+                {this.props.menuItem.name}
             </div>
         )
     }

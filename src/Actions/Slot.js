@@ -11,12 +11,8 @@ export const changeSlot = (slot) => {
 }
 
 //PATCH_SLOT
-export const patchSlot = (slot, guest, statuses) => {
+export const patchSlot = (slot, guest) => {
     return async (dispatch) => {
-
-        //we pass current statuses from redux and convert string from current slot to object in statues.
-        let currentStatus = statuses.filter(status => status.name === slot.status)
-
         const packet = {
             method: "put",
             headers: {
@@ -29,7 +25,7 @@ export const patchSlot = (slot, guest, statuses) => {
                 time: slot.time,
                 party_size: slot.party_size,
                 reservation_notes: slot.reservation_notes,
-                status: currentStatus[0].id,
+                status: slot.status.id,
                 tables: slot.tables,
                 book: slot.book,
                 guest: guest

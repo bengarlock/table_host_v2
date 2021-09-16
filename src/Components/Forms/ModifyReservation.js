@@ -23,6 +23,8 @@ class ModifyReservation extends React.Component {
     }
 
     componentDidMount() {
+        let currentStatus = this.props.statuses.filter(status => status.name === this.props.currentSlot[0].status.name)
+
         this.setState({
             first_name: this.props.currentGuest[0].first_name,
             last_name: this.props.currentGuest[0].last_name,
@@ -31,7 +33,7 @@ class ModifyReservation extends React.Component {
             reservation_notes: this.props.currentSlot[0].reservation_notes,
             guest_notes: this.props.currentSlot[0].guest_notes,
             time: this.props.currentSlot[0].time,
-            status: this.props.currentSlot[0].status === "" ? "Booked" : this.props.currentSlot[0].status
+            status: this.props.currentSlot[0].status.name
         })
     }
 
@@ -106,13 +108,13 @@ class ModifyReservation extends React.Component {
         } else {
             slotToUpdate.time = this.props.currentSlot[0].time
             slotToUpdate.party_size = this.props.currentSlot[0].party_size
-            slotToUpdate.status =
+            slotToUpdate.status = this.props.currentSlot[0].status
             slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
             slotToUpdate.booked = this.props.currentSlot[0].booked
             slotToUpdate.guest = this.props.currentGuest[0]
 
             this.props.patchBook([newBook])
-            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id, this.props.statuses)
+            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id)
             this.props.patchGuest(this.props.currentGuest[0])
             this.props.changeSlot([])
             this.props.changeGuest([])
@@ -145,10 +147,9 @@ class ModifyReservation extends React.Component {
     }
 
     renderStatuses = () => {
-        let statuses = this.props.statuses.filter(status =>
-            status.status_type === 'reservation').map(status => status.name)
+        let statuses = this.props.statuses.filter(status => status.status_type === 'reservation')
         return statuses.map(status =>
-            <MenuItem key={statuses.indexOf(status)} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
+            <MenuItem key={status.id} menuItem={status} toggleMenu={this.toggleMenu} type={"status"}/>)
     }
 
     renderPartySizes = () => {
@@ -184,7 +185,6 @@ class ModifyReservation extends React.Component {
                         <h3>Reservation Details</h3>
 
                         <div className="menu-collection-wrapper">
-
                             <div className="user-select-option">
                                 <div className="label">Time</div>
                                 <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
@@ -245,7 +245,6 @@ class ModifyReservation extends React.Component {
                                     : null
                                 }
                             </div>
-
                         </div>
 
                         <div className="form-collection-wrapper">
