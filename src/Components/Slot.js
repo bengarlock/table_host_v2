@@ -16,8 +16,10 @@ class Slot extends React.Component {
 
     clickHandler = () => {
         if (this.props.slot.booked) {
+
             this.props.changeSlot([this.props.slot])
             this.props.changeGuest([this.props.slot.guest])
+
         } else {
             let newSlot = {...this.props.slot}
             newSlot.status = "Booked"
@@ -27,15 +29,12 @@ class Slot extends React.Component {
     }
 
     renderStyle = () => {
-        if (this.props.statuses.map(status => status.name).includes(this.props.slot.status)) {
-            const status = this.props.statuses.filter(status => status.name === this.props.slot.status)
-            return {backgroundColor: status[0].color}
+        if (this.props.slot.status) {
+            return { backgroundColor: this.props.slot.status.color }
         }
-
     }
 
     render() {
-        console.log(this.props.slot.status ? this.props.slot.status.name : null)
         return(
             <div className="slot-container" onDoubleClick={this.clickHandler} style={this.renderStyle()}>
                 <span>{this.props.slot.time}</span>

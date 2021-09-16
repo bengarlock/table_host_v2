@@ -31,7 +31,7 @@ class ModifyReservation extends React.Component {
             reservation_notes: this.props.currentSlot[0].reservation_notes,
             guest_notes: this.props.currentSlot[0].guest_notes,
             time: this.props.currentSlot[0].time,
-            status: this.props.currentSlot[0].status === "" ? "Booked" : this.props.currentSlot[0].status
+            status: this.props.currentSlot[0].status.name === "" ? "Booked" : this.props.currentSlot[0].status.name
         })
     }
 
@@ -227,7 +227,7 @@ class ModifyReservation extends React.Component {
                                      onClick={this.onClickHandler}
                                      style={this.renderStatusButtonColor()}
                                 >
-                                    {this.props.currentSlot[0].status}
+                                    {this.props.currentSlot[0].status.name}
                                 </div>
                                 {this.state.statusMenu ? (
                                         <>
