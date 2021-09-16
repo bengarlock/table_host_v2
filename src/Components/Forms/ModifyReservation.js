@@ -144,7 +144,7 @@ class ModifyReservation extends React.Component {
     }
 
     renderStatuses = () => {
-        let statuses = this.props.statuses.map(status => status.label)
+        let statuses = this.props.statuses.map(status => status.name)
         return statuses.map(status => <MenuItem key={statuses.indexOf(status)} menuItem={status} toggleMenu={this.toggleMenu}  type={"status"}/>)
     }
 
@@ -156,12 +156,11 @@ class ModifyReservation extends React.Component {
     renderStatusButtonColor = () => {
         if (document.getElementById("status-menu")) {
             let color = this.props.statuses.filter(
-                status => status.label === document.getElementById("status-menu").innerHTML)
+                status => status.name === document.getElementById("status-menu").innerHTML)
             return {backgroundColor: color[0].color}
         } else {
             return null
         }
-
     }
 
     render() {
