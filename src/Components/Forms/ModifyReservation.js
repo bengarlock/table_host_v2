@@ -91,7 +91,7 @@ class ModifyReservation extends React.Component {
         let newBook = {...this.props.currentBook[0]}
         let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot[0].id)
 
-        if (this.props.currentSlot[0].status === "Cancelled") {
+        if (this.props.currentSlot[0].status.name === "Cancelled") {
             slotToUpdate.time = this.props.currentSlot[0].time
             slotToUpdate.party_size = this.props.currentSlot[0].party_size
             slotToUpdate.status = ""
@@ -162,18 +162,6 @@ class ModifyReservation extends React.Component {
                 type={"partySize"}/>)
     }
 
-    renderStatusButtonColor = () => {
-        if (document.getElementById("status-menu")) {
-
-            let color = this.props.statuses.filter(
-                status => status.name === document.getElementById("status-menu").innerHTML)
-
-            // return {backgroundColor: color[0].color}
-        } else {
-            return null
-        }
-    }
-
     render() {
 
         return(
@@ -187,7 +175,9 @@ class ModifyReservation extends React.Component {
                         <div className="menu-collection-wrapper">
                             <div className="user-select-option">
                                 <div className="label">Time</div>
-                                <div className="menu-dropdown-wrapper" id="time-menu" onClick={this.onClickHandler}>
+                                <div className="menu-dropdown-wrapper"
+                                     id="time-menu"
+                                     onClick={this.onClickHandler}>
                                     {this.props.currentSlot[0].time}
                                 </div>
                                 {this.state.timeMenu ? (
@@ -228,7 +218,7 @@ class ModifyReservation extends React.Component {
                                 <div className="menu-dropdown-wrapper"
                                      id="status-menu"
                                      onClick={this.onClickHandler}
-                                     style={this.renderStatusButtonColor()}
+                                     style={{backgroundColor: this.props.currentSlot[0].status.color}}
                                 >
                                     {this.props.currentSlot[0].status.name}
                                 </div>

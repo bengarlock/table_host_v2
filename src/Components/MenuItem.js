@@ -33,14 +33,11 @@ class MenuItem extends React.Component {
         }
     }
 
-    renderStyle = (e) => {
-        if (this.props.statuses.map(status => status.name).includes(this.props.menuItem)) {
-            if (!this.state.hover) {
-                const status = this.props.statuses.filter(status => status.name === this.props.menuItem)
-                return {backgroundColor: status[0].color, transition: '.5s'}
-            } else {
-                return {backgroundColor: "#103974", transition: '.5s'}
-            }
+    renderStyle = () => {
+        if (!this.state.hover) {
+            return {backgroundColor: this.props.menuItem.color, transition: '.5s'}
+        } else {
+            return {backgroundColor: "#103974", transition: '.5s'}
         }
     }
 
@@ -49,8 +46,6 @@ class MenuItem extends React.Component {
             hover: !this.state.hover
         })
     }
-
-
 
     render() {
         return(
@@ -61,7 +56,7 @@ class MenuItem extends React.Component {
                  onClick={this.onClickHandler}
                  style={this.renderStyle()}
             >
-                {this.props.menuItem.name}
+                {this.props.menuItem.name ? this.props.menuItem.name : this.props.menuItem}
             </div>
         )
     }
