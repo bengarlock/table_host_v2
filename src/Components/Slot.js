@@ -31,9 +31,11 @@ class Slot extends React.Component {
             const status = this.props.statuses.filter(status => status.name === this.props.slot.status)
             return {backgroundColor: status[0].color}
         }
+
     }
 
     render() {
+        console.log(this.props.slot.status ? this.props.slot.status.name : null)
         return(
             <div className="slot-container" onDoubleClick={this.clickHandler} style={this.renderStyle()}>
                 <span>{this.props.slot.time}</span>

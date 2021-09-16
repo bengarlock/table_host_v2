@@ -106,13 +106,13 @@ class ModifyReservation extends React.Component {
         } else {
             slotToUpdate.time = this.props.currentSlot[0].time
             slotToUpdate.party_size = this.props.currentSlot[0].party_size
-            slotToUpdate.status = this.props.currentSlot[0].status
+            slotToUpdate.status =
             slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
             slotToUpdate.booked = this.props.currentSlot[0].booked
             slotToUpdate.guest = this.props.currentGuest[0]
 
             this.props.patchBook([newBook])
-            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id)
+            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id, this.props.statuses)
             this.props.patchGuest(this.props.currentGuest[0])
             this.props.changeSlot([])
             this.props.changeGuest([])
