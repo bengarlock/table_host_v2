@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types"
 import Slot from "./Slot";
 import ReservationForm from "./ReservationForm";
+import Table from "./Table";
 
 class Floor extends React.Component {
 
@@ -26,14 +27,24 @@ class Floor extends React.Component {
         console.log(e.target)
     }
 
-    onDragEnter = (e) => {
-        let table = e.target
-        table.style.backgroundColor = "#162a4b"
-    }
 
-    onDragExit = (e) => {
-        let table = e.target
-        table.style.backgroundColor = null
+
+    renderTables = () => {
+        const tables = [
+            {
+                id: 1,
+                name: "1",
+                style: {
+                    class_name: "table",
+                    width: "50px",
+                    height: "50px",
+                    top: "100px",
+                    left: "500px",
+                    background_color: "#9b9b9b",
+                    border: "2px solid gray"
+                }
+            }]
+        return tables.map(table => <Table key={table.id} table={table} />)
     }
 
 
@@ -49,10 +60,9 @@ class Floor extends React.Component {
                 <div className="slider" onMouseOver={this.resizeHandler}>
                 </div>
                 <div className="floor-tables-wrapper">
-                    <div className="table"
-                         onDragEnter={this.onDragEnter}
-                         onDragLeave={this.onDragExit}
-                    >1</div>
+
+                    {this.renderTables()}
+
                 </div>
                 {this.props.currentSlot[0] ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
             </div>

@@ -21,12 +21,10 @@ class Slot extends React.Component {
 
     clickHandler = () => {
         if (this.props.slot.booked) {
-
             this.props.changeSlot([this.props.slot])
             this.props.changeGuest([this.props.slot.guest])
 
         } else {
-
             let newSlot = {...this.props.slot}
             newSlot.status = this.props.statuses.filter(status => status.name === "Booked")[0]
             newSlot.booked = true
@@ -42,8 +40,14 @@ class Slot extends React.Component {
         }
     }
 
-    toggleHover = () => {
+    seatedSlotSelect = () => {
         this.props.changeSeatedSlot(this.props.slot)
+        this.setState({
+            hover: !this.state.hover
+        })
+    }
+    seatedSlotUnSelect = () => {
+        this.props.changeSeatedSlot([])
         this.setState({
             hover: !this.state.hover
         })
@@ -55,8 +59,8 @@ class Slot extends React.Component {
             <div className="slot-container"
                  onDoubleClick={this.clickHandler}
                  style={this.renderStyle()}
-                 onMouseEnter={this.toggleHover}
-                 onMouseLeave={this.toggleHover}
+                 onMouseEnter={this.seatedSlotSelect}
+                 onMouseLeave={this.seatedSlotUnSelect}
                  draggable="true"
             >
                 <span>{this.props.slot.time}</span>
