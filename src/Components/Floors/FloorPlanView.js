@@ -1,17 +1,42 @@
 import React from 'react'
-import "../Stylesheets/Floor.css"
+import "../../Stylesheets/Floor.css"
 import { connect } from "react-redux";
 import PropTypes from "prop-types"
-import Slot from "./Slot";
-import ReservationForm from "./ReservationForm";
-import Table from "./Table";
+import Slot from "../Books/Slot";
+import ReservationForm from "../Forms/ReservationForm";
+import Floor from "./Floor";
 
-class Floor extends React.Component {
+class FloorPlanView extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.array.isRequired,
         currentSlot: PropTypes.array.isRequired,
         hoverSlot: PropTypes.array.isRequired
+    }
+
+    state = {
+        floors: [
+            {
+                id: 1,
+                name: "main",
+                tables: [
+                    {
+                        id: 1,
+                        name: "1",
+                        class_name: "table",
+                        style: {
+                            width: "50px",
+                            height: "50px",
+                            background_color: "#9b9b9b",
+                            border: "2px solid gray"
+                        },
+                        position: {
+                            top: "100px",
+                            left: "500px",
+                        }
+                    }]
+            }
+        ]
     }
 
     renderReservations = () => {
@@ -29,22 +54,8 @@ class Floor extends React.Component {
 
 
 
-    renderTables = () => {
-        const tables = [
-            {
-                id: 1,
-                name: "1",
-                style: {
-                    class_name: "table",
-                    width: "50px",
-                    height: "50px",
-                    top: "100px",
-                    left: "500px",
-                    background_color: "#9b9b9b",
-                    border: "2px solid gray"
-                }
-            }]
-        return tables.map(table => <Table key={table.id} table={table} />)
+    renderFloors = () => {
+        return this.state.floors.map(floor => <Floor key={floor.id} floor={floor}/>)
     }
 
 
@@ -61,7 +72,7 @@ class Floor extends React.Component {
                 </div>
                 <div className="floor-tables-wrapper">
 
-                    {this.renderTables()}
+                    {this.renderFloors()}
 
                 </div>
                 {this.props.currentSlot[0] ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
@@ -76,4 +87,4 @@ const mapStateToProps = (state) => ({
     hoverSlot: state.slot.hoverSlot
 })
 
-export default connect(mapStateToProps)(Floor)
+export default connect(mapStateToProps)(FloorPlanView)

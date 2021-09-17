@@ -1,8 +1,8 @@
 import React from 'react'
-import "../Stylesheets/Slot.css"
+import "../../Stylesheets/Slot.css"
 import PropTypes from 'prop-types';
-import { changeSlot, changeSeatedSlot } from "../Actions/Slot";
-import { changeGuest} from "../Actions/Guest";
+import { changeSlot, changeSeatedSlot } from "../../Actions/Slot";
+import { changeGuest} from "../../Actions/Guest";
 import { connect } from "react-redux";
 
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import "../Stylesheets/Book.css"
+import "../../Stylesheets/Book.css"
 import {connect} from "react-redux";
-import { getBook } from "../Actions/Book";
+import { getBook } from "../../Actions/Book";
 import PropTypes from "prop-types";
 import Slot from "./Slot";
-import ReservationForm from "./ReservationForm";
+import ReservationForm from "../Forms/ReservationForm";
 
 class Book extends React.Component {
 

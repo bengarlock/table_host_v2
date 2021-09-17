@@ -14,7 +14,6 @@ class Table extends React.Component {
     }
 
     renderStyle = () => {
-        console.log(this.props.table.style.width)
         return {
             position: "fixed",
             display: "flex",
@@ -23,6 +22,7 @@ class Table extends React.Component {
             flexDirection: "column",
             textAlign: "center",
             userSelect: "none",
+            color: "black",
 
             width: this.props.table.style.width,
             height: this.props.table.style.height,

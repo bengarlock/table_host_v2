@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import Navbar from "./Components/Navbar";
 import Datepicker from "./Components/Datepicker";
 import {Route} from "react-router-dom";
-import Book from "./Components/Book"
-import Floor from "./Components/Floor";
+import Book from "./Components/Books/Book"
+import Floor from "./Components/Floors/FloorPlanView";
 
 class App extends React.Component {
 

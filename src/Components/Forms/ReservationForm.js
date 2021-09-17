@@ -1,9 +1,9 @@
 import React from 'react'
-import "../Stylesheets/ReservationForm.css"
-import ModifyReservation from "./Forms/ModifyReservation";
-import NewReservation from "./Forms/NewReservation";
+import "../../Stylesheets/ReservationForm.css"
+import ModifyReservation from "./ModifyReservation";
+import NewReservation from "./NewReservation";
 import { connect } from "react-redux";
-import { changeSlot } from "../Actions/Slot";
+import { changeSlot } from "../../Actions/Slot";
 import PropTypes from "prop-types";
 
 
