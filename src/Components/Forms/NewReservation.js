@@ -57,7 +57,8 @@ class NewReservation extends React.Component {
 
             let response = await fetch("https://bengarlock.com/api/v1/tablehost/guests/?search=" + this.state.search)
             let searchResults = await response.json()
-            searchResults = searchResults.filter(guest => guest.active === true)
+            searchResults = searchResults.results.filter(guest => guest.active === true)
+
             this.setState({
                 searchResults: searchResults
             })

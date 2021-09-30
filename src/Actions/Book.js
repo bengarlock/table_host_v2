@@ -14,16 +14,18 @@ export const getBook = (date) => {
                 month = '0' + month;
             if (day.length < 2)
                 day = '0' + day;
-            return [year, month, day].join('-');
+            return String([year, month, day].join('-'));
         }
-        const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + String(formatDate(date)))
-        let book = await response.json()
 
-        book[0].slots.sort((a, b) => (a.id > b.id) ? 1 : -1)
+
+        const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + formatDate(date))
+        let book = await response.json()
+        book = book.results[0]
+        book.slots.sort((a, b) => (a.id > b.id) ? 1 : -1)
 
         dispatch({
             type: GET_BOOK,
-            payload: book
+            payload: [book]
         })
     };
 }

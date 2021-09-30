@@ -166,7 +166,6 @@ class ModifyReservation extends React.Component {
     }
 
     render() {
-
         return(
             <>
                 <div className="overlay" id="overlay" onClick={this.onClickHandler} />
