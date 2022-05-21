@@ -24,16 +24,12 @@ class FloorPlanView extends React.Component {
                         id: 1,
                         name: "1",
                         class_name: "table",
-                        style: {
-                            width: "50px",
-                            height: "50px",
-                            background_color: "#9b9b9b",
-                            border: "2px solid gray"
-                        },
-                        position: {
-                            top: "100px",
-                            left: "500px",
-                        }
+                        width: "50px",
+                        height: "50px",
+                        background_color: "#9b9b9b",
+                        border: "2px solid gray",
+                        top: "100px",
+                        left: "500px",
                     }]
             }
         ]
