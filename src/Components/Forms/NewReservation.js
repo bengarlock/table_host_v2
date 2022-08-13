@@ -15,14 +15,14 @@ class NewReservation extends React.Component {
     }
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.object.isRequired
     }
 
     onClickHandler = (e) => {
         if (e.target.id === "overlay" || e.target.id === 'close-button') {
             if (this.state.search === '') {
-                this.props.changeSlot([])
-                this.props.changeGuest([])
+                this.props.changeSlot({})
+                this.props.changeGuest({})
             } else {
                 this.setState({
                     message: 'Please clear search before exiting.'

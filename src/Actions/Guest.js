@@ -84,7 +84,7 @@ export const createGuest = (guest) => {
 
         dispatch({
             type: CREATE_GUEST,
-            payload: [newGuest]
+            payload: newGuest
         })
     };
 }

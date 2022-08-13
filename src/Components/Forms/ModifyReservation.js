@@ -16,9 +16,9 @@ class ModifyReservation extends React.Component {
     }
 
     static propTypes = {
-        currentBook: PropTypes.array.isRequired,
-        currentSlot: PropTypes.array.isRequired,
-        currentGuest: PropTypes.array.isRequired,
+        currentBook: PropTypes.object.isRequired,
+        currentSlot: PropTypes.object.isRequired,
+        currentGuest: PropTypes.object.isRequired,
         statuses: PropTypes.array.isRequired,
     }
 

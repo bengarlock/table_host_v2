@@ -1,7 +1,7 @@
 import { CHANGE_SELECTED_TABLE } from "../Actions/Types";
 
 const initialState = {
-    currentTable: [],
+    currentTable: {},
 }
 
 export default function table(state = initialState, action) {

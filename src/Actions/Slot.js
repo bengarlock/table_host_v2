@@ -15,7 +15,7 @@ export const changeSeatedSlot = (slot) => {
     return (dispatch) => {
         dispatch({
             type: SEATED_SLOT,
-            payload: [slot]
+            payload: slot
         })
     }
 }

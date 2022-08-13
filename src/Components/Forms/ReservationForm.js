@@ -10,8 +10,8 @@ import PropTypes from "prop-types";
 class ReservationForm extends React.Component {
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired,
-        currentGuest: PropTypes.array.isRequired
+        currentSlot: PropTypes.object.isRequired,
+        currentGuest: PropTypes.object.isRequired
     }
 
     render() {

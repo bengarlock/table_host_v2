@@ -1,8 +1,8 @@
 import { CHANGE_SLOT, SEATED_SLOT } from "../Actions/Types";
 
 const initialState = {
-    currentSlot: [],
-    seatedSlot: []
+    currentSlot: {},
+    seatedSlot: {}
 }
 
 export default function slot(state = initialState, action) {

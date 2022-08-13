@@ -12,7 +12,7 @@ class Slot extends React.Component {
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
         statuses: PropTypes.array.isRequired,
-        seatedSlot: PropTypes.array.isRequired
+        seatedSlot: PropTypes.object.isRequired
     }
 
     state = {
@@ -20,15 +20,16 @@ class Slot extends React.Component {
     }
 
     clickHandler = () => {
+        // check if slot is booked.  If it is, render Modify form. Otherwise render new reso form.
         if (this.props.slot.booked) {
-            this.props.changeSlot([this.props.slot])
-            this.props.changeGuest([this.props.slot.guest])
+            this.props.changeSlot(this.props.slot)
+            this.props.changeGuest(this.props.slot.guest)
 
         } else {
             let newSlot = {...this.props.slot}
             newSlot.status = this.props.statuses.filter(status => status.name === "Booked")[0]
             newSlot.booked = true
-            this.props.changeSlot([newSlot])
+            this.props.changeSlot(newSlot)
         }
     }
 
@@ -47,7 +48,7 @@ class Slot extends React.Component {
         })
     }
     seatedSlotUnSelect = () => {
-        this.props.changeSeatedSlot([])
+        this.props.changeSeatedSlot({})
         this.setState({
             hover: !this.state.hover
         })

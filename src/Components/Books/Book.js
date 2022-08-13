@@ -10,7 +10,7 @@ class Book extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
-        currentSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.object.isRequired
     }
 
     renderSlots = () => {
@@ -31,7 +31,7 @@ class Book extends React.Component {
                     </div>
 
                     {this.renderSlots()}
-                    {this.props.currentSlot[0] ? <ReservationForm /> : null}
+                    {this.props.currentSlot.id ? <ReservationForm /> : null}
                 </div>
             </div>
 
