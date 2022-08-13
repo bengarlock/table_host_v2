@@ -4,7 +4,11 @@ import "../Stylesheets/Navbar.css"
 import { connect } from "react-redux";
 import { changeNavbar } from "../Actions/Navbar";
 import PropTypes from 'prop-types';
-import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { faFile } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Navbar extends React.Component {
 
@@ -23,21 +27,29 @@ class Navbar extends React.Component {
                 <NavLink className={this.props.currentNavbar === "book" ? "menu-icon-selected" : "menu-icon"}
                          id='book'
                          to="/tablehost"
-                         onClick={this.onClickHandler}>B</NavLink>
+                         onClick={this.onClickHandler}>
+                    <FontAwesomeIcon icon={faBookOpen}/>
+                </NavLink>
 
                 <NavLink className={this.props.currentNavbar === "floor" ? "menu-icon-selected" : "menu-icon"}
                          id='floor'
                          to="/tablehost/floor"
-                         onClick={this.onClickHandler}>F</NavLink>
+                         onClick={this.onClickHandler}>
+                    <FontAwesomeIcon icon={faUtensils}/>
+                </NavLink>
 
                 <NavLink className={this.props.currentNavbar === "guests" ? "menu-icon-selected" : "menu-icon"}
                          id='guests'
                          to="/tablehost/guests"
-                         onClick={this.onClickHandler}>G</NavLink>
+                         onClick={this.onClickHandler}>
+                    <FontAwesomeIcon icon={faCircleUser}/>
+                </NavLink>
                 <NavLink className={this.props.currentNavbar === "reports" ? "menu-icon-selected" : "menu-icon"}
                          id='reports'
                          to="/tablehost/reports"
-                         onClick={this.onClickHandler}>R</NavLink>
+                         onClick={this.onClickHandler}>
+                    <FontAwesomeIcon icon={faFile}/>
+                </NavLink>
             </div>
         )
     }
