@@ -9,12 +9,12 @@ import ReservationForm from "../Forms/ReservationForm";
 class Book extends React.Component {
 
     static propTypes = {
-        currentBook: PropTypes.array.isRequired,
+        currentBook: PropTypes.object.isRequired,
         currentSlot: PropTypes.array.isRequired
     }
 
     renderSlots = () => {
-        if (this.props.currentBook) {
+        if (this.props.currentBook.slots) {
             return this.props.currentBook.slots.map(slot => <Slot key={slot.id} slot={slot}/>)
         } else {
             return "CLOSED"

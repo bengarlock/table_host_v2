@@ -9,7 +9,7 @@ import Floor from "./Floor";
 class FloorPlanView extends React.Component {
 
     static propTypes = {
-        currentBook: PropTypes.array.isRequired,
+        currentBook: PropTypes.object.isRequired,
         currentSlot: PropTypes.array.isRequired,
         hoverSlot: PropTypes.array.isRequired
     }

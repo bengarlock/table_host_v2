@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 class Slot extends React.Component {
 
     static propTypes = {
-        currentBook: PropTypes.array.isRequired,
+        currentBook: PropTypes.object.isRequired,
         statuses: PropTypes.array.isRequired,
         seatedSlot: PropTypes.array.isRequired
     }

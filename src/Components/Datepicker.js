@@ -14,7 +14,7 @@ class Datepicker extends React.Component {
     }
 
     static propTypes = {
-        currentBook: PropTypes.array.isRequired,
+        currentBook: PropTypes.object.isRequired,
         currentDate: PropTypes.string.isRequired
     }
 
