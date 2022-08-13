@@ -30,11 +30,14 @@ class App extends React.Component {
       return (
           <div className="app-wrapper">
               <Datepicker />
-              <Navbar />
-              <Route exact path="/tablehost" id="book" render={ () => <Book /> } />
-              <Route exact path="/tablehost/floor" id="floor" render={ () => <Floor /> } />
-              {/*<Route exact path="/tablehost/guests" render={ () => <Guest /> } />*/}
-              {/*<Route exact path="/tablehost/reports" render={ () => <Report /> } />*/}
+              <div className="content-wrapper">
+                  <Navbar />
+                  <Route exact path="/tablehost" id="book" render={ () => <Book /> } />
+                  <Route exact path="/tablehost/floor" id="floor" render={ () => <Floor /> } />
+                  {/*<Route exact path="/tablehost/guests" render={ () => <Guest /> } />*/}
+                  {/*<Route exact path="/tablehost/reports" render={ () => <Report /> } />*/}
+              </div>
+
           </div>
       )
   }

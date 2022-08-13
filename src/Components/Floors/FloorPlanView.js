@@ -57,20 +57,20 @@ class FloorPlanView extends React.Component {
     render() {
         return(
             <div className="floor-wrapper">
-                <div className="floor-reservations-wrapper">
-                    <div className="floor-reservations-header">Reservations</div>
-                    <div>
-                        {this.renderReservations()}
-                    </div>
-                </div>
-                <div className="slider" onMouseOver={this.resizeHandler}>
-                </div>
-                <div className="floor-tables-wrapper">
+                {/*<div className="floor-reservations-wrapper">*/}
+                {/*    <div className="floor-reservations-header">Reservations</div>*/}
+                {/*    <div>*/}
+                {/*        {this.renderReservations()}*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="slider" onMouseOver={this.resizeHandler}>*/}
+                {/*</div>*/}
+                {/*<div className="floor-tables-wrapper">*/}
 
-                    {this.renderFloors()}
+                {/*    {this.renderFloors()}*/}
 
-                </div>
-                {this.props.currentSlot[0] ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
+                {/*</div>*/}
+                {/*{this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}*/}
             </div>
         )
     }
