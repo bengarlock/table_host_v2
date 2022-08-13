@@ -25,21 +25,21 @@ class ModifyReservation extends React.Component {
     componentDidMount() {
 
         this.setState({
-            first_name: this.props.currentGuest[0].first_name,
-            last_name: this.props.currentGuest[0].last_name,
-            phone_number: this.props.currentGuest[0].phone_number,
-            party_size: this.props.currentSlot[0].party_size,
-            reservation_notes: this.props.currentSlot[0].reservation_notes,
-            guest_notes: this.props.currentSlot[0].guest_notes,
-            time: this.props.currentSlot[0].time,
-            status: this.props.currentSlot[0].status.name
+            first_name: this.props.currentGuest.first_name,
+            last_name: this.props.currentGuest.last_name,
+            phone_number: this.props.currentGuest.phone_number,
+            party_size: this.props.currentSlot.party_size,
+            reservation_notes: this.props.currentSlot.reservation_notes,
+            guest_notes: this.props.currentSlot.guest_notes,
+            time: this.props.currentSlot.time,
+            status: this.props.currentSlot.status.name
         })
     }
 
     onClickHandler = (e) => {
         if (e.target.id === "overlay") {
-            this.props.changeSlot([])
-            this.props.changeGuest([])
+            this.props.changeSlot({})
+            this.props.changeGuest({})
         } else if (e.target.id === "status-menu") {
             this.setState({
                 statusMenu: !this.state.statusMenu
@@ -63,61 +63,61 @@ class ModifyReservation extends React.Component {
 
     onChangeHandler = (e) => {
         if (e.target.name === "first-name") {
-            let guest = {...this.props.currentGuest[0]}
+            let guest = {...this.props.currentGuest}
             guest.first_name = e.target.value
-            this.props.changeGuest([guest])
+            this.props.changeGuest(guest)
         } else if (e.target.name === "last-name") {
-            let guest = {...this.props.currentGuest[0]}
+            let guest = {...this.props.currentGuest}
             guest.last_name = e.target.value
-            this.props.changeGuest([guest])
+            this.props.changeGuest(guest)
         } else if (e.target.name === "phone-number") {
-            let guest = {...this.props.currentGuest[0]}
+            let guest = {...this.props.currentGuest}
             guest.phone_number = e.target.value
-            this.props.changeGuest([guest])
+            this.props.changeGuest(guest)
         } else if (e.target.name === "guest-notes") {
-            let guest = {...this.props.currentGuest[0]}
+            let guest = {...this.props.currentGuest}
             guest.guest_notes = e.target.value
-            this.props.changeGuest([guest])
+            this.props.changeGuest(guest)
         } else if (e.target.name === "reservation-notes") {
-            let slot = {...this.props.currentSlot[0]}
+            let slot = {...this.props.currentSlot}
             slot.reservation_notes = e.target.value
-            this.props.changeSlot([slot])
+            this.props.changeSlot(slot)
         }
     }
 
     onSubmitHandler = (e) => {
         e.preventDefault()
-        let newBook = {...this.props.currentBook[0]}
-        let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot[0].id)
+        let newBook = {...this.props.currentBook}
+        let slotToUpdate = newBook.slots.find(slot => slot.id === this.props.currentSlot.id)
 
-        if (this.props.currentSlot[0].status.name === "Cancelled") {
-            slotToUpdate.time = this.props.currentSlot[0].time
-            slotToUpdate.party_size = this.props.currentSlot[0].party_size
+        if (this.props.currentSlot.status.name === "Cancelled") {
+            slotToUpdate.time = this.props.currentSlot.time
+            slotToUpdate.party_size = this.props.currentSlot.party_size
             slotToUpdate.status = null
             slotToUpdate.reservation_notes = ""
             slotToUpdate.booked = false
             slotToUpdate.guest = null
 
             this.props.patchBook([newBook])
-            this.props.patchSlot(this.props.currentSlot[0], null)
-            this.props.patchGuest(this.props.currentGuest[0])
-            this.props.changeSlot([])
-            this.props.changeGuest([])
+            this.props.patchSlot(this.props.currentSlot, null)
+            this.props.patchGuest(this.props.currentGuest)
+            this.props.changeSlot({})
+            this.props.changeGuest({})
 
         } else {
 
-            slotToUpdate.time = this.props.currentSlot[0].time
-            slotToUpdate.party_size = this.props.currentSlot[0].party_size
-            slotToUpdate.status = this.props.currentSlot[0].status
-            slotToUpdate.reservation_notes = this.props.currentSlot[0].reservation_notes
-            slotToUpdate.booked = this.props.currentSlot[0].booked
-            slotToUpdate.guest = this.props.currentGuest[0]
+            slotToUpdate.time = this.props.currentSlot.time
+            slotToUpdate.party_size = this.props.currentSlot.party_size
+            slotToUpdate.status = this.props.currentSlot.status
+            slotToUpdate.reservation_notes = this.props.currentSlot.reservation_notes
+            slotToUpdate.booked = this.props.currentSlot.booked
+            slotToUpdate.guest = this.props.currentGuest
 
-            this.props.patchBook([newBook])
-            this.props.patchSlot(this.props.currentSlot[0], this.props.currentGuest[0].id)
-            this.props.patchGuest(this.props.currentGuest[0])
-            this.props.changeSlot([])
-            this.props.changeGuest([])
+            this.props.patchBook(newBook)
+            this.props.patchSlot(this.props.currentSlot, this.props.currentGuest.id)
+            this.props.patchGuest(this.props.currentGuest)
+            this.props.changeSlot({})
+            this.props.changeGuest({})
         }
     }
 
@@ -141,7 +141,7 @@ class ModifyReservation extends React.Component {
         function uniq(a) {
             return Array.from(new Set(a));
         }
-        let times = uniq(this.props.currentBook[0].slots.map(slot => slot.time)).sort()
+        let times = uniq(this.props.currentBook.slots.map(slot => slot.time)).sort()
         return times.map(time =>
             <MenuItem key={times.indexOf(time)} menuItem={time} toggleMenu={this.toggleMenu} type={"time"}/>)
     }
@@ -180,7 +180,7 @@ class ModifyReservation extends React.Component {
                                 <div className="menu-dropdown-wrapper"
                                      id="time-menu"
                                      onClick={this.onClickHandler}>
-                                    {this.props.currentSlot[0].time}
+                                    {this.props.currentSlot.time}
                                 </div>
                                 {this.state.timeMenu ? (
                                         <>
@@ -199,7 +199,7 @@ class ModifyReservation extends React.Component {
                             <div className="user-select-option">
                                 <div className="label">Party Size</div>
                             <div className="menu-dropdown-wrapper" id="party-size-menu" onClick={this.onClickHandler}>
-                                {this.props.currentSlot[0].party_size}
+                                {this.props.currentSlot.party_size}
                             </div>
                                     {this.state.partySizeMenu ? (
                                     <>
@@ -220,9 +220,9 @@ class ModifyReservation extends React.Component {
                                 <div className="menu-dropdown-wrapper"
                                      id="status-menu"
                                      onClick={this.onClickHandler}
-                                     style={{backgroundColor: this.props.currentSlot[0].status.color}}
+                                     style={{backgroundColor: this.props.currentSlot.status.color}}
                                 >
-                                    {this.props.currentSlot[0].status.name}
+                                    {this.props.currentSlot.status.name}
                                 </div>
                                 {this.state.statusMenu ? (
                                         <>
@@ -243,7 +243,7 @@ class ModifyReservation extends React.Component {
                             <div className="input-wrapper">
                                 <div className="label">First Name</div>
                                 <input name="first-name"
-                                       value={this.props.currentGuest[0].first_name}
+                                       value={this.props.currentGuest.first_name}
                                        onChange={this.onChangeHandler}
                                        type="text"
                                        placeholder="First Name"/>
@@ -251,7 +251,7 @@ class ModifyReservation extends React.Component {
                             <div className="input-wrapper">
                                 <div className="label">Last Name</div>
                                 <input name="last-name"
-                                       value={this.props.currentGuest[0].last_name}
+                                       value={this.props.currentGuest.last_name}
                                        onChange={this.onChangeHandler}
                                        type="text"
                                        placeholder="Last Name" />
@@ -259,7 +259,7 @@ class ModifyReservation extends React.Component {
                             <div className="input-wrapper">
                                 <div className="label">Phone</div>
                                 <input name="phone-number"
-                                       value={this.props.currentGuest[0].phone_number}
+                                       value={this.props.currentGuest.phone_number}
                                        onChange={this.onChangeHandler}
                                        type="text"
                                        placeholder="Phone Number" />
@@ -272,7 +272,7 @@ class ModifyReservation extends React.Component {
                                 <label>Reservation Notes</label>
                                 <input id='reservation-notes' name="reservation-notes"
                                        autoComplete="off"
-                                       value={this.props.currentSlot[0].reservation_notes}
+                                       value={this.props.currentSlot.reservation_notes}
                                        onChange={this.onChangeHandler}
                                        type="text"
                                        placeholder="Reservation Notes" />
@@ -283,7 +283,7 @@ class ModifyReservation extends React.Component {
                                 <label>Guest Notes</label>
                                 <input id='guest-notes' name="guest-notes"
                                        autoComplete="off"
-                                       value={this.props.currentGuest[0].guest_notes}
+                                       value={this.props.currentGuest.guest_notes}
                                        onChange={this.onChangeHandler}
                                        type="text"
                                        placeholder="Guest Notes" />

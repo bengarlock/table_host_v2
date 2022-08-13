@@ -29,7 +29,6 @@ class Book extends React.Component {
                     <div className="header">
                         <span>AVAILABILITY</span>
                     </div>
-
                     {this.renderSlots()}
                     {this.props.currentSlot.id ? <ReservationForm /> : null}
                 </div>

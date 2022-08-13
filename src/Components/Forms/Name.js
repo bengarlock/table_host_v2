@@ -6,15 +6,14 @@ import { changeGuest } from "../../Actions/Guest";
 class Name extends React.Component {
 
     static propTypes = {
-        currentGuest: PropTypes.array.isRequired
+        currentGuest: PropTypes.object.isRequired
     }
 
     onClickHandler = () => {
-        this.props.changeGuest([this.props.name])
+        this.props.changeGuest(this.props.name)
     }
 
     render() {
-
         return(
             <div className="slot-container" onClick={this.onClickHandler}>
                 {this.props.name.first_name} {this.props.name.last_name} {this.props.name.phone_number}

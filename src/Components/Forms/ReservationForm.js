@@ -17,14 +17,13 @@ class ReservationForm extends React.Component {
     render() {
         return(
             <div>
-                {this.props.currentSlot[0] && this.props.currentGuest[0] ? <ModifyReservation /> : <NewReservation />}
+                {this.props.currentSlot.id && this.props.currentGuest.id ? <ModifyReservation /> : <NewReservation /> }
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    //state.resyRestaurants calls the reducer and .resyRestaurants calls the action
     currentSlot: state.slot.currentSlot,
     currentGuest: state.guest.currentGuest
 })

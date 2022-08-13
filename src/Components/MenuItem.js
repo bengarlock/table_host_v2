@@ -6,7 +6,7 @@ import { changeSlot } from "../Actions/Slot";
 class MenuItem extends React.Component {
 
     static propTypes = {
-        currentSlot: PropTypes.array.isRequired,
+        currentSlot: PropTypes.object.isRequired,
         statuses: PropTypes.array.isRequired,
     }
 
@@ -21,13 +21,13 @@ class MenuItem extends React.Component {
             this.props.changeSlot(slot)
             this.props.toggleMenu('time')
         } else if (this.props.type === "status") {
-            let slot = [...this.props.currentSlot]
-            slot[0].status = this.props.menuItem
+            let slot = this.props.currentSlot
+            slot.status = this.props.menuItem
             this.props.changeSlot(slot)
             this.props.toggleMenu('status')
         } else if (this.props.type === "partySize") {
             let slot = [...this.props.currentSlot]
-            slot[0].party_size = this.props.menuItem
+            slot.party_size = this.props.menuItem
             this.props.changeSlot(slot)
             this.props.toggleMenu('partySize')
         }

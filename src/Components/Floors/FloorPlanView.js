@@ -10,8 +10,7 @@ class FloorPlanView extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
-        currentSlot: PropTypes.array.isRequired,
-        hoverSlot: PropTypes.array.isRequired
+        currentSlot: PropTypes.object.isRequired,
     }
 
     state = {
