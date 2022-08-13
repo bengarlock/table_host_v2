@@ -35,8 +35,8 @@ class FloorPlanView extends React.Component {
     }
 
     renderReservations = () => {
-        if (this.props.currentBook[0]) {
-            const reservations = this.props.currentBook[0].slots.filter(reservation =>
+        if (this.props.currentBook.slots) {
+            const reservations = this.props.currentBook.slots.filter(reservation =>
                 reservation.booked
             )
             return reservations.map(slot => <Slot key={slot.id} slot={slot}/>)
@@ -57,20 +57,19 @@ class FloorPlanView extends React.Component {
     render() {
         return(
             <div className="floor-wrapper">
-                {/*<div className="floor-reservations-wrapper">*/}
-                {/*    <div className="floor-reservations-header">Reservations</div>*/}
-                {/*    <div>*/}
-                {/*        {this.renderReservations()}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*<div className="slider" onMouseOver={this.resizeHandler}>*/}
-                {/*</div>*/}
-                {/*<div className="floor-tables-wrapper">*/}
+                <div className="floor-reservations-wrapper">
+                    <div className="floor-reservations-container">
+                        {this.renderReservations()}
+                    </div>
+                </div>
+                <div className="slider" onMouseOver={this.resizeHandler}>
+                </div>
+                <div className="floor-tables-wrapper">
 
-                {/*    {this.renderFloors()}*/}
+                    {this.renderFloors()}
 
-                {/*</div>*/}
-                {/*{this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}*/}
+                </div>
+                {this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
             </div>
         )
     }

@@ -397,6 +397,10 @@ a, a:visited, a:hover, a:active {
   transition: .5s;
 }
 
+.floor-reservations-header {
+
+}
+
 
 
 @media only screen and (min-width: 600px)  {
@@ -419,9 +423,20 @@ a, a:visited, a:hover, a:active {
   }
 
   .floor-wrapper {
+    left: 50px;
     width: 100%;
-    /*width: calc(100vw - 120px);*/
-    background-color: blue;
+    background-color: grey;
+    display: flex;
+    flex-direction: row;
+  }
+  .floor-reservations-wrapper {
+    position: relative;
+    left: 60px;
+    top: 50px;
+    height: calc(100% - 50px);
+    background-color: #3b3b3b;
+    display: flex;
+    justify-content: center;
   }
 
 
