@@ -3,7 +3,7 @@ import { GET_BOOK, PATCH_BOOK } from "../Actions/Types";
 import { SET_DATE} from "../Actions/Types";
 
 const initialState = {
-    currentBook: [],
+    currentBook: '',
     currentDate: ''
 }
 

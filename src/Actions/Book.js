@@ -21,16 +21,13 @@ export const getBook = (date) => {
         const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + formatDate(date))
         let book = await response.json()
 
-
-        book = book.results[0]
-
         if (book > 0) {
             book.slots.sort((a, b) => (a.id > b.id) ? 1 : -1)
         }
 
         dispatch({
             type: GET_BOOK,
-            payload: [book]
+            payload: book[0]
         })
     };
 }

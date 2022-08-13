@@ -14,8 +14,8 @@ class Book extends React.Component {
     }
 
     renderSlots = () => {
-        if (this.props.currentBook[0]) {
-            return this.props.currentBook[0].slots.map(slot => <Slot key={slot.id} slot={slot}/>)
+        if (this.props.currentBook) {
+            return this.props.currentBook.slots.map(slot => <Slot key={slot.id} slot={slot}/>)
         } else {
             return "CLOSED"
         }
