@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { faFile } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Navbar extends React.Component {
@@ -48,7 +48,7 @@ class Navbar extends React.Component {
                          id='reports'
                          to="/tablehost/reports"
                          onClick={this.onClickHandler}>
-                    <FontAwesomeIcon icon={faFile}/>
+                    <FontAwesomeIcon icon={faPencil}/>
                 </NavLink>
             </div>
         )
