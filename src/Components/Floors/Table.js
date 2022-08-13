@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../../Stylesheets/App.css'
 
 class Table extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../Stylesheets/Book.css"
+import '../../Stylesheets/App.css'
 import {connect} from "react-redux";
 import { getBook } from "../../Actions/Book";
 import PropTypes from "prop-types";

@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../Stylesheets/ReservationForm.css"
+import "../../Stylesheets/App.css"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {changeSlot} from "../../Actions/Slot";

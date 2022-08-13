@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../Stylesheets/ReservationForm.css"
+import "../../Stylesheets/App.css"
 import ModifyReservation from "./ModifyReservation";
 import NewReservation from "./NewReservation";
 import { connect } from "react-redux";
