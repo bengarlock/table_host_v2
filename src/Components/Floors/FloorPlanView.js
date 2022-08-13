@@ -62,13 +62,7 @@ class FloorPlanView extends React.Component {
                         {this.renderReservations()}
                     </div>
                 </div>
-                <div className="slider" onMouseOver={this.resizeHandler}>
-                </div>
-                <div className="floor-tables-wrapper">
-
-                    {this.renderFloors()}
-
-                </div>
+                {this.renderFloors()}
                 {this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
             </div>
         )
