@@ -25,6 +25,7 @@ class App extends React.Component {
   }
 
   render() {
+      console.log(React.version)
     return (
         <div className="app-wrapper">
             <Datepicker />
