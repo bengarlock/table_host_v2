@@ -20,8 +20,8 @@ class Table extends React.Component {
 
     mousemove = (e) => {
         this.setState({
-            left: e.screenX - 2040,
-            top: e.screenY - 260
+            left: e.screenX,
+            top: e.screenY
         })
     }
 
