@@ -6,7 +6,9 @@ class Table extends React.Component {
 
     state = {
         left: 400,
-        top: 50
+        top: 50,
+        width: 50,
+        height: 50
     }
 
 
@@ -26,6 +28,9 @@ class Table extends React.Component {
     onMouseUpHandler = () => {
         window.removeEventListener("mousemove", this.onMouseMoveHandler)
         window.removeEventListener("mouseup", this.onMouseUpHandler)
+
+
+
     }
 
 
