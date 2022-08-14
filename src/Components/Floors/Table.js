@@ -3,37 +3,37 @@ import '../../Stylesheets/App.css'
 
 class Table extends React.Component {
 
+    state = {
+        left: 300,
+        top: 20
+    }
+
+
     onMouseDownHandler = (e) => {
         if (e.target.className === 'table') {
-            this.drag(e.target)
+            this.drag(e)
         } else if (e.target.className.includes('resizer')) {
             this.resize(e.target)
         }
     }
 
-    drag = (table) => {
-        window.addEventListener('mousemove', mousemove)
-        window.addEventListener('mouseup', mouseup)
-        let prevX = table.offsetX;
-        let prevY = table.offsetY;
-        console.log(table)
 
-        function mousemove(e) {
-            let newX = prevX - e.offsetX;
-            let newY = prevY - e.offsetY;
-            const rect = table.getBoundingClientRect();
+    mousemove = (e) => {
+        this.setState({
+            left: e.screenX - 2040,
+            top: e.screenY - 260
+        })
+    }
 
-            table.style.left = rect.left - newX + 'px';
-            table.style.top = rect.top - newY + 'px';
+    mouseup = () => {
+        window.removeEventListener('mousemove', this.mousemove)
+        window.removeEventListener('mouseup', this.mouseup)
+    }
 
-            prevX = table.clientX
-            prevY = table.clientY
-        }
+    drag = (e) => {
+        window.addEventListener('mousemove', this.mousemove)
+        window.addEventListener('mouseup', this.mouseup)
 
-        function mouseup() {
-            window.removeEventListener('mousemove', mousemove)
-            window.removeEventListener('mouseup', mouseup)
-        }
     }
 
     resize = (item) => {
@@ -79,8 +79,11 @@ class Table extends React.Component {
 
 
     render() {
+        console.log(this.state)
         return(
-            <div className="table" onMouseDown={this.onMouseDownHandler}>
+            <div className="table" style={{top: this.state.top + 'px', left:this.state.left + 'px'}}
+                 onMouseDown={this.onMouseDownHandler}>
+
                 <div className="resizer nw"/>
                 <div className="resizer ne"/>
                 <div className="resizer sw"/>
