@@ -87,6 +87,7 @@ class Table extends React.Component {
 
 
     render() {
+        console.log(this.props.table)
         return(
             <div className="table" style={{left:this.state.left, top: this.state.top}}
                  onMouseDown={this.onMouseDownHandler}

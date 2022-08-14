@@ -13,27 +13,6 @@ class FloorPlanView extends React.Component {
         currentSlot: PropTypes.object.isRequired,
     }
 
-    state = {
-        floors: [
-            {
-                id: 1,
-                name: "main",
-                tables: [
-                    {
-                        id: 1,
-                        name: "1",
-                        class_name: "table",
-                        width: "50px",
-                        height: "50px",
-                        background_color: "#9b9b9b",
-                        border: "2px solid gray",
-                        top: "100px",
-                        left: "500px",
-                    }]
-            }
-        ]
-    }
-
     renderReservations = () => {
         if (this.props.currentBook.slots) {
             const reservations = this.props.currentBook.slots.filter(reservation =>
@@ -50,7 +29,9 @@ class FloorPlanView extends React.Component {
 
 
     renderFloors = () => {
-        return this.state.floors.map(floor => <Floor key={floor.id} floor={floor}/>)
+        if (this.props.currentBook.floors) {
+            return this.props.currentBook.floors.map(floor => <Floor key={floor.id} floor={floor}/>)
+        }
     }
 
 

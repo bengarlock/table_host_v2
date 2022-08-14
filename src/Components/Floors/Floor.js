@@ -30,7 +30,6 @@ class Floor extends React.Component {
 
 
     render() {
-        console.log(this.props.floor)
         return(
             <div id="table-root">
                 <button id="add" onClick={this.onClickHandler}>+</button>
