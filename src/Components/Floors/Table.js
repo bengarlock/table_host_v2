@@ -1,22 +1,39 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
-import Draggable from 'react-draggable'; // The default
 
 
 class Table extends React.Component {
 
     state = {
-        left: 300,
-        top: 20
+        left: 400,
+        top: 50
     }
 
 
     onMouseDownHandler = (e) => {
         if (e.target.className === 'table') {
-            this.drag(e)
+            this.onMouseDownHandler(e)
         } else if (e.target.className.includes('resizer')) {
             this.resize(e.target)
         }
+    }
+
+    onMouseDownHandler = (e) => {
+        window.addEventListener("mousemove", this.onMouseMoveHandler)
+        window.addEventListener("mouseup", this.onMouseUpHandler)
+    }
+
+    onMouseUpHandler = () => {
+        window.removeEventListener("mousemove", this.onMouseMoveHandler)
+        window.removeEventListener("mouseup", this.onMouseUpHandler)
+    }
+
+
+    onMouseMoveHandler = (e) => {
+        this.setState({
+            left: this.state.left + e.movementX,
+            top: this.state.top + e.movementY
+        })
     }
 
 
@@ -66,15 +83,16 @@ class Table extends React.Component {
 
     render() {
         return(
-            <Draggable>
-                <div className="table">
-                    <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
-                    <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
-                    <div className="resizer sw" onMouseDown={this.onMouseDownHandler}/>
-                    <div className="resizer se" onMouseDown={this.onMouseDownHandler}/>
-                </div>
-            </Draggable>
-
+            <div className="table" style={{left:this.state.left, top: this.state.top}}
+                 onMouseDown={this.onMouseDownHandler}
+                 onMouseUp={this.onMouseUpHandler}
+                 // onMouseMove={this.onMouseMoveHandler}
+            >
+                <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
+                <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
+                <div className="resizer sw" onMouseDown={this.onMouseDownHandler}/>
+                <div className="resizer se" onMouseDown={this.onMouseDownHandler}/>
+            </div>
         )
     }
 }

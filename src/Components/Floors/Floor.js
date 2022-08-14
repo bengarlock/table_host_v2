@@ -46,7 +46,6 @@ class Floor extends React.Component {
 
 
     render() {
-        console.log(this.state.tables)
         return(
             <div id="table-root">
                 <button id="add" onClick={this.onClickHandler}>+</button>
