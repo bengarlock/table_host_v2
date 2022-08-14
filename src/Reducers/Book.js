@@ -1,6 +1,6 @@
 //reducers evaluate actions and return state based off that action.
-import { GET_BOOK, PATCH_BOOK } from "../Actions/Types";
-import { SET_DATE} from "../Actions/Types";
+import { SET_DATE, GET_BOOK, PATCH_BOOK, CREATE_TABLE } from "../Actions/Types";
+
 
 const initialState = {
     currentBook: {},

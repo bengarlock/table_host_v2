@@ -14,20 +14,61 @@ class Floor extends React.Component {
         tables: []
     }
 
+    componentDidMount = () => {
+        this.setState({
+            tables: this.props.floor.tables
+        })
+    }
+
+    createTable = async () => {
+        const mostRecentName = Number(this.state.tables.map(table => Number(table.name)).sort().slice(-1).pop()) + 1
+        console.log(this.state.tables.map(table => table.name))
+
+        let table = {
+            background_color: "#9b9b9b",
+            border: "\"2px solid gray\"",
+            class_name: "table",
+            height: 50,
+            left: 400,
+            name: String(mostRecentName),
+            status: "open",
+            top: 262,
+            width: 50,
+            floor: this.props.floor.id
+        }
+
+        const packet = {
+            method: "post",
+            headers: {
+                "content-type": 'application/json',
+                "accept": "application/json",
+            },
+            body: JSON.stringify(table)
+        }
+
+        const response = await fetch(`https://bengarlock.com/api/v1/tablehost/tables/`, packet)
+        let newTable = await response.json()
+
+        table.id = newTable.id
+
+
+        this.setState({
+            tables: [...this.state.tables, table]
+        })
+
+    }
+
+
+
     onClickHandler = (e) => {
         if (e.target.id === 'add') {
-            const table = React.createElement('div', {className: "table"})
-            this.setState({
-                tables: [...this.state.tables, table]
-            })
+            this.createTable()
         }
     }
 
     renderTables = () => {
-        return this.props.floor.tables.map(table => <Table key={table.id} table={table} /> )
+        return this.state.tables.map(table => <Table key={table.id} table={table} /> )
     }
-
-
 
     render() {
         return(

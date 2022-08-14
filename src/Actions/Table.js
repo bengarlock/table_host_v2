@@ -1,5 +1,10 @@
 import { PATCH_TABLE } from "./Types";
 
+
+
+
+
+
 //PATCH TABLES
 export const updateTable = (table) => {
     return async (dispatch) => {
