@@ -1,5 +1,7 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
+import Draggable from 'react-draggable'; // The default
+
 
 class Table extends React.Component {
 
@@ -18,25 +20,8 @@ class Table extends React.Component {
     }
 
 
-    mousemove = (e) => {
-        this.setState({
-            left: e.screenX,
-            top: e.screenY
-        })
-    }
-
-    mouseup = () => {
-        window.removeEventListener('mousemove', this.mousemove)
-        window.removeEventListener('mouseup', this.mouseup)
-    }
-
-    drag = (e) => {
-        window.addEventListener('mousemove', this.mousemove)
-        window.addEventListener('mouseup', this.mouseup)
-
-    }
-
     resize = (item) => {
+
         const box = item.parentElement
 
         window.addEventListener('mousemove', mousemove)
@@ -68,6 +53,7 @@ class Table extends React.Component {
 
             prevX = e.clientX;
             prevY = e.clientY
+            console.log(item.parentElement)
 
         }
 
@@ -79,16 +65,16 @@ class Table extends React.Component {
 
 
     render() {
-        console.log(this.state)
         return(
-            <div className="table" style={{top: this.state.top + 'px', left:this.state.left + 'px'}}
-                 onMouseDown={this.onMouseDownHandler}>
+            <Draggable>
+                <div className="table">
+                    <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
+                    <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
+                    <div className="resizer sw" onMouseDown={this.onMouseDownHandler}/>
+                    <div className="resizer se" onMouseDown={this.onMouseDownHandler}/>
+                </div>
+            </Draggable>
 
-                <div className="resizer nw"/>
-                <div className="resizer ne"/>
-                <div className="resizer sw"/>
-                <div className="resizer se"/>
-            </div>
         )
     }
 }
