@@ -55,6 +55,7 @@ a, a:visited, a:hover, a:active {
   align-items: center;
   font-size: 15px;
   user-select: none;
+  z-index: 3;
 }
 
 .center-calendar-selector {

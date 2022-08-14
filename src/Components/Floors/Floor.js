@@ -1,25 +1,22 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
+import Table from "./Table";
 
 class Floor extends React.Component {
 
-
-    renderTables = () => {
-
+    state = {
+        tables: []
     }
+
+
+
 
     onClickHandler = (e) => {
         if (e.target.id === 'add') {
-            const root = document.getElementById('table-root')
             const table = React.createElement('div', {className: "table"})
-            console.log(table)
-
-            root.appendChild(table)
-
-
-
-
-
+            this.setState({
+                tables: [...this.state.tables, table]
+            })
 
 
 
@@ -42,12 +39,18 @@ class Floor extends React.Component {
         }
     }
 
+    renderTables = () => {
+        return this.state.tables.map(table => <Table key={this.state.tables.indexOf(table)} table={table} /> )
+    }
+
 
 
     render() {
+        console.log(this.state.tables)
         return(
             <div id="table-root">
                 <button id="add" onClick={this.onClickHandler}>+</button>
+                {this.renderTables()}
             </div>
 
         )

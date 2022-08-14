@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../Stylesheets/App.css'
+import "../../Stylesheets/App.css"
 import { connect } from "react-redux";
 import PropTypes from "prop-types"
 import Slot from "../Books/Slot";
