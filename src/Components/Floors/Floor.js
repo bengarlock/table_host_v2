@@ -11,27 +11,34 @@ class Floor extends React.Component {
     onClickHandler = (e) => {
         if (e.target.id === 'add') {
             const root = document.getElementById('table-root')
-            const div = document.createElement('div')
-            div.className = 'item'
+            const table = React.createElement('div', {className: "table"})
+            console.log(table)
 
-            const nwDiv = document.createElement('div')
-            nwDiv.className = "resizer nw"
+            root.appendChild(table)
 
-            const neDiv = document.createElement('div')
-            neDiv.className = "resizer ne"
 
-            const swDiv = document.createElement('div')
-            swDiv.className = "resizer sw"
 
-            const seDiv = document.createElement('div')
-            seDiv.className = "resizer se"
 
-            div.appendChild(nwDiv)
-            div.appendChild(neDiv)
-            div.appendChild(swDiv)
-            div.appendChild(seDiv)
 
-            root.appendChild(div)
+
+
+
+
+            // const div = document.createElement('div')
+            // div.className = 'table'
+            // const nwDiv = document.createElement('div')
+            // nwDiv.className = "resizer nw"
+            // const neDiv = document.createElement('div')
+            // neDiv.className = "resizer ne"
+            // const swDiv = document.createElement('div')
+            // swDiv.className = "resizer sw"
+            // const seDiv = document.createElement('div')
+            // seDiv.className = "resizer se"
+            // div.appendChild(nwDiv)
+            // div.appendChild(neDiv)
+            // div.appendChild(swDiv)
+            // div.appendChild(seDiv)
+            // root.appendChild(div)
         }
     }
 
@@ -40,7 +47,6 @@ class Floor extends React.Component {
     render() {
         return(
             <div id="table-root">
-                {/*<div style={{backgroundColor: "darkgrey", position: "relative", width: "50px", height: "50px"}}> 10 </div>*/}
                 <button id="add" onClick={this.onClickHandler}>+</button>
             </div>
 
