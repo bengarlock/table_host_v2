@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
-
+import { updateTable } from "../../Actions/Table";
+import { connect } from "react-redux";
 
 class Table extends React.Component {
 
@@ -11,28 +12,38 @@ class Table extends React.Component {
         height: 50
     }
 
-
-    onMouseDownHandler = (e) => {
-        if (e.target.className === 'table') {
-            this.onMouseDownHandler(e)
-        } else if (e.target.className.includes('resizer')) {
-            this.resize(e.target)
-        }
+    componentDidMount = () => {
+        this.setState({
+            left: this.props.table.left,
+            top: this.props.table.top,
+            width: this.props.table.width,
+            height: this.props.table.height
+        })
     }
+
 
     onMouseDownHandler = (e) => {
         window.addEventListener("mousemove", this.onMouseMoveHandler)
         window.addEventListener("mouseup", this.onMouseUpHandler)
+        if (e.target.className === 'table') {
+            this.onMouseMoveHandler(e)
+        }
     }
 
     onMouseUpHandler = () => {
+        console.log(this.props.table.id)
+        console.log(this.state)
+        let table = this.props.table
+        table.left = this.state.left
+        table.top = this.state.top
+        table.width = this.state.width
+        table.height = this.state.height
+
+        this.props.updateTable(table)
+
         window.removeEventListener("mousemove", this.onMouseMoveHandler)
         window.removeEventListener("mouseup", this.onMouseUpHandler)
-
-
-
     }
-
 
     onMouseMoveHandler = (e) => {
         this.setState({
@@ -41,58 +52,11 @@ class Table extends React.Component {
         })
     }
 
-
-    resize = (item) => {
-
-        const box = item.parentElement
-
-        window.addEventListener('mousemove', mousemove)
-        window.addEventListener('mouseup', mouseup)
-
-        let prevX = box.clientX;
-        let prevY = box.clientY;
-
-        function mousemove(e) {
-            const rect = box.getBoundingClientRect()
-
-            if (item.classList.contains('se')) {
-                box.style.width = rect.width - (prevX - e.clientX) + 'px'
-                box.style.height = rect.height - (prevY - e.clientY) + 'px'
-            } else if (item.classList.contains('sw')) {
-                box.style.width = rect.width + (prevX - e.clientX) + 'px'
-                box.style.height = rect.height - (prevY - e.clientY) + 'px'
-                box.style.left = rect.left - (prevX - e.clientX) + 'px'
-            } else if (item.classList.contains('ne')) {
-                box.style.width = rect.width - (prevX - e.clientX) + 'px'
-                box.style.height = rect.height + (prevY - e.clientY) + 'px'
-                box.style.top = rect.top - (prevY - e.clientY) + 'px'
-            } else if (item.classList.contains('nw')) {
-                box.style.width = rect.width + (prevX - e.clientX) + 'px'
-                box.style.height = rect.height + (prevY - e.clientY) + 'px'
-                box.style.top = rect.top - (prevY - e.clientY) + 'px'
-                box.style.left = rect.left - (prevX - e.clientX) + 'px'
-            }
-
-            prevX = e.clientX;
-            prevY = e.clientY
-            console.log(item.parentElement)
-
-        }
-
-        function mouseup() {
-            window.removeEventListener('mousemove', mousemove)
-            window.removeEventListener('mouseup', mouseup)
-        }
-    }
-
-
     render() {
-        console.log(this.props.table)
         return(
             <div className="table" style={{left:this.state.left, top: this.state.top}}
                  onMouseDown={this.onMouseDownHandler}
                  onMouseUp={this.onMouseUpHandler}
-                 // onMouseMove={this.onMouseMoveHandler}
             >
                 <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
                 <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
@@ -103,4 +67,10 @@ class Table extends React.Component {
     }
 }
 
-export default Table
+const mapStateToProps = (state) => ({
+    currentBook: state.book.currentBook,
+    currentSlot: state.slot.currentSlot,
+    hoverSlot: state.slot.hoverSlot
+})
+
+export default connect(mapStateToProps, { updateTable })(Table)

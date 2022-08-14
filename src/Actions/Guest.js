@@ -13,6 +13,7 @@ export const changeGuest = (guest) => {
 //PATCH_GUEST
 export const patchGuest = (guest) => {
     return async (dispatch) => {
+
         const packet = {
             method: "put",
             headers: {

@@ -33,8 +33,6 @@ class Book extends React.Component {
                     {this.props.currentSlot.id ? <ReservationForm /> : null}
                 </div>
             </div>
-
-
         )
     }
 }
