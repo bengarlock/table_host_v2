@@ -25,7 +25,6 @@ export const updateTable = (table) => {
 
         const response = await fetch(`https://bengarlock.com/api/v1/tablehost/tables/${table.id}/`, packet)
         let updatedTable = await response.json()
-        console.log(updatedTable)
 
         dispatch({
             type: PATCH_TABLE,

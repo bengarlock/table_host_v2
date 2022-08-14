@@ -14,8 +14,8 @@ class Table extends React.Component {
 
     componentDidMount = () => {
         this.setState({
-            left: this.props.table.left,
-            top: this.props.table.top,
+            left: this.props.table.left < 400 ? 400 : this.props.table.left,
+            top: this.props.table.top < 50 ? 50 : this.props.table.top,
             width: this.props.table.width,
             height: this.props.table.height
         })
@@ -31,16 +31,12 @@ class Table extends React.Component {
     }
 
     onMouseUpHandler = () => {
-        console.log(this.props.table.id)
-        console.log(this.state)
         let table = this.props.table
         table.left = this.state.left
         table.top = this.state.top
         table.width = this.state.width
         table.height = this.state.height
-
         this.props.updateTable(table)
-
         window.removeEventListener("mousemove", this.onMouseMoveHandler)
         window.removeEventListener("mouseup", this.onMouseUpHandler)
     }
@@ -58,6 +54,7 @@ class Table extends React.Component {
                  onMouseDown={this.onMouseDownHandler}
                  onMouseUp={this.onMouseUpHandler}
             >
+                {this.props.table.name}
                 <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
                 <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
                 <div className="resizer sw" onMouseDown={this.onMouseDownHandler}/>
