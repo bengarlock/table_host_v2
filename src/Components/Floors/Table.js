@@ -1,15 +1,21 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
-import { updateTable } from "../../Actions/Table";
+import { updateTable, changeSeatedTable } from "../../Actions/Table";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class Table extends React.Component {
+
+    static propTypes = {
+        currentTable: PropTypes.object.isRequired,
+    }
 
     state = {
         left: 400,
         top: 50,
         width: 50,
-        height: 50
+        height: 50,
+        background: "darkGrey"
     }
 
     componentDidMount = () => {
@@ -17,7 +23,8 @@ class Table extends React.Component {
             left: this.props.table.left < 400 ? 400 : this.props.table.left,
             top: this.props.table.top < 50 ? 50 : this.props.table.top,
             width: this.props.table.width,
-            height: this.props.table.height
+            height: this.props.table.height,
+            background: this.props.table.background_color
         })
     }
 
@@ -48,11 +55,39 @@ class Table extends React.Component {
         })
     }
 
+    onDragOverHandler = () => {
+        this.setState({
+            background: "pink"
+        })
+        this.props.changeSeatedTable(this.props.table)
+    }
+
+    onMouseLeaveHandler = () => {
+        this.setState({
+            background: "darkGrey"
+        })
+    }
+
+    onDropCaptureHandler = () => {
+        console.log("drag up")
+        if (this.props.currentTable.id){
+            console.log(this.props.currentTable)
+        }
+    }
+
     render() {
+        console.log(this.props.table)
         return(
-            <div className="table" style={{left:this.state.left, top: this.state.top}}
+            <div className="table" style={{
+                left:this.state.left,
+                top: this.state.top,
+                background: this.state.background
+            }}
                  onMouseDown={this.onMouseDownHandler}
                  onMouseUp={this.onMouseUpHandler}
+                 onDragOver={this.onDragOverHandler}
+                 onDragLeave={this.onMouseLeaveHandler}
+                 onDropCapture={this.onDropCaptureHandler}
             >
                 {this.props.table.name}
                 <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
@@ -67,7 +102,8 @@ class Table extends React.Component {
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     currentSlot: state.slot.currentSlot,
+    currentTable: state.table.currentTable,
     hoverSlot: state.slot.hoverSlot
 })
 
-export default connect(mapStateToProps, { updateTable })(Table)
+export default connect(mapStateToProps, { updateTable, changeSeatedTable })(Table)

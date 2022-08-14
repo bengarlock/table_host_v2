@@ -1,9 +1,4 @@
-import { PATCH_TABLE } from "./Types";
-
-
-
-
-
+import {PATCH_TABLE, CHANGE_SEATED_TABLE, SET_TABLES} from "./Types";
 
 //PATCH TABLES
 export const updateTable = (table) => {
@@ -36,4 +31,14 @@ export const updateTable = (table) => {
             payload: updatedTable
         })
     };
+}
+
+//CHANGE_SEATED_TABLE
+export const changeSeatedTable = (table) => {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_SEATED_TABLE,
+            payload: table
+        })
+    }
 }

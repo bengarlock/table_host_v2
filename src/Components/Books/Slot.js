@@ -2,6 +2,8 @@ import React from 'react'
 import '../../Stylesheets/App.css'
 import PropTypes from 'prop-types';
 import { changeSlot, changeSeatedSlot } from "../../Actions/Slot";
+import { updateTable } from "../../Actions/Table";
+
 import { changeGuest} from "../../Actions/Guest";
 import { connect } from "react-redux";
 
@@ -12,7 +14,8 @@ class Slot extends React.Component {
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
         statuses: PropTypes.array.isRequired,
-        seatedSlot: PropTypes.object.isRequired
+        seatedSlot: PropTypes.object.isRequired,
+        currentTable: PropTypes.object.isRequired
     }
 
     state = {
@@ -54,6 +57,17 @@ class Slot extends React.Component {
         })
     }
 
+    onDropCaptureHandler = () => {
+        console.log(this.props.currentTable)
+
+        if (this.props.currentTable) {
+            const table = this.props.currentTable
+            table.stauts = "seated"
+            table.background_color = "pink"
+            this.props.updateTable(table)
+        }
+    }
+
 
     render() {
         return(
@@ -62,7 +76,8 @@ class Slot extends React.Component {
                  style={this.renderStyle()}
                  onMouseEnter={this.seatedSlotSelect}
                  onMouseLeave={this.seatedSlotUnSelect}
-                 draggable="true"
+                 draggable={true}
+                 onDragEnd={this.onDropCaptureHandler}
             >
                 <span>{this.props.slot.time}</span>
                 <span>{this.props.slot.party_size}</span>
@@ -88,7 +103,8 @@ class Slot extends React.Component {
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     statuses: state.status.statuses,
-    seatedSlot: state.slot.seatedSlot
+    seatedSlot: state.slot.seatedSlot,
+    currentTable: state.table.currentTable
 })
 
-export default connect(mapStateToProps, { changeSlot, changeGuest, changeSeatedSlot })(Slot);
+export default connect(mapStateToProps, { changeSlot, changeGuest, changeSeatedSlot, updateTable })(Slot);

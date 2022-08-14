@@ -3,6 +3,7 @@ import './Stylesheets/App.css'
 import { Route, Redirect } from "react-router-dom";
 import { getBook, setDate } from "./Actions/Book";
 import { getStatuses } from "./Actions/Status";
+import { setTables } from "./Actions/Table";
 import { connect } from 'react-redux';
 import { changeNavbar } from "./Actions/Navbar"
 import PropTypes from 'prop-types';
@@ -25,7 +26,6 @@ class App extends React.Component {
   }
 
 
-
   render() {
       return (
           <div className="app-wrapper">
@@ -44,9 +44,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  //state.resyRestaurants calls the reducer and .resyRestaurants calls the action
-  currentBook: state.book.currentBook,
-  currentNavbar: state.navbar.currentNavbar
+    currentBook: state.book.currentBook,
+    currentNavbar: state.navbar.currentNavbar,
 })
 
 export default connect(mapStateToProps, { getBook, getStatuses, setDate, changeNavbar })(App);
