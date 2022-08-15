@@ -38,6 +38,7 @@ class Table extends React.Component {
     }
 
     onMouseUpHandler = () => {
+        console.log("mouse up")
         let table = this.props.table
         table.left = this.state.left
         table.top = this.state.top
@@ -69,14 +70,13 @@ class Table extends React.Component {
     }
 
     onDropCaptureHandler = () => {
-        console.log("drag up")
+        console.log("mouse up")
         if (this.props.currentTable.id){
             console.log(this.props.currentTable)
         }
     }
 
     render() {
-        console.log(this.props.table)
         return(
             <div className="table" style={{
                 left:this.state.left,
