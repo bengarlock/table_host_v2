@@ -21,6 +21,7 @@ export default function book(state = initialState, action) {
             }
 
         case PATCH_BOOK:
+            console.log("test")
             return {
                 ...state,
                 currentBook: action.payload

@@ -17,6 +17,7 @@ class FloorPlanView extends React.Component {
         if (this.props.currentBook.slots) {
             let reservations = this.props.currentBook.slots.filter(reservation => reservation.status)
             reservations = reservations.filter(reservation => reservation.status.status_type === 'reservation')
+            console.log(reservations)
             return reservations.map(slot => <Slot key={slot.id} slot={slot}/>)
         }
     }

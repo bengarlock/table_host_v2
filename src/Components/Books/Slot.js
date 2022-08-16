@@ -61,19 +61,18 @@ class Slot extends React.Component {
     // manages seated table
     onDropCaptureHandler = () => {
         if (this.props.currentTable) {
-            console.log("mouse drop")
+
             const table = this.props.currentTable
             table.stauts = "seated"
             table.background_color = "pink"
             this.props.updateTable(table)
 
             // update slot to seated and booked
-            let updatedBook = this.props.currentBook
+            let updatedBook = {...this.props.currentBook}
             let updatedSlot = updatedBook.slots.find(slot => slot.id === this.props.seatedSlot.id)
             updatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
             updatedSlot.status.status_type = "Seated"
             this.props.patchBook(updatedBook)
-
 
 
 
