@@ -58,8 +58,6 @@ class Floor extends React.Component {
 
     }
 
-
-
     onClickHandler = (e) => {
         if (e.target.id === 'add') {
             this.createTable()
