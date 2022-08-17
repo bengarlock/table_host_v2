@@ -68,7 +68,7 @@ class Slot extends React.Component {
 
             let updatedTable = updatedBook.floors[0].tables.find(table => table.id === this.props.currentTable.id)
             updatedTable.status = {...updatedSlot.status}
-            console.log(updatedBook)
+            updatedTable.reservation = updatedSlot.id
 
             this.props.patchBook(updatedBook)
             this.props.patchTable(updatedTable)

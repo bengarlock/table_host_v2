@@ -40,11 +40,12 @@ class Table extends React.Component {
 
     onMouseUpHandler = () => {
         if (this.props.currentTable) {
-            let table = this.props.table
+            let table = {...this.props.table}
             table.left = this.state.left
             table.top = this.state.top
             table.width = this.state.width
             table.height = this.state.height
+            table.reservation = this.props.reservation ? this.props.reservation.id : null
             this.props.patchTable(table)
             window.removeEventListener("mousemove", this.onMouseMoveHandler)
             window.removeEventListener("mouseup", this.onMouseUpHandler)

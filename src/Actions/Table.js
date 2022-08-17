@@ -19,7 +19,8 @@ export const patchTable = (table) => {
                 width: table.width,
                 height: table.height,
                 background_color: table.background_color,
-                border: table.border
+                border: table.border,
+                reservation: table.reservation
             })
         }
 
