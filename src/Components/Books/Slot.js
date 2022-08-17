@@ -72,7 +72,7 @@ class Slot extends React.Component {
 
             this.props.patchBook(updatedBook)
             this.props.patchTable(updatedTable)
-            // this.props.patchSlot(updatedSlot)
+            this.props.patchSlot(updatedSlot)
         }
     }
 

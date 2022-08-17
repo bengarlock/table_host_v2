@@ -25,7 +25,6 @@ class Table extends React.Component {
                 top: this.props.table.top < 50 ? 50 : this.props.table.top,
                 width: this.props.table.width,
                 height: this.props.table.height,
-                color: this.props.table.status ? this.props.table.status.color : null
             })
 
     }
@@ -91,7 +90,7 @@ class Table extends React.Component {
             <div className="table" style={{
                 left:this.state.left,
                 top: this.state.top,
-                background: this.state.color
+                background: this.props.table.status ? this.props.table.status.color : null
             }}
                  onMouseDown={this.onMouseDownHandler}
                  onMouseUp={this.onMouseUpHandler}

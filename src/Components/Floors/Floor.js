@@ -51,7 +51,6 @@ class Floor extends React.Component {
 
         table.id = newTable.id
 
-
         this.setState({
             tables: [...this.state.tables, table]
         })
