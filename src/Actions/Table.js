@@ -1,7 +1,7 @@
 import {PATCH_TABLE, CHANGE_SEATED_TABLE, SET_TABLES} from "./Types";
 
 //PATCH TABLES
-export const updateTable = (table) => {
+export const patchTable = (table) => {
     return async (dispatch) => {
 
         const packet = {
@@ -15,7 +15,7 @@ export const updateTable = (table) => {
                 left: table.left,
                 top: table.top,
                 name: table.name,
-                status: table.status,
+                status: table.status.id,
                 width: table.width,
                 height: table.height,
                 background_color: table.background_color,

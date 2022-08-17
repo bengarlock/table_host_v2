@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
-import { updateTable, changeSeatedTable } from "../../Actions/Table";
+import { patchTable, changeSeatedTable } from "../../Actions/Table";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -15,17 +15,19 @@ class Table extends React.Component {
         top: 50,
         width: 50,
         height: 50,
-        background: "darkGrey"
+        color: "darkGrey",
+        status: {}
     }
 
     componentDidMount = () => {
         this.setState({
-            left: this.props.table.left < 400 ? 400 : this.props.table.left,
-            top: this.props.table.top < 50 ? 50 : this.props.table.top,
-            width: this.props.table.width,
-            height: this.props.table.height,
-            background: this.props.table.background_color
-        })
+                left: this.props.table.left < 400 ? 400 : this.props.table.left,
+                top: this.props.table.top < 50 ? 50 : this.props.table.top,
+                width: this.props.table.width,
+                height: this.props.table.height,
+                color: this.props.table.status ? this.props.table.status.color : null
+            })
+
     }
 
 
@@ -38,15 +40,21 @@ class Table extends React.Component {
     }
 
     onMouseUpHandler = () => {
-        console.log("mouse up")
-        let table = this.props.table
-        table.left = this.state.left
-        table.top = this.state.top
-        table.width = this.state.width
-        table.height = this.state.height
-        this.props.updateTable(table)
-        window.removeEventListener("mousemove", this.onMouseMoveHandler)
-        window.removeEventListener("mouseup", this.onMouseUpHandler)
+        if (this.props.currentTable) {
+            let table = this.props.table
+            table.left = this.state.left
+            table.top = this.state.top
+            table.width = this.state.width
+            table.height = this.state.height
+            this.props.patchTable(table)
+            window.removeEventListener("mousemove", this.onMouseMoveHandler)
+            window.removeEventListener("mouseup", this.onMouseUpHandler)
+        }
+
+    }
+
+    onMouseOverHandler = () => {
+        this.props.changeSeatedTable(this.props.table)
     }
 
     onMouseMoveHandler = (e) => {
@@ -57,39 +65,45 @@ class Table extends React.Component {
     }
 
     onDragOverHandler = () => {
-        this.setState({
-            background: "pink"
-        })
+        console.log("Dragging over me!!")
         this.props.changeSeatedTable(this.props.table)
     }
 
     onMouseLeaveHandler = () => {
-        this.setState({
-            background: "darkGrey"
-        })
+        this.props.changeSeatedTable({})
     }
 
-    onDropCaptureHandler = () => {
-        console.log("mouse up")
-        if (this.props.currentTable.id){
-            console.log(this.props.currentTable)
-        }
+    onDropCaptureHandler = (e) => {
+        e.preventDefault()
+        console.log("drop!")
+
+        // const table = this.props.currentTable
+        // table.stauts = "seated"
+        // table.background_color = "pink"
+        // this.props.updateTable(table)
+        // update slot to seated and booked
+
     }
+
 
     render() {
         return(
             <div className="table" style={{
                 left:this.state.left,
                 top: this.state.top,
-                background: this.state.background
+                background: this.state.color
             }}
                  onMouseDown={this.onMouseDownHandler}
                  onMouseUp={this.onMouseUpHandler}
-                 onDragOver={this.onDragOverHandler}
-                 onDragLeave={this.onMouseLeaveHandler}
+                 onMouseOver={this.onMouseOverHandler}
+                 onMouseLeave={this.onMouseLeaveHandler}
+                 // onDragLeave={this.onMouseLeaveHandler}
+                 onDragOverCapture={this.onDragOverHandler}
                  onDropCapture={this.onDropCaptureHandler}
             >
                 {this.props.table.name}
+
+
                 <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
                 <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
                 <div className="resizer sw" onMouseDown={this.onMouseDownHandler}/>
@@ -106,4 +120,4 @@ const mapStateToProps = (state) => ({
     hoverSlot: state.slot.hoverSlot
 })
 
-export default connect(mapStateToProps, { updateTable, changeSeatedTable })(Table)
+export default connect(mapStateToProps, { patchTable, changeSeatedTable })(Table)

@@ -2,7 +2,7 @@ import React from 'react'
 import '../../Stylesheets/App.css'
 import PropTypes from 'prop-types';
 import { changeSlot, changeSeatedSlot, patchSlot } from "../../Actions/Slot";
-import { updateTable } from "../../Actions/Table";
+import { patchTable } from "../../Actions/Table";
 import { patchBook } from "../../Actions/Book"
 
 import { changeGuest} from "../../Actions/Guest";
@@ -61,27 +61,18 @@ class Slot extends React.Component {
     // manages seated table
     onDropCaptureHandler = () => {
         if (this.props.currentTable) {
-
-            const table = this.props.currentTable
-            table.stauts = "seated"
-            table.background_color = "pink"
-            this.props.updateTable(table)
-
-            // update slot to seated and booked
             let updatedBook = {...this.props.currentBook}
             let updatedSlot = updatedBook.slots.find(slot => slot.id === this.props.seatedSlot.id)
             updatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
             updatedSlot.status.status_type = "Seated"
+
+            let updatedTable = updatedBook.floors[0].tables.find(table => table.id === this.props.currentTable.id)
+            updatedTable.status = {...updatedSlot.status}
+            console.log(updatedBook)
+
             this.props.patchBook(updatedBook)
-
-
-
+            this.props.patchTable(updatedTable)
             // this.props.patchSlot(updatedSlot)
-            //
-            //
-            // let updatedSlot2 = this.props.currentBook.slots.find(slot => slot.id === this.props.slot.id)
-            // updatedSlot2.status = this.props.statuses.find(status => status.name === 'Seated')
-            // updatedSlot2.status.status_type = "seated"
         }
     }
 
@@ -125,4 +116,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {
-    changeSlot, changeGuest, changeSeatedSlot, updateTable, patchSlot, patchBook })(Slot);
+    changeSlot, changeGuest, changeSeatedSlot, patchTable, patchSlot, patchBook })(Slot);
