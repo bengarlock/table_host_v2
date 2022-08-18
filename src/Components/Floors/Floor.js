@@ -62,20 +62,24 @@ class Floor extends React.Component {
     }
 
     syncSlotsAndFloor = () => {
-        // this function will examine all booked slots and check if there is an attached table.
-        // if the status of the slot moves to a non-seated status, it will unseat the table.
-        let seatedTable = this.state.tables.filter(table => table.reservation)
-        seatedTable.forEach(table => {
-            if (!table.reservation.status) {
-                console.log(';')
-                table.status = null
-            } else if (table.reservation.status.status_type === 'reservation') {
-                table.status = null
-                table.reservation = null
-            }
+        // Examines tables for attached reservations. Corrects seating status if reservation is removed.
+        //
+        // console.log(this.state)
+        // let tablesWithStatuses = this.state.tables.filter(table => table.status)
+        // console.log(tablesWithStatuses)
 
 
-        })
+        // let seatedTable = this.state.tables.filter(table => table.reservation)
+        // seatedTable.forEach(table => {
+        //     if (!table.reservation.status) {
+        //         console.log(';')
+        //         table.status = null
+        //     } else if (table.reservation.status.status_type === 'reservation') {
+        //         table.status = null
+        //         table.reservation = null
+        //     }
+
+        // })
 
 
 

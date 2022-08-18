@@ -60,7 +60,10 @@ class Slot extends React.Component {
 
     // manages seated table
     onDropCaptureHandler = () => {
-        if (this.props.currentTable) {
+        console.log("slot drop")
+        console.log(this.props.currentTable)
+        if (this.props.currentTable.id) {
+            console.log("slot drop on table")
             let updatedBook = {...this.props.currentBook}
             let updatedSlot = updatedBook.slots.find(slot => slot.id === this.props.seatedSlot.id)
             updatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
