@@ -20,7 +20,7 @@ export const patchTable = (table) => {
                 height: table.height,
                 background_color: table.background_color,
                 border: table.border,
-                reservation: table.reservation
+                reservation: table.reservation ? table.reservation.id : null
             })
         }
 

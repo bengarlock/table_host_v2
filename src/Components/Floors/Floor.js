@@ -22,8 +22,6 @@ class Floor extends React.Component {
 
     createTable = async () => {
         const mostRecentName = Number(this.state.tables.map(table => Number(table.name)).sort().slice(-1).pop()) + 1
-        console.log(this.state.tables.map(table => table.name))
-
         let table = {
             background_color: "#9b9b9b",
             border: "\"2px solid gray\"",
@@ -63,15 +61,38 @@ class Floor extends React.Component {
         }
     }
 
+    syncSlotsAndFloor = () => {
+        // this function will examine all booked slots and check if there is an attached table.
+        // if the status of the slot moves to a non-seated status, it will unseat the table.
+        let seatedTable = this.state.tables.filter(table => table.reservation)
+        seatedTable.forEach(table => {
+            if (!table.reservation.status) {
+                console.log(';')
+                table.status = null
+            } else if (table.reservation.status.status_type === 'reservation') {
+                table.status = null
+                table.reservation = null
+            }
+
+
+        })
+
+
+
+
+    }
+
     renderTables = () => {
         return this.state.tables.map(table => <Table key={table.id} table={table} /> )
     }
 
     render() {
+
         return(
             <div id="table-root">
                 <button id="add" onClick={this.onClickHandler}>+</button>
                 {this.renderTables()}
+                {this.syncSlotsAndFloor()}
             </div>
 
         )

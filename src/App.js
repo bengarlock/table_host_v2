@@ -28,6 +28,7 @@ class App extends React.Component {
 
   render() {
       console.log(this.props.currentBook)
+
       return (
           <div className="app-wrapper">
               <Datepicker />

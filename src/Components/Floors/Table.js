@@ -65,7 +65,6 @@ class Table extends React.Component {
     }
 
     onDragOverHandler = () => {
-        console.log("Dragging over me!!")
         this.props.changeSeatedTable(this.props.table)
     }
 
@@ -97,7 +96,6 @@ class Table extends React.Component {
                  onMouseUp={this.onMouseUpHandler}
                  onMouseOver={this.onMouseOverHandler}
                  onMouseLeave={this.onMouseLeaveHandler}
-                 // onDragLeave={this.onMouseLeaveHandler}
                  onDragOverCapture={this.onDragOverHandler}
                  onDropCapture={this.onDropCaptureHandler}
             >
