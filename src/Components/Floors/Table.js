@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
-import { patchTable, changeSeatedTable } from "../../Actions/Table";
+import { patchTable, changeSelectedTable } from "../../Actions/Table";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -53,9 +53,9 @@ class Table extends React.Component {
 
     }
 
-    onMouseOverHandler = () => {
-        this.props.changeSeatedTable(this.props.table)
-    }
+    // onMouseOverHandler = () => {
+    //     this.props.changeSelectedTable(this.props.table)
+    // }
 
     onMouseMoveHandler = (e) => {
         this.setState({
@@ -65,17 +65,20 @@ class Table extends React.Component {
     }
 
     onDragOverHandler = () => {
-        console.log({...this.props.table})
-        this.props.changeSeatedTable({...this.props.table})
+        this.props.changeSelectedTable({...this.props.table})
     }
 
     onMouseLeaveHandler = () => {
-        this.props.changeSeatedTable({})
+        // this.props.changeSelectedTable({})
+    }
+
+    onDragOverCapture = () => {
+        this.props.changeSelectedTable({...this.props.table})
     }
 
     onDropCaptureHandler = (e) => {
         e.preventDefault()
-        console.log("drop!")
+        console.log("table drop!")
 
         // const table = this.props.currentTable
         // table.stauts = "seated"
@@ -93,13 +96,13 @@ class Table extends React.Component {
                 top: this.state.top,
                 background: this.props.table.status ? this.props.table.status.color : null
             }}
-                 onMouseDown={this.onMouseDownHandler}
-                 onMouseUp={this.onMouseUpHandler}
-                 onMouseOver={this.onMouseOverHandler}
-                 onMouseLeave={this.onMouseLeaveHandler}
-                 onDragOverCapture={this.onDragOverHandler}
+                 // onMouseDown={this.onMouseDownHandler}
+                 // onMouseUp={this.onMouseUpHandler}
+                 // onMouseOver={this.onMouseOverHandler}
+                 // onMouseLeave={this.onMouseLeaveHandler}
+                 onDragOverCapture={this.onDragOverCapture}
                  onDragLeave={this.onMouseLeaveHandler}
-                 onDropCapture={this.onDropCaptureHandler}
+                 onDragExit={this.onDropCaptureHandler}
             >
                 {this.props.table.name}
 
@@ -120,4 +123,4 @@ const mapStateToProps = (state) => ({
     hoverSlot: state.slot.hoverSlot
 })
 
-export default connect(mapStateToProps, { patchTable, changeSeatedTable })(Table)
+export default connect(mapStateToProps, { patchTable, changeSelectedTable })(Table)

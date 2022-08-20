@@ -1,4 +1,5 @@
 import React from 'react'
+import { endpoint } from "../../endpoint";
 import "../../Stylesheets/App.css"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -55,7 +56,7 @@ class NewReservation extends React.Component {
                 search: e.target.value,
             })
 
-            let response = await fetch("https://bengarlock.com/api/v1/tablehost/guests/?search=" + this.state.search)
+            let response = await fetch(endpoint + 'v1/tablehost/guests/?search=' + this.state.search)
             let searchResults = await response.json()
             searchResults = searchResults.results.filter(guest => guest.active === true)
 

@@ -58,10 +58,8 @@ class Slot extends React.Component {
         })
     }
 
-    // manages seated table
+    // manages moving slot to table
     onDropCaptureHandler = () => {
-        console.log("slot drop")
-        console.log(this.props.currentTable)
         if (this.props.currentTable.id) {
             console.log("slot drop on table")
             let updatedBook = {...this.props.currentBook}
@@ -73,8 +71,8 @@ class Slot extends React.Component {
             updatedTable.status = {...updatedSlot.status}
             updatedTable.reservation = updatedSlot
 
-            this.props.patchBook(updatedBook)
             this.props.patchTable(updatedTable)
+            this.props.patchBook(updatedBook)
             this.props.patchSlot(updatedSlot)
         }
     }

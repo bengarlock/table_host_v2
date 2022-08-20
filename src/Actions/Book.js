@@ -1,3 +1,4 @@
+import { endpoint } from '../endpoint'
 import {GET_BOOK, PATCH_BOOK} from "./Types";
 import { SET_DATE} from "./Types";
 
@@ -18,7 +19,7 @@ export const getBook = (date) => {
         }
 
 
-        const response = await fetch("https://bengarlock.com/api/v1/tablehost/books/?date=" + formatDate(date))
+        const response = await fetch(endpoint + 'v1/tablehost/books/?date=' + formatDate(date))
         let book = await response.json()
         book = book[0]
         book.slots.sort((a, b) => (a.time > b.time) ? 1 : -1)

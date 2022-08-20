@@ -1,9 +1,8 @@
 import React from 'react'
 import './Stylesheets/App.css'
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { getBook, setDate } from "./Actions/Book";
 import { getStatuses } from "./Actions/Status";
-import { setTables } from "./Actions/Table";
 import { connect } from 'react-redux';
 import { changeNavbar } from "./Actions/Navbar"
 import PropTypes from 'prop-types';
@@ -27,7 +26,7 @@ class App extends React.Component {
 
 
   render() {
-      console.log(this.props.currentBook)
+      // console.log(this.props.currentBook)
 
       return (
           <div className="app-wrapper">

@@ -1,3 +1,4 @@
+import { endpoint } from "../endpoint";
 import {CHANGE_SLOT, SEATED_SLOT, PATCH_SLOT} from "./Types";
 
 //CHANGE_SLOT
@@ -42,7 +43,7 @@ export const patchSlot = (slot, guest) => {
             })
         }
 
-        const response = await fetch("https://bengarlock.com/api/v1/tablehost/slots/" + String(slot.id) + "/", packet)
+        const response = await fetch(endpoint + 'v1/tablehost/slots/' + String(slot.id) + "/", packet)
         let updatedSlot = await response.json()
 
         dispatch({
