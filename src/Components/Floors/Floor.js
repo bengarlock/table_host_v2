@@ -3,6 +3,9 @@ import '../../Stylesheets/App.css'
 import Table from "./Table";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { patchBook } from "../../Actions/Book";
+import { patchTable } from "../../Actions/Table";
+
 
 class Floor extends React.Component {
 
@@ -62,28 +65,41 @@ class Floor extends React.Component {
     }
 
     syncSlotsAndFloor = () => {
-        // Examines tables for attached reservations. Corrects seating status if reservation is removed.
+        // Examines tables for attached reservations. Corrects seating status if reservation is unseated.
+        let currentBook = {...this.props.currentBook}
+        let currentFloor = currentBook.floors.find(floor => floor.id === this.props.floor.id)
+        let seatedTables = currentFloor.tables.filter(table => table.reservation)
+
+
+        seatedTables.forEach(table => {
+            if (table.reservation.status) {
+                if (table.reservation.status.status_type === 'reservation') {
+                    table.reservation = null
+                    table.status = null
+                    this.props.patchTable(table)
+               }
+            }
+        })
+
+        return true
+
+
+
+
+        // seatedTables.forEach(table => {
+        //     console.log(table.reservation)
+        //     if (table.reservation.status.status_type === 'reservation') {
+        //         console.log(table.reservation)
+        //         }
+        //     })
+
+
         //
-        // console.log(this.state)
-        // let tablesWithStatuses = this.state.tables.filter(table => table.status)
-        // console.log(tablesWithStatuses)
-
-
-        // let seatedTable = this.state.tables.filter(table => table.reservation)
+        //
+        // // go through every seated table and check reservation status
         // seatedTable.forEach(table => {
-        //     if (!table.reservation.status) {
-        //         console.log(';')
-        //         table.status = null
-        //     } else if (table.reservation.status.status_type === 'reservation') {
-        //         table.status = null
-        //         table.reservation = null
-        //     }
-
+        //     console.log(table.reservation)
         // })
-
-
-
-
     }
 
     renderTables = () => {
@@ -107,5 +123,5 @@ const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook
 })
 
-export default connect(mapStateToProps)(Floor)
+export default connect(mapStateToProps, { patchBook, patchTable })(Floor)
 

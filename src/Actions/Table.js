@@ -6,7 +6,7 @@ export const patchTable = (table) => {
     return async (dispatch) => {
 
         const packet = {
-            method: "put",
+            method: "patch",
             headers: {
                 "content-type": 'application/json',
                 "accept": "application/json",
@@ -17,7 +17,7 @@ export const patchTable = (table) => {
                 left: table.left,
                 top: table.top,
                 name: table.name,
-                status: table.status,
+                status: table.status ? table.status.id : null,
                 width: table.width,
                 height: table.height,
                 background_color: table.background_color,
@@ -28,8 +28,6 @@ export const patchTable = (table) => {
 
         const response = await fetch(endpoint + 'v1/tablehost/tables/' + String(table.id) + '/', packet)
         let updatedTable = await response.json()
-
-        console.log(updatedTable)
 
         dispatch({
             type: PATCH_TABLE,

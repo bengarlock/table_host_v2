@@ -61,19 +61,21 @@ class Slot extends React.Component {
     // manages moving slot to table
     onDropCaptureHandler = () => {
         if (this.props.currentTable.id) {
-            console.log("slot drop on table")
-            let updatedBook = {...this.props.currentBook}
-            let updatedSlot = updatedBook.slots.find(slot => slot.id === this.props.seatedSlot.id)
-            updatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
-            updatedSlot.status.status_type = "Seated"
+            // update slot to seated
+            // let updatedBook = {...this.props.currentBook}
+            // let updatedSlot = updatedBook.slots.find(slot => slot.id === this.props.seatedSlot.id)
+            // updatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
+            // updatedSlot.status.status_type = "Seated"
 
-            let updatedTable = updatedBook.floors[0].tables.find(table => table.id === this.props.currentTable.id)
-            updatedTable.status = {...updatedSlot.status}
-            updatedTable.reservation = updatedSlot
-
-            this.props.patchTable(updatedTable)
-            this.props.patchBook(updatedBook)
-            this.props.patchSlot(updatedSlot)
+            // update current table to seated.
+            //
+            // let updatedTable = {...updatedBook.floors[0].tables.find(table => table.id === this.props.currentTable.id)}
+            // updatedTable.status = {...updatedSlot.status}
+            // updatedTable.reservation = {...updatedSlot}
+            //
+            // this.props.patchTable(updatedTable)
+            // this.props.patchBook(updatedBook)
+            // this.props.patchSlot(updatedSlot)
         }
     }
 

@@ -85,14 +85,6 @@ class ModifyReservation extends React.Component {
         }
     }
 
-    unSeatTable = () => {
-        console.log("unseat table")
-        let currenTables = [...this.props.currentBook.floors[0].tables]
-        let tableToUnseat = currenTables.find(table => table.reservation === this.props.currentSlot.id)
-        console.log(tableToUnseat)
-
-    }
-
     onSubmitHandler = (e) => {
         e.preventDefault()
         let newBook = {...this.props.currentBook}

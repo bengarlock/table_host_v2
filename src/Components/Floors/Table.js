@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../Stylesheets/App.css'
 import { patchTable, changeSelectedTable } from "../../Actions/Table";
+import { patchSlot, changeSeatedSlot } from "../../Actions/Slot";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -8,6 +9,8 @@ class Table extends React.Component {
 
     static propTypes = {
         currentTable: PropTypes.object.isRequired,
+        seatedSlot: PropTypes.object.isRequired,
+        statuses: PropTypes.array.isRequired
     }
 
     state = {
@@ -53,9 +56,9 @@ class Table extends React.Component {
 
     }
 
-    // onMouseOverHandler = () => {
-    //     this.props.changeSelectedTable(this.props.table)
-    // }
+    onMouseOverHandler = () => {
+        this.props.changeSelectedTable(this.props.table)
+    }
 
     onMouseMoveHandler = (e) => {
         this.setState({
@@ -65,10 +68,49 @@ class Table extends React.Component {
     }
 
     onDragOverHandler = () => {
+        console.log('onDragOverHandler')
         this.props.changeSelectedTable({...this.props.table})
     }
 
     onMouseLeaveHandler = () => {
+        if (this.props.seatedSlot.id && this.props.currentTable.id) {
+            let newSeatedSlot = {...this.props.seatedSlot}
+            let newCurrentTable = {...this.props.currentTable}
+
+            // update slot to seated
+            newSeatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
+            newSeatedSlot.status.status_type = "Seated"
+
+            this.props.patchSlot(newSeatedSlot)
+
+
+            // update current table to seated
+            newCurrentTable.status = {...newSeatedSlot.status}
+            newCurrentTable.reservation = {...newSeatedSlot}
+
+            this.props.patchTable(newCurrentTable)
+
+
+
+            this.props.changeSeatedSlot({})
+            this.props.changeSelectedTable({})
+
+
+        } else {
+            // this.props.changeSelectedTable({})
+        }
+
+
+
+
+
+
+        //
+        //
+        // newCurrentTable.status = this.props.seatedSlot.status
+        // console.log(this.props.currentTable)
+
+
         // this.props.changeSelectedTable({})
     }
 
@@ -96,10 +138,10 @@ class Table extends React.Component {
                 top: this.state.top,
                 background: this.props.table.status ? this.props.table.status.color : null
             }}
-                 // onMouseDown={this.onMouseDownHandler}
-                 // onMouseUp={this.onMouseUpHandler}
-                 // onMouseOver={this.onMouseOverHandler}
-                 // onMouseLeave={this.onMouseLeaveHandler}
+                 onMouseDown={this.onMouseDownHandler}
+                 onMouseUp={this.onMouseUpHandler}
+                 onMouseOver={this.onMouseOverHandler}
+                 onMouseLeave={this.onMouseLeaveHandler}
                  onDragOverCapture={this.onDragOverCapture}
                  onDragLeave={this.onMouseLeaveHandler}
                  onDragExit={this.onDropCaptureHandler}
@@ -119,8 +161,11 @@ class Table extends React.Component {
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     currentSlot: state.slot.currentSlot,
+    seatedSlot: state.slot.seatedSlot,
     currentTable: state.table.currentTable,
-    hoverSlot: state.slot.hoverSlot
+    hoverSlot: state.slot.hoverSlot,
+    statuses: state.status.statuses
 })
 
-export default connect(mapStateToProps, { patchTable, changeSelectedTable })(Table)
+export default connect(mapStateToProps, {
+    patchTable, changeSelectedTable, patchSlot , changeSeatedSlot})(Table)
