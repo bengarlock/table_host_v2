@@ -92,15 +92,15 @@ class Table extends React.Component {
         if (this.props.seatedSlot.id && this.props.currentTable.id) {
             let updatedBook = {...this.props.currentBook}
             let newSeatedSlot = updatedBook.slots.find(slot => slot.id === this.props.seatedSlot.id)
-            let newCurrentTable = {...updatedBook.floors[0].tables.find(table => table.id === this.props.currentTable.id)}
+            let newCurrentTable = updatedBook.floors[0].tables.find(table => table.id === this.props.currentTable.id)
 
             // update slot to seated
             newSeatedSlot.status = this.props.statuses.find(status => status.name === 'Seated')
             newSeatedSlot.status.status_type = "Seated"
 
             // update current table to seated
-            newCurrentTable.status = {...newSeatedSlot.status}
-            newCurrentTable.reservation = {...newSeatedSlot}
+            newCurrentTable.status = newSeatedSlot.status
+            newCurrentTable.reservation = newSeatedSlot
 
             this.props.patchTable(newCurrentTable)
             this.props.patchSlot(newSeatedSlot)
