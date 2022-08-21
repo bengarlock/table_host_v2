@@ -80,7 +80,6 @@ class Table extends React.Component {
 
     onDragOver = (event) => {
         event.preventDefault()
-        this.props.changeSelectedTable({...this.props.table})
     }
 
     onDragLeaveHandler = (event) => {
