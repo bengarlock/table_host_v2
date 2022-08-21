@@ -22,7 +22,8 @@ class Table extends React.Component {
         height: 50,
         color: "darkGrey",
         status: {},
-        edit_mode: false
+        edit_mode: false,
+        border: false
     }
 
     componentDidMount = () => {
@@ -109,6 +110,12 @@ class Table extends React.Component {
             this.props.changeSeatedSlot({})
             this.props.changeSelectedTable({})
         }
+    }
+
+    onClickHandler = () => {
+        this.setState({
+            border: !this.state.border
+        })
 
     }
 
@@ -118,6 +125,7 @@ class Table extends React.Component {
             <div className="table" style={{
                 left:this.state.left,
                 top: this.state.top,
+                border: this.state.border ? "solid black" : null,
                 background: this.props.table.status ? this.props.table.status.color : null
             }}
                  // onMouseDown={this.state.edit_mode ? this.onMouseDownHandler : null}
@@ -127,6 +135,7 @@ class Table extends React.Component {
                  onDragEnter={this.onDragEnter}
                  onDragLeave={this.onDragLeaveHandler}
                  onDrop={this.onDropHandler}
+                 onClick={this.onClickHandler}
 
 
             >

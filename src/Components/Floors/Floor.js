@@ -70,7 +70,6 @@ class Floor extends React.Component {
         let currentFloor = currentBook.floors.find(floor => floor.id === this.props.floor.id)
         let seatedTables = currentFloor.tables.filter(table => table.reservation)
 
-
         seatedTables.forEach(table => {
             if (table.reservation.status) {
                 if (table.reservation.status.status_type === 'reservation') {
@@ -80,26 +79,8 @@ class Floor extends React.Component {
                }
             }
         })
-
         return true
 
-
-
-
-        // seatedTables.forEach(table => {
-        //     console.log(table.reservation)
-        //     if (table.reservation.status.status_type === 'reservation') {
-        //         console.log(table.reservation)
-        //         }
-        //     })
-
-
-        //
-        //
-        // // go through every seated table and check reservation status
-        // seatedTable.forEach(table => {
-        //     console.log(table.reservation)
-        // })
     }
 
     renderTables = () => {
