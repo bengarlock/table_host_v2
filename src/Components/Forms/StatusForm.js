@@ -21,7 +21,6 @@ class StatusForm extends React.Component {
     renderStatuses = () =>  {
         if (this.props.statuses) {
             let seatedStatuses = this.props.statuses.filter(status => status.status_type === 'seated')
-            console.log(seatedStatuses)
             return seatedStatuses.map(status => <StatusButton key={status.id} status={status}/>)
         }
     }
