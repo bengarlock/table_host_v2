@@ -5,6 +5,7 @@ import { patchBook } from "../../Actions/Book"
 import { patchTable } from "../../Actions/Table";
 import { patchSlot } from "../../Actions/Slot";
 import { changeRenderStatusForm } from "../../Actions/Status"
+import { changeSelectedTable } from "../../Actions/Table";
 
 
 class StatusButton extends React.Component {
@@ -12,6 +13,11 @@ class StatusButton extends React.Component {
         currentBook: PropTypes.object.isRequired,
         currentTable: PropTypes.object.isRequired,
         renderStatusForm: PropTypes.bool.isRequired
+    }
+
+    processDone = () => {
+
+
     }
 
     onClickHandler = () => {
@@ -23,11 +29,18 @@ class StatusButton extends React.Component {
         newSeatedSlot.status = this.props.status
         newCurrentTable.status = this.props.status
 
+        if (this.props.status.name === "Done") {
+            newSeatedSlot.status = this.props.status
+            newCurrentTable.status = null
+            newCurrentTable.reservation = null
+        }
+
         this.props.patchTable(newCurrentTable)
         this.props.patchSlot(newSeatedSlot)
         this.props.patchBook(updatedBook)
-
         this.props.changeRenderStatusForm(!this.props.renderStatusForm)
+
+        this.props.changeSelectedTable({})
     }
 
     render() {
@@ -46,4 +59,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {
-    patchBook, patchTable, patchSlot, changeRenderStatusForm })(StatusButton)
+    patchBook, patchTable, patchSlot, changeRenderStatusForm, changeSelectedTable })(StatusButton)

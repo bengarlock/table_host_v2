@@ -120,8 +120,11 @@ class Table extends React.Component {
     }
 
     onDoubleClickHandler = () => {
-        this.props.changeSelectedTable({...this.props.table})
-        this.props.changeRenderStatusForm(true)
+        if (this.props.table.reservation) {
+            this.props.changeSelectedTable({...this.props.table})
+            this.props.changeRenderStatusForm(true)
+        }
+
     }
 
 
