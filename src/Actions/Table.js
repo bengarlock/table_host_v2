@@ -6,7 +6,7 @@ export const patchTable = (table) => {
     return async (dispatch) => {
 
         const packet = {
-            method: "patch",
+            method: "put",
             headers: {
                 "content-type": 'application/json',
                 "accept": "application/json",

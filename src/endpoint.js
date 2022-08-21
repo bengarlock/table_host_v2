@@ -1,1 +1,1 @@
-export const endpoint = 'https://www.bengarlock.com/api/'
+export const endpoint = 'https://bengarlock.com/api/'
