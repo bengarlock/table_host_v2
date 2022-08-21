@@ -5,6 +5,7 @@ import slot from "./Slot"
 import guest from './Guest'
 import status from "./Status";
 import table from "./Table";
+import settings from "./Settings"
 
 export default combineReducers({
     book,
@@ -12,5 +13,6 @@ export default combineReducers({
     slot,
     guest,
     status,
-    table
+    table,
+    settings
 })

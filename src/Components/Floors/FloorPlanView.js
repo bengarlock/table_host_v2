@@ -13,10 +13,18 @@ class FloorPlanView extends React.Component {
         currentBook: PropTypes.object.isRequired,
         currentSlot: PropTypes.object.isRequired,
         renderStatusForm: PropTypes.bool.isRequired,
+        settings: PropTypes.object.isRequired
     }
 
     state = {
         container_width: 350
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            container_width: this.props.settings.floor_reservation_column_width
+        })
+
     }
 
     renderReservations = () => {
@@ -38,7 +46,6 @@ class FloorPlanView extends React.Component {
     }
 
     onMouseDownHandler = (e) => {
-
         if (e.target.className === 'divider') {
             window.addEventListener("mousemove", this.onMouseMoveHandler)
             window.addEventListener("mouseup", this.onMouseUpHandler)
@@ -47,7 +54,6 @@ class FloorPlanView extends React.Component {
     }
 
     onMouseMoveHandler = (e) => {
-
         this.setState({
             container_width: this.state.container_width + e.movementX,
         })
@@ -59,13 +65,14 @@ class FloorPlanView extends React.Component {
     }
 
     render() {
+        console.log(this.props.settings.floor_reservation_column_width)
         return(
             <div className="floor-wrapper">
                 <div className="floor-reservations-wrapper">
                     <div className="floor-reservations-container" style={{width: this.state.container_width + "px"}}>
                         {this.renderReservations()}
                     </div>
-                    <div className="divider" onMouseDown={this.onMouseDownHandler}></div>
+                    <div className="divider" onMouseDown={this.onMouseDownHandler}/>
                 </div>
                 {this.renderFloors()}
                 {this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
@@ -79,7 +86,8 @@ const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     currentSlot: state.slot.currentSlot,
     hoverSlot: state.slot.hoverSlot,
-    renderStatusForm: state.status.renderStatusForm
+    renderStatusForm: state.status.renderStatusForm,
+    settings: state.settings.settings
 })
 
 export default connect(mapStateToProps)(FloorPlanView)

@@ -16,7 +16,7 @@ body {
 
 a, a:visited, a:hover, a:active {
   color: inherit;
-  text-decoradtion: none;
+  text-decoration: none;
 }
 
 .page-container {
@@ -380,7 +380,6 @@ a, a:visited, a:hover, a:active {
 
 .slot-container {
   background-color: #1f1f21;
-  width: 90%;
   padding: .5em;
   margin: 5px;
   display: flex;
@@ -460,7 +459,6 @@ a, a:visited, a:hover, a:active {
     width: 350px;
   }
 
-
   .menu-icon {
     width: 100%;
     padding: 0;
@@ -525,7 +523,7 @@ a, a:visited, a:hover, a:active {
     user-select: none;
     display: inline-block;
     vertical-align: middle;
-    position: absolute;
+    position: relative;
     line-height: 50px;
     text-align: center;
     width: 50px;
