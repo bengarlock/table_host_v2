@@ -1,7 +1,12 @@
 import React from 'react'
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 
 class StatusButton extends React.Component {
+    static propTypes = {
+        currentTable: PropTypes.object.isRequired
+    }
 
     render() {
         return(
@@ -14,4 +19,8 @@ class StatusButton extends React.Component {
     }
 }
 
-export default StatusButton
+const mapStateToProps = (state) => ({
+    currentTable: state.table.currentTable
+})
+
+export default connect(mapStateToProps)(StatusButton)

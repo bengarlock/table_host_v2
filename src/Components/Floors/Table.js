@@ -81,9 +81,6 @@ class Table extends React.Component {
     onDragOver = (event) => {
         event.preventDefault()
         this.props.changeSelectedTable({...this.props.table})
-
-
-
     }
 
     onDragLeaveHandler = (event) => {
@@ -123,6 +120,7 @@ class Table extends React.Component {
     }
 
     onDoubleClickHandler = () => {
+        this.props.changeSelectedTable({...this.props.table})
         this.props.changeRenderStatusForm(true)
     }
 

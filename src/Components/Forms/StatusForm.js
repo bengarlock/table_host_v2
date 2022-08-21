@@ -3,6 +3,8 @@ import { changeRenderStatusForm } from "../../Actions/Status"
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import StatusButton from "./StatusButton";
+import { patchTable, changeSelectedTable } from "../../Actions/Table";
+
 
 class StatusForm extends React.Component {
 
@@ -13,6 +15,7 @@ class StatusForm extends React.Component {
 
     onClickHandler = () => {
         this.props.changeRenderStatusForm(!this.props.renderStatusForm)
+        this.props.changeSelectedTable({})
     }
 
     renderStatuses = () =>  {
@@ -43,4 +46,5 @@ const mapStateToProps = (state) => ({
     statuses: state.status.statuses
 })
 
-export default connect(mapStateToProps, { changeRenderStatusForm })(StatusForm)
+export default connect(mapStateToProps, {
+    changeRenderStatusForm, patchTable, changeSelectedTable })(StatusForm)
