@@ -12,7 +12,11 @@ class FloorPlanView extends React.Component {
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
         currentSlot: PropTypes.object.isRequired,
-        renderStatusForm: PropTypes.bool.isRequired
+        renderStatusForm: PropTypes.bool.isRequired,
+    }
+
+    state = {
+        container_width: 350
     }
 
     renderReservations = () => {
@@ -27,22 +31,41 @@ class FloorPlanView extends React.Component {
         console.log(e.target)
     }
 
-
-
     renderFloors = () => {
         if (this.props.currentBook.floors) {
             return this.props.currentBook.floors.map(floor => <Floor key={floor.id} floor={floor}/>)
         }
     }
 
+    onMouseDownHandler = (e) => {
+
+        if (e.target.className === 'divider') {
+            window.addEventListener("mousemove", this.onMouseMoveHandler)
+            window.addEventListener("mouseup", this.onMouseUpHandler)
+            this.onMouseMoveHandler(e)
+        }
+    }
+
+    onMouseMoveHandler = (e) => {
+
+        this.setState({
+            container_width: this.state.container_width + e.movementX,
+        })
+    }
+
+    onMouseUpHandler = () => {
+        window.removeEventListener("mousemove", this.onMouseMoveHandler)
+        window.removeEventListener("mouseup", this.onMouseUpHandler)
+    }
 
     render() {
         return(
             <div className="floor-wrapper">
                 <div className="floor-reservations-wrapper">
-                    <div className="floor-reservations-container">
+                    <div className="floor-reservations-container" style={{width: this.state.container_width + "px"}}>
                         {this.renderReservations()}
                     </div>
+                    <div className="divider" onMouseDown={this.onMouseDownHandler}></div>
                 </div>
                 {this.renderFloors()}
                 {this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}

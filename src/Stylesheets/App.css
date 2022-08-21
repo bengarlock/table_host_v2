@@ -582,7 +582,9 @@ a, a:visited, a:hover, a:active {
     padding: 2em;
   }
 
-
-
-
+  .divider {
+    width: 5px;
+    background-color: #1f1f21;
+    cursor: col-resize	;
+  }
 }
