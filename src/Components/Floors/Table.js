@@ -3,6 +3,7 @@ import '../../Stylesheets/App.css'
 import { patchTable, changeSelectedTable } from "../../Actions/Table";
 import { patchSlot, changeSeatedSlot } from "../../Actions/Slot";
 import { patchBook } from "../../Actions/Book"
+import { changeRenderStatusForm } from "../../Actions/Status"
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -12,7 +13,8 @@ class Table extends React.Component {
     static propTypes = {
         currentTable: PropTypes.object.isRequired,
         seatedSlot: PropTypes.object.isRequired,
-        statuses: PropTypes.array.isRequired
+        statuses: PropTypes.array.isRequired,
+        renderStatusForm: PropTypes.bool.isRequired
     }
 
     state = {
@@ -23,6 +25,7 @@ class Table extends React.Component {
         color: "darkGrey",
         status: {},
         edit_mode: false,
+        select_mode: false,
         border: false
     }
 
@@ -119,6 +122,10 @@ class Table extends React.Component {
 
     }
 
+    onDoubleClickHandler = () => {
+        this.props.changeRenderStatusForm(true)
+    }
+
 
     render() {
         return(
@@ -135,9 +142,8 @@ class Table extends React.Component {
                  onDragEnter={this.onDragEnter}
                  onDragLeave={this.onDragLeaveHandler}
                  onDrop={this.onDropHandler}
-                 onClick={this.onClickHandler}
-
-
+                 onClick={this.state.select_mode ? this.onClickHandler : null}
+                 onDoubleClick={this.onDoubleClickHandler}
             >
                 {this.props.table.name}
 
@@ -161,8 +167,9 @@ const mapStateToProps = (state) => ({
     seatedSlot: state.slot.seatedSlot,
     currentTable: state.table.currentTable,
     hoverSlot: state.slot.hoverSlot,
-    statuses: state.status.statuses
+    statuses: state.status.statuses,
+    renderStatusForm: state.status.renderStatusForm
 })
 
 export default connect(mapStateToProps, {
-    patchTable, changeSelectedTable, patchSlot , changeSeatedSlot, patchBook})(Table)
+    patchTable, changeSelectedTable, patchSlot , changeSeatedSlot, patchBook, changeRenderStatusForm})(Table)

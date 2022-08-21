@@ -5,12 +5,14 @@ import PropTypes from "prop-types"
 import Slot from "../Books/Slot";
 import ReservationForm from "../Forms/ReservationForm";
 import Floor from "./Floor";
+import StatusForm from "../Forms/StatusForm";
 
 class FloorPlanView extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
         currentSlot: PropTypes.object.isRequired,
+        renderStatusForm: PropTypes.bool.isRequired
     }
 
     renderReservations = () => {
@@ -44,6 +46,7 @@ class FloorPlanView extends React.Component {
                 </div>
                 {this.renderFloors()}
                 {this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
+                {this.props.renderStatusForm ? <StatusForm /> : null}
             </div>
         )
     }
@@ -52,7 +55,8 @@ class FloorPlanView extends React.Component {
 const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     currentSlot: state.slot.currentSlot,
-    hoverSlot: state.slot.hoverSlot
+    hoverSlot: state.slot.hoverSlot,
+    renderStatusForm: state.status.renderStatusForm
 })
 
 export default connect(mapStateToProps)(FloorPlanView)

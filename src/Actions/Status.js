@@ -1,5 +1,5 @@
 import { endpoint } from "../endpoint";
-import { GET_STATUSES } from "./Types";
+import { GET_STATUSES, RENDER_STATUS_FORM } from "./Types";
 
 //GET_STATUSES
 export const getStatuses = () => {
@@ -15,4 +15,14 @@ export const getStatuses = () => {
             payload: statuses
         })
     };
+}
+
+// RENDER_STATUS_FORM
+export const changeRenderStatusForm = (status) => {
+    return (dispatch) => {
+        dispatch({
+            type: RENDER_STATUS_FORM,
+            payload: status
+        })
+    }
 }

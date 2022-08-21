@@ -1,7 +1,8 @@
-import { GET_STATUSES } from "../Actions/Types";
+import {GET_STATUSES, RENDER_STATUS_FORM} from "../Actions/Types";
 
 const initialState = {
     statuses: [],
+    renderStatusForm: false
 }
 
 export default function status(state = initialState, action) {
@@ -10,6 +11,13 @@ export default function status(state = initialState, action) {
             return {
                 ...state,
                 statuses: action.payload,
+            }
+
+        case RENDER_STATUS_FORM :{
+            return {
+                ...state,
+                renderStatusForm: action.payload
+                }
             }
 
         default:
