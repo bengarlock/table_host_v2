@@ -25,10 +25,11 @@ class Book extends React.Component {
     render() {
         return(
             <div className="page-container">
+                <div className="header">
+                    <span>AVAILABILITY</span>
+                </div>
                 <div className="book-wrapper">
-                    <div className="header">
-                        <span>AVAILABILITY</span>
-                    </div>
+
                     {this.renderSlots()}
                     {this.props.currentSlot.id ? <ReservationForm /> : null}
                 </div>
