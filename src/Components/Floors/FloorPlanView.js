@@ -18,19 +18,9 @@ class FloorPlanView extends React.Component {
     }
 
     state = {
-        container_width: 0
+        container_width: 300
     }
 
-    componentDidMount = () => {
-        const settings = this.props.getSettings()
-        console.log(settings)
-
-
-        console.log(this.props.settings.floor_reservation_column_width)
-        this.setState({
-            container_width: this.props.settings.floor_reservation_column_width
-        })
-    }
 
     renderReservations = () => {
         if (this.props.currentBook.slots) {
@@ -59,10 +49,7 @@ class FloorPlanView extends React.Component {
     }
 
     onMouseMoveHandler = (e) => {
-        const currentPosition = this.state.container_width ? this.state.container_width : 350
-        const newPosition = currentPosition.container_width + e.movementX
-        console.log("current state", this.state.container_width)
-        console.log('new position', newPosition )
+        const newPosition = this.state.container_width + e.movementX
         this.setState({
             container_width: newPosition
         })
@@ -76,11 +63,8 @@ class FloorPlanView extends React.Component {
     render() {
         return(
             <div className="floor-wrapper">
-                <div className="floor-reservations-wrapper">
-                    <div className="floor-reservations-container" style={
-                        {width: this.props.settings.floor_reservation_column_width + "px"}}>
-                        {this.renderReservations()}
-                    </div>
+                <div className="floor-reservations-wrapper" style={{width: this.state.container_width}}>
+                    {this.renderReservations()}
                 </div>
                 <div className="divider" onMouseDown={this.onMouseDownHandler}/>
 

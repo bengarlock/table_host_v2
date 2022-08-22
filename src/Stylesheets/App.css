@@ -456,16 +456,13 @@ a, a:visited, a:hover, a:active {
   }
   .floor-reservations-wrapper {
     background-color: #3b3b3b;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
   }
 
   .floor-reservations-container {
     display: flex;
     overflow: scroll;
     flex-direction: column;
-    width: 350px;
+    width: 100%;
   }
 
   .menu-icon {
@@ -524,7 +521,7 @@ a, a:visited, a:hover, a:active {
   }
 
   #table-root {
-    width: 100%;
+
   }
 
 
@@ -590,7 +587,7 @@ a, a:visited, a:hover, a:active {
   }
 
   .divider {
-    width: 10px;
+    width: 5px;
     background-color: #1f1f21;
     cursor: col-resize	;
   }
