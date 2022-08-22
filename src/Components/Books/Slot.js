@@ -89,10 +89,9 @@ class Slot extends React.Component {
 
     }
 
-
     render() {
         return(
-            <div className="slot-container"
+            <div className={this.props.slotType === "floor-slot" ? "slot-container floor-slot-container" : "slot-container"}
                  onDoubleClick={this.clickHandler}
                  style={this.renderStyle()}
                  onMouseEnter={this.seatedSlotSelect}

@@ -36,7 +36,7 @@ class FloorPlanView extends React.Component {
         if (this.props.currentBook.slots) {
             let reservations = this.props.currentBook.slots.filter(reservation => reservation.status)
             reservations = reservations.filter(reservation => reservation.status.status_type === 'reservation')
-            return reservations.map(slot => <Slot key={slot.id} slot={slot}/>)
+            return reservations.map(slot => <Slot key={slot.id} slot={slot} slotType='floor-slot'/> )
         }
     }
 
@@ -74,7 +74,6 @@ class FloorPlanView extends React.Component {
     }
 
     render() {
-        console.log(this.state.container_width)
         return(
             <div className="floor-wrapper">
                 <div className="floor-reservations-wrapper">
@@ -82,8 +81,9 @@ class FloorPlanView extends React.Component {
                         {width: this.props.settings.floor_reservation_column_width + "px"}}>
                         {this.renderReservations()}
                     </div>
-                    <div className="divider" onMouseDown={this.onMouseDownHandler}/>
                 </div>
+                <div className="divider" onMouseDown={this.onMouseDownHandler}/>
+
                 {this.renderFloors()}
                 {this.props.currentSlot.id ? <div className="reservation-floor-wrapper"> <ReservationForm /> </div> : null}
                 {this.props.renderStatusForm ? <StatusForm /> : null}
