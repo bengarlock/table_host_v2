@@ -10,6 +10,8 @@ body {
 }
 
 .app-wrapper {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 }
 
@@ -45,7 +47,12 @@ a, a:visited, a:hover, a:active {
 }
 
 .datepicker-wrapper {
-  height: 50px;
+  display: flex;
+  flex-direction: column;
+
+}
+.calendar-controls-wrapper {
+  /*height: 50px;*/
   background-color: #2b2b2f;
   width: 100%;
   display: flex;
@@ -55,7 +62,6 @@ a, a:visited, a:hover, a:active {
   align-items: center;
   font-size: 15px;
   user-select: none;
-  z-index: 3;
 }
 
 .center-calendar-selector {
