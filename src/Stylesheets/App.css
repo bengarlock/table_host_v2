@@ -382,14 +382,19 @@ a, a:visited, a:hover, a:active {
   width: 100%;
   background-color: #1f1f21;
   padding: .5em;
-  margin: 5px;
+  margin: 2px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   user-select: none;
   z-index: 0;
   /*box-shadow: 0 2px 2px #2a2929;*/
 }
+
+.slot-container span {
+  margin-left: 10px;
+}
+
 .floor-slot-container {
   width: auto;
 }
