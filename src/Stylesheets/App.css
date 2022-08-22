@@ -144,7 +144,7 @@ a, a:visited, a:hover, a:active {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top:0;
   width: 100%;
@@ -163,7 +163,7 @@ a, a:visited, a:hover, a:active {
 
 
 .form-wrapper {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
