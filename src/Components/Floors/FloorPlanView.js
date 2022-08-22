@@ -6,6 +6,7 @@ import Slot from "../Books/Slot";
 import ReservationForm from "../Forms/ReservationForm";
 import Floor from "./Floor";
 import StatusForm from "../Forms/StatusForm";
+import { getSettings } from "../../Actions/Settings"
 
 class FloorPlanView extends React.Component {
 
@@ -17,14 +18,18 @@ class FloorPlanView extends React.Component {
     }
 
     state = {
-        container_width: 350
+        container_width: 0
     }
 
     componentDidMount = () => {
+        const settings = this.props.getSettings()
+        console.log(settings)
+
+
+        console.log(this.props.settings.floor_reservation_column_width)
         this.setState({
             container_width: this.props.settings.floor_reservation_column_width
         })
-
     }
 
     renderReservations = () => {
@@ -54,8 +59,12 @@ class FloorPlanView extends React.Component {
     }
 
     onMouseMoveHandler = (e) => {
+        const currentPosition = this.state.container_width ? this.state.container_width : 350
+        const newPosition = currentPosition.container_width + e.movementX
+        console.log("current state", this.state.container_width)
+        console.log('new position', newPosition )
         this.setState({
-            container_width: this.state.container_width + e.movementX,
+            container_width: newPosition
         })
     }
 
@@ -65,11 +74,12 @@ class FloorPlanView extends React.Component {
     }
 
     render() {
-        console.log(this.props.settings.floor_reservation_column_width)
+        console.log(this.state.container_width)
         return(
             <div className="floor-wrapper">
                 <div className="floor-reservations-wrapper">
-                    <div className="floor-reservations-container" style={{width: this.state.container_width + "px"}}>
+                    <div className="floor-reservations-container" style={
+                        {width: this.props.settings.floor_reservation_column_width + "px"}}>
                         {this.renderReservations()}
                     </div>
                     <div className="divider" onMouseDown={this.onMouseDownHandler}/>
@@ -90,4 +100,4 @@ const mapStateToProps = (state) => ({
     settings: state.settings.settings
 })
 
-export default connect(mapStateToProps)(FloorPlanView)
+export default connect(mapStateToProps, { getSettings })(FloorPlanView)

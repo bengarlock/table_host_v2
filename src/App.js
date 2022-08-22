@@ -19,11 +19,9 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-      const today = new Date();
-      this.props.getBook(today)
-      this.props.setDate(today)
+      this.props.getBook(new Date())
+      this.props.setDate(new Date())
       this.props.getStatuses()
-      this.props.getSettings()
   }
 
 
