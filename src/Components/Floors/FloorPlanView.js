@@ -21,6 +21,10 @@ class FloorPlanView extends React.Component {
         container_width: 300
     }
 
+    componentDidMount() {
+        // pull container width from local storage (if exist). If not set to 300
+    }
+
 
     renderReservations = () => {
         if (this.props.currentBook.slots) {
@@ -50,9 +54,15 @@ class FloorPlanView extends React.Component {
 
     onMouseMoveHandler = (e) => {
         const newPosition = this.state.container_width + e.movementX
-        this.setState({
-            container_width: newPosition
-        })
+
+        if (newPosition < 600) {
+            this.setState({
+                container_width: newPosition
+            })
+        }
+
+        // save to local storage here.
+
     }
 
     onMouseUpHandler = () => {

@@ -101,7 +101,7 @@ class Floor extends React.Component {
 
         return(
             <div id="table-root">
-                <button className='floor-edit-button' onClick={this.toggleEditMode}>{this.state.floorEditMode ? "SAVE" : "EDIT"}</button>
+                <button className='floor-edit-button' onClick={this.toggleEditMode}>{this.state.floorEditMode ? "Save" : "Edit Floor"}</button>
                 {this.state.floorEditMode ? <button id="add" onClick={this.onClickHandler}>+</button> : null}
 
                 {this.renderTables()}

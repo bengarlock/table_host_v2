@@ -63,15 +63,12 @@ class Table extends React.Component {
 
     }
 
-
     onMouseMoveHandler = (e) => {
         this.setState({
             left: this.state.left + e.movementX,
             top: this.state.top + e.movementY
         })
     }
-
-
 
 
     onDragEnter = (event) => {
@@ -147,7 +144,7 @@ class Table extends React.Component {
             >
                 {this.props.table.name}
 
-                {this.state.edit_mode ?
+                {this.props.editMode ?
                     <>
                         <div className="resizer nw" onMouseDown={this.onMouseDownHandler}/>
                         <div className="resizer ne" onMouseDown={this.onMouseDownHandler}/>
