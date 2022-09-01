@@ -39,36 +39,37 @@ class Table extends React.Component {
 
     }
 
-    // onMouseDownHandler = (e) => {
-    //     window.addEventListener("mousemove", this.onMouseMoveHandler)
-    //     window.addEventListener("mouseup", this.onMouseUpHandler)
-    //     if (e.target.className === 'table') {
-    //         this.onMouseMoveHandler(e)
-    //     }
-    // }
+    onMouseDownHandler = (e) => {
+        console.log('mouse down')
+        window.addEventListener("mousemove", this.onMouseMoveHandler)
+        window.addEventListener("mouseup", this.onMouseUpHandler)
+        if (e.target.className === 'table') {
+            this.onMouseMoveHandler(e)
+        }
+    }
 
-    // onMouseUpHandler = () => {
-    //     if (this.props.currentTable) {
-    //         let table = {...this.props.table}
-    //         table.left = this.state.left
-    //         table.top = this.state.top
-    //         table.width = this.state.width
-    //         table.height = this.state.height
-    //         table.reservation = this.props.reservation ? this.props.reservation.id : null
-    //         this.props.patchTable(table)
-    //         window.removeEventListener("mousemove", this.onMouseMoveHandler)
-    //         window.removeEventListener("mouseup", this.onMouseUpHandler)
-    //     }
-    //
-    // }
+    onMouseUpHandler = () => {
+        if (this.props.currentTable) {
+            let table = {...this.props.table}
+            table.left = this.state.left
+            table.top = this.state.top
+            table.width = this.state.width
+            table.height = this.state.height
+            table.reservation = this.props.reservation ? this.props.reservation.id : null
+            this.props.patchTable(table)
+            window.removeEventListener("mousemove", this.onMouseMoveHandler)
+            window.removeEventListener("mouseup", this.onMouseUpHandler)
+        }
 
-    //
-    // onMouseMoveHandler = (e) => {
-    //     this.setState({
-    //         left: this.state.left + e.movementX,
-    //         top: this.state.top + e.movementY
-    //     })
-    // }
+    }
+
+
+    onMouseMoveHandler = (e) => {
+        this.setState({
+            left: this.state.left + e.movementX,
+            top: this.state.top + e.movementY
+        })
+    }
 
 
 
@@ -135,9 +136,8 @@ class Table extends React.Component {
                 border: this.state.border ? "solid black" : null,
                 background: this.props.table.status ? this.props.table.status.color : null
             }}
-                 // onMouseDown={this.state.edit_mode ? this.onMouseDownHandler : null}
-                 // onMouseUp={this.state.edit_mode ? this.onMouseUpHandler : null}
-                 // onMouseOver={this.onMouseOverHandler}
+                 onMouseDown={this.props.editMode ? this.onMouseDownHandler : null}
+                 onMouseUp={this.props.editMode ? this.onMouseUpHandler : null}
                  onDragOver={this.onDragOver}
                  onDragEnter={this.onDragEnter}
                  onDragLeave={this.onDragLeaveHandler}

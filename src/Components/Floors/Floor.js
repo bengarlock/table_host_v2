@@ -14,7 +14,8 @@ class Floor extends React.Component {
     }
 
     state = {
-        tables: []
+        tables: [],
+        floorEditMode: false
     }
 
     componentDidMount = () => {
@@ -83,15 +84,26 @@ class Floor extends React.Component {
 
     }
 
+    toggleEditMode = () => {
+        this.setState({
+            floorEditMode: !this.state.floorEditMode
+        })
+    }
+
     renderTables = () => {
-        return this.state.tables.map(table => <Table key={table.id} table={table} /> )
+        return this.state.tables.map(table => <Table
+            key={table.id}
+            editMode={this.state.floorEditMode}
+            table={table} /> )
     }
 
     render() {
 
         return(
             <div id="table-root">
-                <button id="add" onClick={this.onClickHandler}>+</button>
+                <button className='floor-edit-button' onClick={this.toggleEditMode}>{this.state.floorEditMode ? "SAVE" : "EDIT"}</button>
+                {this.state.floorEditMode ? <button id="add" onClick={this.onClickHandler}>+</button> : null}
+
                 {this.renderTables()}
                 {this.syncSlotsAndFloor()}
             </div>
