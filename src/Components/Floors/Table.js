@@ -39,7 +39,7 @@ class Table extends React.Component {
 
     }
 
-    onMouseDownHandler = (e) => {
+    onMouseDownHandler = () => {
         window.addEventListener("mousemove", this.onMouseMoveHandler)
         window.addEventListener("mouseup", this.onMouseUpHandler)
     }
@@ -60,7 +60,7 @@ class Table extends React.Component {
         }
 
     }
-
+    // https://engineering.datorama.com/mastering-drag-drop-with-reactjs-part-01-39bed3d40a03
     onMouseMoveHandler = (e) => {
         if (e.target.className === 'table') {
             this.setState({
@@ -69,9 +69,12 @@ class Table extends React.Component {
             })
 
         } else if (e.target.className.includes('resizer')) {
+            let width = this.state.width
+            let height = this.state.height
+
             this.setState({
-                width: this.state.width + e.movementX,
-                height: this.state.height + e.movementY
+                width: width + e.movementX,
+                height: height + e.movementY
             })
         }
 
