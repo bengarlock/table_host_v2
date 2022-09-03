@@ -79,6 +79,7 @@ class Datepicker extends React.Component {
 
     onChangeHandler = (date) => {
         this.props.setDate(date)
+        this.props.getBook(date)
         this.setState({
             calendarClicked: false
         })
@@ -114,7 +115,6 @@ const mapStateToProps = (state) => ({
     currentBook: state.book.currentBook,
     currentDate: state.book.currentDate,
     currentNavbar: state.navbar.currentNavbar,
-
 })
 
 export default connect(mapStateToProps, { getBook, setDate })(Datepicker);
