@@ -87,12 +87,11 @@ class Datepicker extends React.Component {
     render() {
         return (
             <div className='datepicker-wrapper'>
-                <div id="now-button" onClick={this.onClickHandler}>NOW</div>
                 <div className='calendar-controls-wrapper'>
                     <span className="calendar-button" onClick={this.onClickHandler} id="left"> {"<"} </span>
                     <span className="center-calendar-selector" onClick={this.onClickHandler} id="cal">
-                    {this.renderDay()}
-                </span>
+                        {this.renderDay()}
+                    </span>
                     {this.state.calendarClicked ?
                         <div id="th-calendar-wrapper" onClick={this.onClickHandler}>
                             <div className="th-calendar">
@@ -104,7 +103,7 @@ class Datepicker extends React.Component {
                         : null}
                     <span className="calendar-button" onClick={this.onClickHandler} id="right"> {">"} </span>
                 </div>
-
+                <div id="now-button" onClick={this.onClickHandler}>NOW</div>
             </div>
         )
     }
