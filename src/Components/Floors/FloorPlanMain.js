@@ -72,7 +72,7 @@ class FloorPlanMain extends React.Component {
 
     render() {
         return(
-            <div className="floor-wrapper">
+            <div className="left-menu-wrapper">
                 <div className="floor-reservations-wrapper" style={{width: this.state.container_width}}>
                     {this.renderReservations()}
                 </div>

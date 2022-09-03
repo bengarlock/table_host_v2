@@ -1,7 +1,8 @@
-import { CHANGE_NAVBAR } from "../Actions/Types";
+import { CHANGE_NAVBAR, CHANGE_SETTINGS_NAVBAR } from "../Actions/Types";
 
 const initialState = {
     currentNavbar: '',
+    currentSettingNavbar: '',
 }
 
 export default function navbar(state = initialState, action) {
@@ -10,6 +11,12 @@ export default function navbar(state = initialState, action) {
             return {
                 ...state,
                 currentNavbar: action.payload,
+            }
+
+        case CHANGE_SETTINGS_NAVBAR:
+            return {
+                ...state,
+                currentSettingNavbar: action.payload,
             }
 
         default:

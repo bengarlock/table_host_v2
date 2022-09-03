@@ -450,7 +450,7 @@ a, a:visited, a:hover, a:active {
     flex-direction: row;
   }
 
-  .floor-wrapper {
+  .left-menu-wrapper {
     position: relative;
     width: 100%;
     height: calc(100vh - 62px);
@@ -458,6 +458,7 @@ a, a:visited, a:hover, a:active {
     display: flex;
     flex-direction: row;
   }
+
   .floor-reservations-wrapper {
     background-color: #3b3b3b;
   }
@@ -610,5 +611,25 @@ a, a:visited, a:hover, a:active {
     background-color: #0d3052;
     transition: .5s;
 
+  }
+  .settings-inner-wrapper {
+    padding: .5em;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+  }
+  .settings-button {
+    padding: 1em;
+    background-color: #2b2b2c;
+    user-select: none;
+  }
+
+  .settings-button-selected {
+    background-color: #319f9f;
+  }
+
+  .settings-button:hover {
+    background-color: #0e3483;
+    transition: .5s;
   }
 }

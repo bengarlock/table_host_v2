@@ -38,7 +38,6 @@ class BookMain extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    //state.resyRestaurants calls the reducer and .resyRestaurants calls the action
     currentBook: state.book.currentBook,
     currentSlot: state.slot.currentSlot
 })

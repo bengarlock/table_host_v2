@@ -11,7 +11,6 @@ import Navbar from "./Components/Navbar";
 import Datepicker from "./Components/Datepicker";
 import Book from "./Components/Books/BookMain"
 import Floor from "./Components/Floors/FloorPlanMain";
-import Guest from "./Components/Guests/Guest";
 import SettingsMain from "./Components/Settings/SettingsMain";
 import ReportMain from "./Components/Reports/ReportsMain";
 import GuestsMain from "./Components/Guests/Guest";
@@ -40,6 +39,7 @@ class App extends React.Component {
                   <Route exact path="/tablehost/guests" render={ () => <GuestsMain /> } />
                   <Route exact path="/tablehost/reports" render={ () => <ReportMain /> } />
                   <Route exact path="/tablehost/settings" render={ () => <SettingsMain /> } />
+                  <Route exact path="/tablehost/settings/*" render={ () => <SettingsMain /> } />
               </div>
 
           </div>

@@ -1,4 +1,4 @@
-import {CHANGE_NAVBAR} from "./Types";
+import {CHANGE_NAVBAR, CHANGE_SETTINGS_NAVBAR} from "./Types";
 
 //CHANGE_NAVBAR
 export const changeNavbar = (selection) => {
@@ -8,4 +8,15 @@ export const changeNavbar = (selection) => {
             payload: selection
         })
     }
+}
+
+//CHANGE SETTINGS NAVBAR
+export const changeSettingsNavbar = (selection) => {
+    return (dispatch) => {
+        dispatch({
+            type: CHANGE_SETTINGS_NAVBAR,
+            payload: selection
+        })
+    }
+
 }
