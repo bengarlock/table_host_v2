@@ -40,13 +40,10 @@ class Table extends React.Component {
     }
 
     onMouseDownHandler = (e) => {
-        console.log('mouse down')
         window.addEventListener("mousemove", this.onMouseMoveHandler)
         window.addEventListener("mouseup", this.onMouseUpHandler)
-        if (e.target.className === 'table') {
-            this.onMouseMoveHandler(e)
-        }
     }
+
 
     onMouseUpHandler = () => {
         if (this.props.currentTable) {
@@ -57,6 +54,7 @@ class Table extends React.Component {
             table.height = this.state.height
             table.reservation = this.props.reservation ? this.props.reservation.id : null
             this.props.patchTable(table)
+
             window.removeEventListener("mousemove", this.onMouseMoveHandler)
             window.removeEventListener("mouseup", this.onMouseUpHandler)
         }
@@ -64,10 +62,19 @@ class Table extends React.Component {
     }
 
     onMouseMoveHandler = (e) => {
-        this.setState({
-            left: this.state.left + e.movementX,
-            top: this.state.top + e.movementY
-        })
+        if (e.target.className === 'table') {
+            this.setState({
+                left: this.state.left + e.movementX,
+                top: this.state.top + e.movementY
+            })
+
+        } else if (e.target.className.includes('resizer')) {
+            this.setState({
+                width: this.state.width + e.movementX,
+                height: this.state.height + e.movementY
+            })
+        }
+
     }
 
 
@@ -130,6 +137,8 @@ class Table extends React.Component {
             <div className="table" style={{
                 left:this.state.left,
                 top: this.state.top,
+                width: this.state.width,
+                height: this.state.height,
                 border: this.state.border ? "solid black" : null,
                 background: this.props.table.status ? this.props.table.status.color : null
             }}
