@@ -8,7 +8,7 @@ import Floor from "./Floor";
 import StatusForm from "../Forms/StatusForm";
 import { getSettings } from "../../Actions/Settings"
 
-class FloorPlanView extends React.Component {
+class FloorPlanMain extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
@@ -94,4 +94,4 @@ const mapStateToProps = (state) => ({
     settings: state.settings.settings
 })
 
-export default connect(mapStateToProps, { getSettings })(FloorPlanView)
+export default connect(mapStateToProps, { getSettings })(FloorPlanMain)

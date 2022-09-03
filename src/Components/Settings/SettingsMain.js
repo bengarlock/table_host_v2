@@ -2,12 +2,12 @@ import React from 'react'
 import '../../Stylesheets/App.css'
 import {connect} from "react-redux";
 
-class GuestsMain extends React.Component {
+class SettingsMain extends React.Component {
 
     render() {
         return(
             <div className="page-container">
-                <div className="placeholder">Guests</div>
+                <div className="placeholder">Settings</div>
             </div>
         )
     }
@@ -16,4 +16,4 @@ class GuestsMain extends React.Component {
 const mapStateToProps = (state) => ({
 })
 
-export default connect(mapStateToProps, { })(GuestsMain);
+export default connect(mapStateToProps, { })(SettingsMain);

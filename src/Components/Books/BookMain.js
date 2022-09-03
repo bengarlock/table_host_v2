@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Slot from "./Slot";
 import ReservationForm from "../Forms/ReservationForm";
 
-class Book extends React.Component {
+class BookMain extends React.Component {
 
     static propTypes = {
         currentBook: PropTypes.object.isRequired,
@@ -43,4 +43,4 @@ const mapStateToProps = (state) => ({
     currentSlot: state.slot.currentSlot
 })
 
-export default connect(mapStateToProps, { getBook })(Book);
+export default connect(mapStateToProps, { getBook })(BookMain);

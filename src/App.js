@@ -9,9 +9,12 @@ import { changeNavbar } from "./Actions/Navbar"
 import PropTypes from 'prop-types';
 import Navbar from "./Components/Navbar";
 import Datepicker from "./Components/Datepicker";
-import Book from "./Components/Books/Book"
-import Floor from "./Components/Floors/FloorPlanView";
+import Book from "./Components/Books/BookMain"
+import Floor from "./Components/Floors/FloorPlanMain";
 import Guest from "./Components/Guests/Guest";
+import SettingsMain from "./Components/Settings/SettingsMain";
+import ReportMain from "./Components/Reports/ReportsMain";
+import GuestsMain from "./Components/Guests/Guest";
 
 class App extends React.Component {
 
@@ -34,8 +37,9 @@ class App extends React.Component {
                   <Navbar />
                   <Route exact path="/tablehost" id="book" render={ () => <Book /> } />
                   <Route exact path="/tablehost/floor" id="floor" render={ () => <Floor /> } />
-                  <Route exact path="/tablehost/guests" render={ () => <Guest /> } />
-                  {/*<Route exact path="/tablehost/reports" render={ () => <Report /> } />*/}
+                  <Route exact path="/tablehost/guests" render={ () => <GuestsMain /> } />
+                  <Route exact path="/tablehost/reports" render={ () => <ReportMain /> } />
+                  <Route exact path="/tablehost/settings" render={ () => <SettingsMain /> } />
               </div>
 
           </div>

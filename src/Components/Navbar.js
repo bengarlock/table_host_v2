@@ -8,6 +8,7 @@ import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Navbar extends React.Component {
@@ -49,6 +50,12 @@ class Navbar extends React.Component {
                          to="/tablehost/reports"
                          onClick={this.onClickHandler}>
                     <FontAwesomeIcon icon={faPencil}/>
+                </NavLink>
+                <NavLink className={this.props.currentNavbar === "settings" ? "menu-icon-selected" : "menu-icon"}
+                         id='settings'
+                         to="/tablehost/settings"
+                         onClick={this.onClickHandler}>
+                    <FontAwesomeIcon icon={faGear}/>
                 </NavLink>
             </div>
         )
