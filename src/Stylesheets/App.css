@@ -440,7 +440,7 @@ a, a:visited, a:hover, a:active {
 @media only screen and (min-width: 600px)  {
   #nav-bar-wrapper {
     position: relative;
-    /*height: calc(100vh - 50px);*/
+    height: calc(100vh - 62px);
     flex-direction: column;
     width: 60px;
     justify-content: flex-start;
