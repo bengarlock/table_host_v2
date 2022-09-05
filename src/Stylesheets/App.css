@@ -96,10 +96,6 @@ a, a:visited, a:hover, a:active {
   text-align: center;
 }
 
-.react-calendar {
-  background: darkgrey;
-}
-
 #now-button {
   font-size: 10px;
   color: white;
@@ -432,7 +428,6 @@ a, a:visited, a:hover, a:active {
   background-color: #0e3483;
   transition: .2s;
 }
-
 
 
 @media only screen and (min-width: 600px)  {
